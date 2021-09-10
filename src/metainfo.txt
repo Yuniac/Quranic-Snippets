@@ -1,0 +1,5 @@
+Subject to change:
+font: "https://fonts.google.com/specimen/Amiri";
+design: "https://www.figma.com/file/tI8WKcVotMV35oUHRpLLQ5/Qurnic-snippets";
+color palette: "https://coolors.co/293f14-386c0b-38a700-31d843-3eff8b";
+That's all for now.
