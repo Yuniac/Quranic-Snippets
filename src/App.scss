@@ -1,7 +1,23 @@
 @import "./style/_variables";
+@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,700&display=swap");
 .App {
 	width: 522px;
 	height: 322px;
-	background-color: $light-main-bg;
+	background-color: $primary-bg;
 	margin: 0 auto;
+
+	color: $primary-font-color;
+	font-family: "Amiri", serif;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+main,
+footer {
+	direction: rtl;
+}
+main {
+	color: $primary-font-color;
+	font-family: "Amiri", serif;
 }
