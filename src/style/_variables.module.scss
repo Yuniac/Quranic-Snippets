@@ -1,0 +1,19 @@
+$primary-bg: #1c1c20;
+$secondary-bg: #34343b;
+//
+$primary-font-color: #fff;
+//
+$fs-large: 2rem;
+$fs-x-large: 3rem;
+$fs-normal: 1rem;
+$fs-small: 0.6rem;
+$fw-heavy: 700;
+$fw-normal: 400;
+//
+$Z-regular: 1;
+$Z-important: 11;
+// variables used in react js files will be exported down below;
+:export {
+	zRegular: $Z-regular;
+	zImportant: $Z-important;
+}
