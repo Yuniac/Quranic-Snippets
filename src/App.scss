@@ -138,6 +138,10 @@ main {
 				color: #272727;
 				text-shadow: 0px 1px 1px black;
 			}
+			&:focus {
+				border: 1px solid cyan;
+				border-radius: 2px;
+			}
 		}
 		textarea {
 			height: 90px;
