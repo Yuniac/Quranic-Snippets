@@ -3,7 +3,7 @@ import "../App.scss";
 function Header() {
 	return (
 		<div className="header">
-			<h1>القرآن الكريم</h1>
+			<h1>قُصَّاصَاتْ قُرآنيّةَ</h1>
 		</div>
 	);
 }

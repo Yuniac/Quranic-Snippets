@@ -1,3 +1,5 @@
+/* global browser */
+
 import React from "react";
 
 import Header from "./Header";
@@ -5,10 +7,17 @@ import Snippet from "./Snippet";
 import Settings from "./hidden_by_default/Settings";
 import Feedback from "./hidden_by_default/Feedback";
 
-function App({ settingsVisibility, setSettingsVisibility, feedbackVisibility, setFeedbackVisibility }) {
+function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, setFeedbackVisibility }) {
 	const [ayah, setAyah] = React.useState("");
-	const [timer, setTimer] = React.useState(true);
-	const newSnippetFrequency = 3600000;
+
+	// const [refresh, setRefresh] = React.useState(true);
+	// const newSnippetFrequency = 3600000;
+	// store a variable in localstorage to determine how often we fetch a new ayah;
+	const [newAyahTimer, setNewAyahTimer] = React.useState(() => {
+		if (!localStorage.getItem("timer")) {
+			localStorage.setItem("timer", "10000");
+		}
+	});
 	const getAyaURL = "http://api.alquran.cloud/v1/ayah/";
 
 	function getRandomSnippet() {
@@ -20,10 +29,13 @@ function App({ settingsVisibility, setSettingsVisibility, feedbackVisibility, se
 				setAyah(processedAyah);
 			})
 			.then(() => {
-				// cause a re-render after an hour and thus fetching a new ayah
-				setTimeout(() => {
-					setTimer((oldValue) => !oldValue);
-				}, newSnippetFrequency);
+				// compare times and determine whether we should fetch a new ayah or not;
+				// const timer = JSON.parse(localStorage.getItem("timer"));
+				browser.storage.sync.get();
+
+				// setTimeout(() => {
+				// 	setNewAyahTimer((oldState) => !oldState);
+				// }, timer);
 			})
 			.catch((e) => console.log(e));
 	}
@@ -38,7 +50,10 @@ function App({ settingsVisibility, setSettingsVisibility, feedbackVisibility, se
 	}
 	React.useEffect(() => {
 		getRandomSnippet();
-	}, [timer]);
+	}, [newAyahTimer]);
+	browser.runtime.onMessage.addListener((x) => {
+		console.log("||||||||", x, "|||||||||");
+	});
 	return (
 		<main>
 			<Header />
@@ -49,4 +64,4 @@ function App({ settingsVisibility, setSettingsVisibility, feedbackVisibility, se
 	);
 }
 
-export default App;
+export default Body;
