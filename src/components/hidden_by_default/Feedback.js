@@ -8,7 +8,6 @@ function Feedback({ feedbackVisibility, setFeedbackVisibility }) {
 	const form = React.useRef(null);
 
 	function handleSubmit(e) {
-		console.log(form);
 		e.preventDefault();
 		const name = form.current.elements.user_name;
 		const email = form.current.elements.user_email;
