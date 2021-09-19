@@ -57,6 +57,12 @@ main {
 		padding: 0.4rem 0 0.8rem;
 
 		border: 1px solid $light-cyan;
+
+		max-height: 320px;
+		overflow-y: auto;
+
+		scrollbar-color: $primary-bg $secondary-bg;
+		scrollbar-width: thin;
 	}
 }
 //
@@ -166,6 +172,8 @@ main {
 }
 //
 footer {
+	margin-top: 0.7rem;
+
 	ul {
 		width: 80%;
 		margin: 0 auto;
