@@ -1,4 +1,5 @@
 /* global browser */
+// This stops eslint from breaking the code execution because, here and right now, "browser" isn't defined, but when this app is packged and ran as an extension, "browser" is indeed defined;
 
 import React from "react";
 
@@ -7,63 +8,64 @@ import Snippet from "./Snippet";
 import Settings from "./hidden_by_default/Settings";
 import Feedback from "./hidden_by_default/Feedback";
 
-function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, setFeedbackVisibility }) {
+function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, setFeedbackVisibility, language, setLanguage }) {
+	console.log(language);
 	const getAyaURL = "http://api.alquran.cloud/v1/ayah/";
+	// this state will manage the ayah that is visible to the user when he opens the extension
 	const [ayah, setAyah] = React.useState("");
-
-	// const [refresh, setRefresh] = React.useState(true);
+	//
 	const newSnippetFrequency = 3600000;
-	// store a variable in localstorage to determine how often we fetch a new ayah;
-	// const [newAyahTimer, setNewAyahTimer] = React.useState(() => {
-	// });
-	// let storedAyah, storedAyahTimeStamp;
-	// browser.storage.local.get("ayah").then((x) => console.log(x.ayah, x));
-
-	// browser.storage.local.get("ayah").then((value) => (storedAyah = value.ayah));
-	// browser.storage.local.get("ayahTimeStamp").then((value) => (storedAyahTimeStamp = value.ayahTimeStamp));
 
 	async function getRandomSnippet() {
-		const { ayah, ayahTimeStamp } = await browser.storage.local.get(["ayah", "ayahTimeStamp"]);
+		// get stored ayah and its related information
+		const { ayah, ayahTimeStamp } = await browser.storage.sync.get(["ayah", "ayahTimeStamp"]);
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
 		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency) {
-			console.log("this has ran");
+			// fetch a new ayah
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
 			const fetchedAyah = await fetch(getAyaURL + randomAyahNumber);
 			const fetchedAyahAsJson = await fetchedAyah.json();
+			// processing the ayah to remove "bismillah". might change this later;
 			const processedAyah = processAyah(fetchedAyahAsJson);
+			// create an object containing the ayah and all the information about it;
 			const newStoredAyah = {
 				ayah: processedAyah,
 				ayahTimeStamp: new Date().getTime(),
+				lang: language,
 			};
+			// update the state with the newly fetched ayah
 			setAyah(processedAyah);
-			browser.storage.local.set(newStoredAyah);
+			// store the new ayah with a timeStamp and any other info I might add later on;
+			browser.storage.sync.set(newStoredAyah);
 		} else {
-			// otherwise, just get the old already stored ayah
-			console.log("hasn't, we are at the bottom");
-			console.log(ayahTimeStamp, new Date().getTime(), ayahTimeStamp - new Date().getTime());
-			console.log(ayahTimeStamp - new Date().getTime() >= newSnippetFrequency ? true : false);
+			// otherwise, just get the old already stored ayah and use it to update the state;
 			setAyah(ayah);
 		}
 	}
+
+	// if the ayah begins with 'bismillah', cut it out, as our focus is to only show the verse
 	function processAyah(json) {
 		let ayah = json.data.text;
 		if (ayah.match(/^(بِسْم)/)) {
-			// if the ayah begins with 'bismillah', cut it out, as our focus is to only show the verse
 			ayah = ayah.slice(38);
 			return ayah;
 		}
 		return ayah;
 	}
 	React.useEffect(() => {
-		getRandomSnippet();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// getRandomSnippet();
 	});
 
 	return (
 		<main>
 			<Header />
 			<Snippet ayah={ayah} />
-			<Settings settingsVisibility={settingsVisibility} setSettingsVisibility={setSettingsVisibility} />
+			<Settings
+				settingsVisibility={settingsVisibility}
+				setSettingsVisibility={setSettingsVisibility}
+				language={language}
+				setLanguage={setLanguage}
+			/>
 			<Feedback feedbackVisibility={feedbackVisibility} setFeedbackVisibility={setFeedbackVisibility} />
 		</main>
 	);

@@ -1,7 +1,8 @@
 /* global browser */
-// browser.storage.local.clear();
 const ayahObject = {
 	ayah: "",
 	ayahTimeStamp: new Date().getTime(),
+	lang: "en",
 };
-browser.storage.local.set(ayahObject);
+browser.storage.sync.set(ayahObject);
+console.log(browser.storage.sync.get());

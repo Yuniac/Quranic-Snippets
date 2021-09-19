@@ -62,17 +62,23 @@ main {
 //
 .settings {
 	.settings-options {
-		li {
-			padding-right: 7px;
-			padding-top: 5px;
-			&::after {
-				content: "-";
-				right: 0;
-				position: absolute;
-			}
+		div:not(h2) {
+			margin-right: 0.5rem;
+		}
+		h2 {
+			padding: 0 0.2rem;
+		}
+	}
+	.change-lang-option {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		input {
+			margin: 1rem;
 		}
 	}
 }
+
 .popup-css {
 	background-color: $secondary-bg;
 
@@ -102,7 +108,6 @@ main {
 
 	position: absolute;
 	top: 10px;
-	left: 10px;
 
 	z-index: $Z-important;
 
