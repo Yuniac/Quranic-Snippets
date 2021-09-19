@@ -1,7 +1,10 @@
 import React from "react";
 import LanguageSettings from "../mini-compoenents/LanguageSettings";
-import ToggleButton from "../shared/ToggleButton";
 import { zImportant, zRegular } from "../../style/_variables.module.scss";
+
+import ToggleButton from "../shared/ToggleButton";
+import Divider from "../shared/Divider";
+
 function Settings({ settingsVisibility, setSettingsVisibility, language, setLanguage }) {
 	return (
 		<div
@@ -12,22 +15,23 @@ function Settings({ settingsVisibility, setSettingsVisibility, language, setLang
 				zIndex: settingsVisibility ? zImportant : zRegular,
 			}}
 		>
+			<h2
+				style={{
+					direction: language === "ar" ? "rtl" : "ltr",
+				}}
+			>
+				<span className="ar-text" style={{ display: language === "ar" ? "inline-block" : "none" }}>
+					إعدادات الإضافة:
+				</span>
+				<span className="en-text" style={{ display: language === "ar" ? "none" : "inline-block" }}>
+					Extensions Settings:
+				</span>{" "}
+			</h2>
 			<ToggleButton setFunction={setSettingsVisibility} language={language} />
 			{/* <div>Background stays here</div> */}
 			<div className="settings-options">
-				<h2
-					style={{
-						direction: language === "ar" ? "rtl" : "ltr",
-					}}
-				>
-					<span className="ar-text" style={{ display: language === "ar" ? "inline-block" : "none" }}>
-						إعدادات الإضافة:
-					</span>
-					<span className="en-text" style={{ display: language === "ar" ? "none" : "inline-block" }}>
-						Extensions Settings:
-					</span>{" "}
-				</h2>
 				<LanguageSettings language={language} setLanguage={setLanguage} />
+				<Divider />
 				{/* <ul> */}
 				{/* <li>The freq of which new verses display</li>
 					<li>The UI language</li>

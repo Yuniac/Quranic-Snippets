@@ -9,7 +9,6 @@ import Settings from "./hidden_by_default/Settings";
 import Feedback from "./hidden_by_default/Feedback";
 
 function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, setFeedbackVisibility, language, setLanguage }) {
-	console.log(language);
 	const getAyaURL = "http://api.alquran.cloud/v1/ayah/";
 	// this state will manage the ayah that is visible to the user when he opens the extension
 	const [ayah, setAyah] = React.useState("");
@@ -58,7 +57,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 
 	return (
 		<main>
-			<Header />
+			<Header language={language} />
 			<Snippet ayah={ayah} />
 			<Settings
 				settingsVisibility={settingsVisibility}

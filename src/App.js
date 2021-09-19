@@ -20,7 +20,7 @@ function App() {
 		});
 	}
 	React.useEffect(() => {
-		getStoredLang();
+		// getStoredLang();
 	}, [language]);
 	return (
 		<div className="App">
@@ -32,7 +32,7 @@ function App() {
 				feedbackVisibility={feedbackVisibility}
 				setFeedbackVisibility={setFeedbackVisibility}
 			/>
-			<Footer setSettingsVisibility={setsettingsVisibility} setFeedbackVisibility={setFeedbackVisibility} />
+			<Footer setSettingsVisibility={setsettingsVisibility} setFeedbackVisibility={setFeedbackVisibility} language={language} />
 		</div>
 	);
 }

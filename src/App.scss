@@ -43,8 +43,8 @@ main {
 		font-weight: $fw-heavy;
 		color: black;
 
-		text-shadow: 0px 2px 1px black;
-		box-shadow: 0px -10px 1003px lightcyan;
+		text-shadow: 0px 2px 1px $black;
+		box-shadow: 0px -10px 1003px $light-cyan;
 	}
 }
 //
@@ -56,22 +56,23 @@ main {
 
 		padding: 0.4rem 0 0.8rem;
 
-		border: 1px solid lightcyan;
+		border: 1px solid $light-cyan;
 	}
 }
 //
 .settings {
+	h2 {
+		padding: 0 0.2rem;
+		color: $black;
+		font-weight: 700;
+	}
 	.settings-options {
-		div:not(h2) {
-			margin-right: 0.5rem;
-		}
-		h2 {
-			padding: 0 0.2rem;
+		& > div {
+			padding: 0 0.4rem;
 		}
 	}
 	.change-lang-option {
 		display: flex;
-		justify-content: flex-start;
 		align-items: center;
 		input {
 			margin: 1rem;
@@ -89,10 +90,9 @@ main {
 	left: 0;
 
 	background-color: $secondary-bg;
-	// z-index: $Z-important;
 }
 .toggle-button {
-	border: 1px solid grey;
+	border: 1px solid $grey;
 	border-radius: 5px;
 
 	padding: 1px 2px;
@@ -124,7 +124,7 @@ main {
 	padding-right: 0.3rem;
 	h3 {
 		margin-top: 2.5rem;
-		border-bottom: 1px solid cyan;
+		border-bottom: 1px solid $cyan;
 	}
 	form {
 		display: flex;
@@ -141,10 +141,10 @@ main {
 
 			&::placeholder {
 				color: #272727;
-				text-shadow: 0px 1px 1px black;
+				text-shadow: 0px 1px 1px $black;
 			}
 			&:focus {
-				border: 1px solid cyan;
+				border: 1px solid $cyan;
 				border-radius: 2px;
 			}
 		}
@@ -155,9 +155,9 @@ main {
 			}
 		}
 		button {
-			background-color: white;
-			color: #747474;
-			text-shadow: 0px 1px 1px black;
+			background-color: $white;
+			color: $light-grey;
+			text-shadow: 0px 1px 1px $black;
 
 			padding: 2px;
 			border-radius: 2px;
@@ -176,12 +176,29 @@ footer {
 
 		padding: 0 0.4rem;
 		li {
-			color: black;
-			text-shadow: 0px 2px 1px black;
+			color: $black;
+			text-shadow: 0px 2px 1px $black;
 			&:hover {
 				cursor: pointer;
 				text-decoration: underline;
 			}
 		}
+		.lang-link,
+		.feedback-link {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			span {
+				padding: 0 3px;
+			}
+		}
 	}
+}
+
+// generic classes and styling;
+.divider {
+	height: 2px;
+	width: 80%;
+	margin: 0 auto;
+	background-color: $primary-bg;
 }
