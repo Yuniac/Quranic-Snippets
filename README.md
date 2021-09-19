@@ -4,9 +4,9 @@ A React Firefox extension that provides Quranic verses as snippets
 
 <div align="center">
 
-![demo img](./src/img/demo/demo.jpg)
-
 ![demo img](./src/img/demo/demo-2.jpg)
+
+![demo img](./src/img/demo/demo.jpg)
 
 <div/>
 
