@@ -8,7 +8,7 @@ A React Firefox extension that provides Quranic verses as snippets
 
 ![demo img](./src/img/demo/demo.jpg)
 
-<div/>
+</div>
 
 ## What does Quranic-Snippets do?
 
