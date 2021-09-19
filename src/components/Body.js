@@ -52,7 +52,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 		return ayah;
 	}
 	React.useEffect(() => {
-		// getRandomSnippet();
+		getRandomSnippet();
 	});
 
 	return (
