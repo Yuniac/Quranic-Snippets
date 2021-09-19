@@ -15,12 +15,10 @@ function App() {
 		const storedData = browser.storage.sync.get();
 		storedData.then(({ lang }) => {
 			setLanguage(lang);
-			// console.log(lang, "stored <");
-			console.log(language);
 		});
 	}
 	React.useEffect(() => {
-		// getStoredLang();
+		getStoredLang();
 	}, [language]);
 	return (
 		<div className="App">

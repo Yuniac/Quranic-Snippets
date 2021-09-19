@@ -2,7 +2,6 @@
 const ayahObject = {
 	ayah: "",
 	ayahTimeStamp: new Date().getTime(),
-	lang: "en",
+	lang: "ar",
 };
 browser.storage.sync.set(ayahObject);
-console.log(browser.storage.sync.get());
