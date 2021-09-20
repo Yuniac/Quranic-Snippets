@@ -73,15 +73,15 @@ main {
 		font-weight: 700;
 	}
 	.settings-options {
-		& > div {
-			padding: 0 0.4rem;
+		& > div:not(.divider) {
+			padding: 0.4rem 0.4rem;
 		}
 	}
 	.change-lang-option {
 		display: flex;
 		align-items: center;
 		input {
-			margin: 1rem;
+			margin: 0.5rem 1rem;
 		}
 	}
 }
@@ -207,6 +207,6 @@ footer {
 .divider {
 	height: 2px;
 	width: 80%;
-	margin: 0 auto;
+	margin: 0.4rem auto;
 	background-color: $primary-bg;
 }
