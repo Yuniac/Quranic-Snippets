@@ -26,22 +26,44 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	//
 	const newSnippetFrequency = 3600000;
 
+	let currentAyahNumber, curentAyahNumberInSurah, currentAyahText, currentSurahNameEN, currentSurahNameAR;
+
 	async function getRandomSnippet() {
 		// get stored ayah and its related information
-		const { ayah, ayahTimeStamp, UILang, QLang } = await browser.storage.sync.get(["ayah", "ayahTimeStamp", "UILang"]);
+		const { ayah, ayahTimeStamp, UILang, QLang } = await browser.storage.sync.get(["ayah", "ayahTimeStamp", "UILang", "QLang"]);
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
 		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency) {
 			// fetch a new ayah
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
-			const fetchedAyah = await fetch(getAyahURL + randomAyahNumber);
-			const fetchedAyahAsJson = await fetchedAyah.json();
+			const urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
+			const fetchedAyah = await fetch(urlToFetch);
+			let fetchedAyahAsJson = await fetchedAyah.json();
+			fetchedAyahAsJson = fetchedAyahAsJson.data;
+			currentAyahNumber = fetchedAyahAsJson.number;
+			curentAyahNumberInSurah = fetchedAyahAsJson.numberInSurah;
+			// surah = fetchedAyahAsJson.surah
+			currentAyahText = fetchedAyahAsJson.text;
+			currentSurahNameEN = fetchedAyahAsJson.surah.englishName;
+			currentSurahNameAR = fetchedAyahAsJson.surah.name;
+			// const {
+			// 	number: currentAyahNumber,
+			// 	numberInSurah: curentAyahNumberInSurah,
+			// 	surah,
+			// 	text: currentAyahText,
+			// } = fetchedAyahAsJson.data;
+			// const { englishName: currentSurahNameEN, name: currentSurahNameAR } = surah;
 			// processing the ayah to remove "bismillah". might change this later;
-			const processedAyah = processAyah(fetchedAyahAsJson);
+			const processedAyah = processAyah(currentAyahText);
 			// create an object containing the ayah and all the information about it;
 			const newStoredAyah = {
 				ayah: processedAyah,
 				ayahTimeStamp: new Date().getTime(),
+				currentAyahNumber: currentAyahNumber,
+				curentAyahNumberInSurah: curentAyahNumberInSurah,
+				currentSurahNameEN: currentSurahNameEN,
+				currentSurahNameAR: currentSurahNameAR,
 				UILang: UILang,
+				QLang: QLang,
 			};
 			// update the state with the newly fetched ayah
 			setAyah(processedAyah);
@@ -54,8 +76,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	}
 
 	// if the ayah begins with 'bismillah', cut it out, as our focus is to only show the verse
-	function processAyah(json) {
-		let ayah = json.data.text;
+	function processAyah(ayah) {
 		if (ayah.match(/^(بِسْم)/)) {
 			ayah = ayah.slice(38);
 			return ayah;
@@ -64,12 +85,13 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	}
 	React.useEffect(() => {
 		getRandomSnippet();
+		console.log(browser.storage.sync.get());
 	}, []);
 
 	return (
 		<main>
 			<Header UILanguage={UILanguage} />
-			<Snippet ayah={ayah} />
+			<Snippet ayah={ayah} QLanguage={QLanguage} />
 			<Settings
 				settingsVisibility={settingsVisibility}
 				setSettingsVisibility={setSettingsVisibility}
@@ -77,6 +99,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 				setUILanguage={setUILanguage}
 				QLanguage={QLanguage}
 				setQLanguage={setQLanguage}
+				getRandomSnippet={getRandomSnippet}
 			/>
 			<Feedback feedbackVisibility={feedbackVisibility} setFeedbackVisibility={setFeedbackVisibility} />
 		</main>
