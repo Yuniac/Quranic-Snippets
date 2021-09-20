@@ -6,7 +6,7 @@ import ToggleButton from "../shared/ToggleButton";
 import Divider from "../shared/Divider";
 import QuranLanguageSettings from "../mini-compoenents/QuranLanguageSetting";
 
-function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUILanguage, QLanguage, setQLanguage }) {
+function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUILanguage, QLanguage, setQLanguage, getRandomSnippet }) {
 	return (
 		<div
 			className="settings popup-css"
@@ -33,7 +33,13 @@ function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUI
 			<div className="settings-options">
 				<UILanguageSettings UILanguage={UILanguage} setUILanguage={setUILanguage} />
 				<Divider />
-				<QuranLanguageSettings QLanguage={QLanguage} setQLanguage={setQLanguage} />
+				<QuranLanguageSettings
+					QLanguage={QLanguage}
+					setQLanguage={setQLanguage}
+					UILanguage={UILanguage}
+					getRandomSnippet={getRandomSnippet}
+				/>
+				<Divider />
 				{/* <ul> */}
 				{/* <li>The freq of which new verses display</li>
 					<li>The UI language</li>

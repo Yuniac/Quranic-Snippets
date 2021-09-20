@@ -1,6 +1,5 @@
 /* global browser */
 // This stops eslint from breaking the code execution because, here and right now, "browser" isn't defined, but when this app is packged and ran as an extension, "browser" is indeed defined;
-
 import React from "react";
 
 import Header from "./Header";
@@ -16,9 +15,10 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 		setQLanguage(QLang);
 	}
 
+	// get the already stored language, run once only;
 	React.useEffect(() => {
 		getStoredLang();
-	}, [QLanguage]);
+	}, []);
 
 	const getAyahURL = "http://api.alquran.cloud/v1/ayah/";
 	// this state will manage the ayah that is visible to the user when he opens the extension
@@ -28,15 +28,18 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 
 	let currentAyahNumber, curentAyahNumberInSurah, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 
-	async function getRandomSnippet() {
+	async function getRandomSnippet(isNewAyah) {
+		console.log("fetching for: ", QLanguage);
 		// get stored ayah and its related information
 		const { ayah, ayahTimeStamp, UILang, QLang } = await browser.storage.sync.get(["ayah", "ayahTimeStamp", "UILang", "QLang"]);
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
-		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency) {
+		// 'isNewAyah' true = overrides everything and fetch a new ayah regardless, will only be called when the language changes
+		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency || isNewAyah) {
 			// fetch a new ayah
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
 			const urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 			const fetchedAyah = await fetch(urlToFetch);
+			console.log(urlToFetch);
 			let fetchedAyahAsJson = await fetchedAyah.json();
 			fetchedAyahAsJson = fetchedAyahAsJson.data;
 			currentAyahNumber = fetchedAyahAsJson.number;
@@ -45,13 +48,6 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 			currentAyahText = fetchedAyahAsJson.text;
 			currentSurahNameEN = fetchedAyahAsJson.surah.englishName;
 			currentSurahNameAR = fetchedAyahAsJson.surah.name;
-			// const {
-			// 	number: currentAyahNumber,
-			// 	numberInSurah: curentAyahNumberInSurah,
-			// 	surah,
-			// 	text: currentAyahText,
-			// } = fetchedAyahAsJson.data;
-			// const { englishName: currentSurahNameEN, name: currentSurahNameAR } = surah;
 			// processing the ayah to remove "bismillah". might change this later;
 			const processedAyah = processAyah(currentAyahText);
 			// create an object containing the ayah and all the information about it;
@@ -84,7 +80,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 		return ayah;
 	}
 	React.useEffect(() => {
-		getRandomSnippet();
+		getRandomSnippet(false);
 		console.log(browser.storage.sync.get());
 	}, []);
 

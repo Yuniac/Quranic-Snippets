@@ -19,8 +19,10 @@ function Snippet({ ayah, QLanguage }) {
 	});
 	return (
 		<div className="snippet-wrapper" style={{ padding: "0 5px" }}>
-			<p className="current-ayah">{ayah}</p>
-			<p className="current-ayah-from-surah">{currentSurahName || "?!"}</p>
+			<p className="current-ayah" style={{ direction: QLanguage.startsWith("ar") ? "rtl" : "ltr" }}>
+				{ayah}
+			</p>
+			<p className="current-ayah-from-surah">{currentSurahName}</p>
 		</div>
 	);
 }

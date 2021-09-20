@@ -1,10 +1,12 @@
 /* global browser */
 import React from "react";
 
-function QuranLanguageSettings({ QLanguage, setQLanguage, UILanguage }) {
+function QuranLanguageSettings({ QLanguage, setQLanguage, UILanguage, getRandomSnippet }) {
+	// const [currentAyahLanguage, setcurrentAyahLanguage] = React.useState(QLanguage);
 	function changeQLanguage(radio) {
 		const lang = radio.target.value;
 		setQLanguage(lang);
+		browser.storage.sync.set({ QLang: QLanguage }).then(() => getRandomSnippet(true));
 	}
 
 	React.useEffect(() => {
