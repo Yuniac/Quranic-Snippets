@@ -3,6 +3,6 @@ const ayahObject = {
 	ayah: "",
 	ayahTimeStamp: new Date().getTime(),
 	UILang: "ar",
-	QLang: "ar.asd",
+	QLang: "ar.asad",
 };
 browser.storage.sync.set(ayahObject);
