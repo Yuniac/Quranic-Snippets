@@ -1,5 +1,5 @@
 import React from "react";
-function ToggleButton({ setFunction, language }) {
+function ToggleButton({ setFunction, UILanguage }) {
 	function toggleVis() {
 		setFunction(false);
 	}
@@ -8,7 +8,7 @@ function ToggleButton({ setFunction, language }) {
 			<button
 				className="toggle-button"
 				onClick={toggleVis}
-				style={{ left: language === "ar" ? "10px" : "", right: language === "ar" ? "" : "10px" }}
+				style={{ left: UILanguage === "ar" ? "10px" : "", right: UILanguage === "ar" ? "" : "10px" }}
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" height="12px" viewBox="0 0 24 24" width="12px" fill="#000000">
 					<path d="M0 0h24v24H0V0z" fill="none" />

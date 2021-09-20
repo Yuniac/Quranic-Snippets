@@ -7,30 +7,30 @@ import Footer from "./components/Footer";
 import React from "react";
 
 function App() {
-	const [language, setLanguage] = React.useState("");
-	const [settingsVisibility, setsettingsVisibility] = React.useState(false);
+	const [UILanguage, setUILanguage] = React.useState("");
+	const [settingsVisibility, setSettingsVisibility] = React.useState(false);
 	const [feedbackVisibility, setFeedbackVisibility] = React.useState(false);
 
 	function getStoredLang() {
 		const storedData = browser.storage.sync.get();
-		storedData.then(({ lang }) => {
-			setLanguage(lang);
+		storedData.then(({ UILang }) => {
+			setUILanguage(UILang);
 		});
 	}
 	React.useEffect(() => {
 		getStoredLang();
-	}, [language]);
+	}, [UILanguage]);
 	return (
 		<div className="App">
 			<Body
-				language={language}
-				setLanguage={setLanguage}
+				UILanguage={UILanguage}
+				setUILanguage={setUILanguage}
 				settingsVisibility={settingsVisibility}
-				setSettingsVisibility={setsettingsVisibility}
+				setSettingsVisibility={setSettingsVisibility}
 				feedbackVisibility={feedbackVisibility}
 				setFeedbackVisibility={setFeedbackVisibility}
 			/>
-			<Footer setSettingsVisibility={setsettingsVisibility} setFeedbackVisibility={setFeedbackVisibility} language={language} />
+			<Footer setSettingsVisibility={setSettingsVisibility} setFeedbackVisibility={setFeedbackVisibility} language={UILanguage} />
 		</div>
 	);
 }
