@@ -11,12 +11,11 @@ function App() {
 	const [settingsVisibility, setSettingsVisibility] = React.useState(false);
 	const [feedbackVisibility, setFeedbackVisibility] = React.useState(false);
 
-	function getStoredLang() {
-		const storedData = browser.storage.sync.get();
-		storedData.then(({ UILang }) => {
-			setUILanguage(UILang);
-		});
+	async function getStoredLang() {
+		const { UILang } = await browser.storage.sync.get();
+		setUILanguage(UILang);
 	}
+
 	React.useEffect(() => {
 		getStoredLang();
 	}, [UILanguage]);
