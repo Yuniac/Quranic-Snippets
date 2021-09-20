@@ -9,7 +9,7 @@ function LanguageSettings({ language, setLanguage }) {
 	}
 	React.useEffect(() => {
 		if (language.length) {
-			// browser.storage.sync.set({ lang: language });
+			browser.storage.sync.set({ lang: language });
 		}
 	});
 	return (

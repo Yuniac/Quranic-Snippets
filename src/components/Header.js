@@ -1,19 +1,19 @@
 import React from "react";
 import "../App.scss";
-function Header({ language }) {
+function Header({ UILanguage }) {
 	return (
 		<div className="header">
 			<h1>
 				<span
 					style={{
-						display: language === "ar" ? "inline-block" : "none",
+						display: UILanguage === "ar" ? "inline-block" : "none",
 					}}
 				>
 					قُصَّاصَاتْ قُرآنيّةَ
 				</span>
 				<span
 					style={{
-						display: language === "ar" ? "none" : "inline-block",
+						display: UILanguage === "ar" ? "none" : "inline-block",
 					}}
 				>
 					Quranic Snippets

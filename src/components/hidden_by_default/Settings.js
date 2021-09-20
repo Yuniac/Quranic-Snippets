@@ -1,11 +1,12 @@
 import React from "react";
-import LanguageSettings from "../mini-compoenents/LanguageSettings";
+import UILanguageSettings from "../mini-compoenents/UILanguageSettings";
 import { zImportant, zRegular } from "../../style/_variables.module.scss";
 
 import ToggleButton from "../shared/ToggleButton";
 import Divider from "../shared/Divider";
+import QuranLanguageSettings from "../mini-compoenents/QuranLanguageSetting";
 
-function Settings({ settingsVisibility, setSettingsVisibility, language, setLanguage }) {
+function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUILanguage, QLanguage, setQLanguage }) {
 	return (
 		<div
 			className="settings popup-css"
@@ -17,21 +18,22 @@ function Settings({ settingsVisibility, setSettingsVisibility, language, setLang
 		>
 			<h2
 				style={{
-					direction: language === "ar" ? "rtl" : "ltr",
+					direction: UILanguage === "ar" ? "rtl" : "ltr",
 				}}
 			>
-				<span className="ar-text" style={{ display: language === "ar" ? "inline-block" : "none" }}>
+				<span className="ar-text" style={{ display: UILanguage === "ar" ? "inline-block" : "none" }}>
 					إعدادات الإضافة:
 				</span>
-				<span className="en-text" style={{ display: language === "ar" ? "none" : "inline-block" }}>
+				<span className="en-text" style={{ display: UILanguage === "ar" ? "none" : "inline-block" }}>
 					Extensions Settings:
 				</span>{" "}
 			</h2>
-			<ToggleButton setFunction={setSettingsVisibility} language={language} />
+			<ToggleButton setFunction={setSettingsVisibility} UILanguage={UILanguage} />
 			{/* <div>Background stays here</div> */}
 			<div className="settings-options">
-				<LanguageSettings language={language} setLanguage={setLanguage} />
+				<UILanguageSettings UILanguage={UILanguage} setUILanguage={setUILanguage} />
 				<Divider />
+				<QuranLanguageSettings QLanguage={QLanguage} setQLanguage={setQLanguage} />
 				{/* <ul> */}
 				{/* <li>The freq of which new verses display</li>
 					<li>The UI language</li>
