@@ -7,11 +7,11 @@ function QuranLanguageSettings({ QLanguage, setQLanguage, UILanguage }) {
 		setQLanguage(lang);
 	}
 
-	React.useEffect(() => {
-		if (QLanguage.length) {
-			browser.storage.sync.set({ QLang: QLanguage });
-		}
-	}, [QLanguage]);
+	// React.useEffect(() => {
+	// 	if (QLanguage.length) {
+	// 		browser.storage.sync.set({ QLang: QLanguage });
+	// 	}
+	// }, [QLanguage]);
 	return (
 		<div>
 			<div>

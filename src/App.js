@@ -16,9 +16,9 @@ function App() {
 		setUILanguage(UILang);
 	}
 
-	React.useEffect(() => {
-		getStoredLang();
-	}, [UILanguage]);
+	// React.useEffect(() => {
+	// 	getStoredLang();
+	// }, [UILanguage]);
 	return (
 		<div className="App">
 			<Body

@@ -16,9 +16,9 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 		setQLanguage(QLang);
 	}
 
-	React.useEffect(() => {
-		getStoredLang();
-	}, [QLanguage]);
+	// React.useEffect(() => {
+	// 	getStoredLang();
+	// }, [QLanguage]);
 
 	const getAyahURL = "http://api.alquran.cloud/v1/ayah/";
 	// this state will manage the ayah that is visible to the user when he opens the extension
@@ -63,7 +63,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 		return ayah;
 	}
 	React.useEffect(() => {
-		getRandomSnippet();
+		// getRandomSnippet();
 	}, []);
 
 	return (
