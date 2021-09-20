@@ -8,8 +8,19 @@ import Snippet from "./Snippet";
 import Settings from "./hidden_by_default/Settings";
 import Feedback from "./hidden_by_default/Feedback";
 
-function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, setFeedbackVisibility, language, setLanguage }) {
-	const getAyaURL = "http://api.alquran.cloud/v1/ayah/";
+function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, setFeedbackVisibility, UILanguage, setUILanguage }) {
+	const [QLanguage, setQLanguage] = React.useState("");
+
+	async function getStoredLang() {
+		const { QLang } = await browser.storage.sync.get();
+		setQLanguage(QLang);
+	}
+
+	React.useEffect(() => {
+		getStoredLang();
+	}, [QLanguage]);
+
+	const getAyahURL = "http://api.alquran.cloud/v1/ayah/";
 	// this state will manage the ayah that is visible to the user when he opens the extension
 	const [ayah, setAyah] = React.useState("");
 	//
@@ -17,12 +28,12 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 
 	async function getRandomSnippet() {
 		// get stored ayah and its related information
-		const { ayah, ayahTimeStamp } = await browser.storage.sync.get(["ayah", "ayahTimeStamp"]);
+		const { ayah, ayahTimeStamp, UILang, QLang } = await browser.storage.sync.get(["ayah", "ayahTimeStamp", "UILang"]);
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
 		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency) {
 			// fetch a new ayah
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
-			const fetchedAyah = await fetch(getAyaURL + randomAyahNumber);
+			const fetchedAyah = await fetch(getAyahURL + randomAyahNumber);
 			const fetchedAyahAsJson = await fetchedAyah.json();
 			// processing the ayah to remove "bismillah". might change this later;
 			const processedAyah = processAyah(fetchedAyahAsJson);
@@ -30,7 +41,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 			const newStoredAyah = {
 				ayah: processedAyah,
 				ayahTimeStamp: new Date().getTime(),
-				lang: language,
+				UILang: UILang,
 			};
 			// update the state with the newly fetched ayah
 			setAyah(processedAyah);
@@ -53,17 +64,19 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	}
 	React.useEffect(() => {
 		getRandomSnippet();
-	});
+	}, []);
 
 	return (
 		<main>
-			<Header language={language} />
+			<Header UILanguage={UILanguage} />
 			<Snippet ayah={ayah} />
 			<Settings
 				settingsVisibility={settingsVisibility}
 				setSettingsVisibility={setSettingsVisibility}
-				language={language}
-				setLanguage={setLanguage}
+				UILanguage={UILanguage}
+				setUILanguage={setUILanguage}
+				QLanguage={QLanguage}
+				setQLanguage={setQLanguage}
 			/>
 			<Feedback feedbackVisibility={feedbackVisibility} setFeedbackVisibility={setFeedbackVisibility} />
 		</main>
