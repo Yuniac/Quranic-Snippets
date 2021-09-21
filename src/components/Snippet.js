@@ -18,11 +18,21 @@ function Snippet({ ayah, QLanguage }) {
 		getStoredName();
 	});
 	return (
-		<div className="snippet-wrapper" style={{ padding: "0 5px" }}>
+		<div className="snippet-wrapper" style={{ padding: "0 0.4rem" }}>
 			<p className="current-ayah" style={{ direction: QLanguage.startsWith("ar") ? "rtl" : "ltr" }}>
 				{ayah}
 			</p>
-			<p className="current-ayah-from-surah">{currentSurahName}</p>
+			<p
+				className="current-ayah-from-surah"
+				style={{
+					direction: QLanguage.startsWith("ar") ? "rtl" : "ltr",
+					textAlign: "center",
+					marginTop: "0.4rem",
+				}}
+			>
+				<span style={{ display: QLanguage.startsWith("ar") ? "none" : "inline" }}>Surah </span>
+				{currentSurahName}
+			</p>
 		</div>
 	);
 }
