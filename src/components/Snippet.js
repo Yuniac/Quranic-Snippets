@@ -10,8 +10,8 @@ function Snippet({ ayah, QLanguage }) {
 			const { currentSurahNameAR } = await browser.storage.sync.get();
 			setCurrentSurahName(currentSurahNameAR);
 		} else {
-			const { currentSurahNameEM } = await browser.storage.sync.get();
-			setCurrentSurahName(currentSurahNameEM);
+			const { currentSurahNameEN } = await browser.storage.sync.get();
+			setCurrentSurahName(currentSurahNameEN);
 		}
 	}
 	React.useEffect(() => {
