@@ -5,13 +5,15 @@ function QuranLanguageSettings({ QLanguage, setQLanguage, UILanguage }) {
 	function changeQLanguage(radio) {
 		const lang = radio.target.value;
 		setQLanguage(lang);
+		// the argument true means fetch a new ayah in the second langauge regardless of what's stored in the storage;
+		browser.storage.sync.set({ QLang: QLanguage }).then(() => getRandomSnippet(true));
 	}
 
-	// React.useEffect(() => {
-	// 	if (QLanguage.length) {
-	// 		browser.storage.sync.set({ QLang: QLanguage });
-	// 	}
-	// }, [QLanguage]);
+	React.useEffect(() => {
+		if (QLanguage.length) {
+			browser.storage.sync.set({ QLang: QLanguage });
+		}
+	}, [QLanguage]);
 	return (
 		<div>
 			<div>

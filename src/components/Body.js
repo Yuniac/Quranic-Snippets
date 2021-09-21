@@ -16,9 +16,9 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 		setQLanguage(QLang);
 	}
 
-	// React.useEffect(() => {
-	// 	getStoredLang();
-	// }, [QLanguage]);
+	React.useEffect(() => {
+		getStoredLang();
+	}, [QLanguage]);
 
 	const getAyahURL = "http://api.alquran.cloud/v1/ayah/";
 	// this state will manage the ayah that is visible to the user when he opens the extension
@@ -26,15 +26,36 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	//
 	const newSnippetFrequency = 3600000;
 
-	async function getRandomSnippet() {
+	let currentAyahNumber, curentAyahNumberInSurah, currentAyahText, currentSurahNameEN, currentSurahNameAR;
+	let urlToFetch;
+
+	async function getRandomSnippet(newAyahInSecondLang) {
 		// get stored ayah and its related information
 		const { ayah, ayahTimeStamp, UILang, QLang } = await browser.storage.sync.get(["ayah", "ayahTimeStamp", "UILang"]);
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
-		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency) {
+		// 'newAyahInSecondLang' true = overrides everything and fetch a new ayah regardless, will only be called when the language changes
+		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency || newAyahInSecondLang) {
 			// fetch a new ayah
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
-			const fetchedAyah = await fetch(getAyahURL + randomAyahNumber);
-			const fetchedAyahAsJson = await fetchedAyah.json();
+			if (newAyahInSecondLang) {
+				const { currentAyahNumber } = await browser.storage.sync.get("currentAyahNumber");
+				// console.log(ayahNumber);
+				urlToFetch = getAyahURL + currentAyahNumber + "/" + QLang;
+			} else {
+				urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
+			}
+			// const urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
+			const fetchedAyah = await fetch(urlToFetch);
+			let fetchedAyahAsJson = await fetchedAyah.json();
+			console.log(fetchedAyahAsJson);
+
+			fetchedAyahAsJson = fetchedAyahAsJson.data;
+			currentAyahNumber = fetchedAyahAsJson.number;
+			curentAyahNumberInSurah = fetchedAyahAsJson.numberInSurah;
+			currentAyahText = fetchedAyahAsJson.text;
+			currentSurahNameEN = fetchedAyahAsJson.surah.englishName;
+			currentSurahNameAR = fetchedAyahAsJson.surah.name;
+
 			// processing the ayah to remove "bismillah". might change this later;
 			const processedAyah = processAyah(fetchedAyahAsJson);
 			// create an object containing the ayah and all the information about it;
@@ -63,7 +84,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 		return ayah;
 	}
 	React.useEffect(() => {
-		// getRandomSnippet();
+		getRandomSnippet(false);
 	}, []);
 
 	return (
