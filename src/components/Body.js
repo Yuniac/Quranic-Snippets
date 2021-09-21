@@ -33,14 +33,20 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 		// get stored ayah and its related information
 		const { ayah, ayahTimeStamp, UILang, QLang } = await browser.storage.sync.get(["ayah", "ayahTimeStamp", "UILang", "QLang"]);
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
-		// 'newAyahInSecondLang' true = overrides everything and fetch a new ayah regardless, will only be called when the language changes
+		// or if 'newAyahInSecondLang' argument is present as true/false, true = overrides everything and fetch a new ayah regardless, will only be called when the language changes or 'get a new snippet now' button;
+		// this will be named forced new snippet;
 		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency || newAyahInSecondLang) {
 			// fetch a new ayah
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
 			if (newAyahInSecondLang) {
 				const { currentAyahNumber } = await browser.storage.sync.get("currentAyahNumber");
-				// console.log(ayahNumber);
-				urlToFetch = getAyahURL + currentAyahNumber + "/" + QLang;
+				// if forced new snippet but in different language, then this verse exist in storage, get its number and fetch it in the second language;
+				if (currentAyahNumber) {
+					urlToFetch = getAyahURL + currentAyahNumber + "/" + QLang;
+				} else {
+					// else, fetch randomly
+					urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
+				}
 			} else {
 				urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 			}
