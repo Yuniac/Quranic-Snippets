@@ -44,6 +44,7 @@ function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUI
 				{/* <li>The freq of which new verses display</li>
 					<li>The UI language</li>
 					<li>The verses languge</li>
+					<li>Next snippt in {nextSnippetTimer}</li>
 					<li>The UI theme</li>\<li>The frequency of getting a new verse</li>
 					<li>Bookmark verses</li>
 					<li>Get additional information about verses</li>
