@@ -13,7 +13,7 @@ function NewSnippetNowButton({ getRandomSnippet, UILanguage }) {
 	}
 	return (
 		<button
-			className="new-snippet-now-button"
+			className="new-snippet-now-button cta-button"
 			onClick={handleClick}
 			style={{
 				right: UILanguage === "ar" ? "8px" : "null",
