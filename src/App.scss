@@ -4,10 +4,6 @@
 	font-family: Kitab;
 	src: url("./fonts/Kitab-Regular.ttf");
 }
-@font-face {
-	font-family: Kitab;
-	src: url("./fonts/Kitab-Bold.ttf");
-}
 body {
 	background: black;
 }
@@ -17,12 +13,10 @@ body {
 	max-height: fit-content;
 
 	background-color: $primary-bg;
-
+	font-family: "Amiri", serif;
 	margin: 0 auto;
 
 	color: $primary-font-color;
-
-	// font-family: "Amiri", serif;
 
 	display: flex;
 	flex-direction: column;
@@ -31,6 +25,7 @@ body {
 	position: relative;
 
 	overflow-y: auto;
+	overflow-x: hidden;
 }
 main,
 footer {
@@ -38,8 +33,6 @@ footer {
 }
 main {
 	color: $primary-font-color;
-	// font-family: "Amiri", serif;
-	font-family: "Kitab";
 }
 
 //
@@ -59,10 +52,13 @@ main {
 }
 //
 .snippet-wrapper {
+	font-family: "Kitab" !important;
 	position: relative;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
 	.current-surah-cta {
 		display: flex;
 		justify-content: space-between;
@@ -73,6 +69,10 @@ main {
 	}
 	.current-ayah {
 		font-size: $fs-large;
+		p {
+			font-family: "Kitab" !important;
+		}
+
 		line-height: 4.1rem;
 		text-align: center;
 
@@ -83,6 +83,7 @@ main {
 		max-height: 320px;
 		width: 100%;
 		overflow-y: auto;
+		overflow-x: hidden;
 
 		scrollbar-color: $primary-bg $secondary-bg;
 		scrollbar-width: thin;
