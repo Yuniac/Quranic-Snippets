@@ -1,5 +1,9 @@
 @import "./style/_variables.module";
 @import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,700&display=swap");
+@font-face {
+	font-family: Kitab;
+	src: url("./fonts/Kitab-Regular.ttf");
+}
 body {
 	background: black;
 }
@@ -9,11 +13,10 @@ body {
 	max-height: fit-content;
 
 	background-color: $primary-bg;
-
+	font-family: "Amiri", serif;
 	margin: 0 auto;
 
 	color: $primary-font-color;
-	font-family: "Amiri", serif;
 
 	display: flex;
 	flex-direction: column;
@@ -22,6 +25,7 @@ body {
 	position: relative;
 
 	overflow-y: auto;
+	overflow-x: hidden;
 }
 main,
 footer {
@@ -29,7 +33,6 @@ footer {
 }
 main {
 	color: $primary-font-color;
-	font-family: "Amiri", serif;
 }
 
 //
@@ -49,8 +52,27 @@ main {
 }
 //
 .snippet-wrapper {
+	font-family: "Kitab" !important;
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.current-surah-cta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		width: 350px;
+		margin: 0.4rem auto 0;
+	}
 	.current-ayah {
 		font-size: $fs-large;
+		p {
+			font-family: "Kitab" !important;
+		}
+
 		line-height: 4.1rem;
 		text-align: center;
 
@@ -59,10 +81,15 @@ main {
 		border: 1px solid $light-cyan;
 
 		max-height: 320px;
+		width: 100%;
 		overflow-y: auto;
+		overflow-x: hidden;
 
 		scrollbar-color: $primary-bg $secondary-bg;
 		scrollbar-width: thin;
+	}
+	.new-snippet-now-button {
+		background-color: $secondary-bg;
 	}
 }
 //

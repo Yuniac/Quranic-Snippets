@@ -29,18 +29,24 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	let currentAyahNumber, curentAyahNumberInSurah, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 	let urlToFetch;
 
-	async function getRandomSnippet(newAyahInSecondLang) {
+	async function getRandomSnippet(newAyahInSecondLang, forced) {
 		// get stored ayah and its related information
 		const { ayah, ayahTimeStamp, UILang, QLang } = await browser.storage.sync.get(["ayah", "ayahTimeStamp", "UILang"]);
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
-		// 'newAyahInSecondLang' true = overrides everything and fetch a new ayah regardless, will only be called when the language changes
+		// or if 'newAyahInSecondLang' argument is present as true/false, true = overrides everything and fetch a new ayah regardless, will only be called when the language changes or 'get a new snippet now' button;
+		// this will be named forced new snippet;
 		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency || newAyahInSecondLang) {
 			// fetch a new ayah
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
 			if (newAyahInSecondLang) {
 				const { currentAyahNumber } = await browser.storage.sync.get("currentAyahNumber");
-				// console.log(ayahNumber);
-				urlToFetch = getAyahURL + currentAyahNumber + "/" + QLang;
+				// if forced, then user has requested to get a new snippt, regardless of everything so fetch anew;
+				if (forced) {
+					urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
+				} else {
+					// else, get the same verse that is stored but in th second language
+					urlToFetch = getAyahURL + currentAyahNumber + "/" + QLang;
+				}
 			} else {
 				urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 			}
@@ -90,7 +96,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	return (
 		<main>
 			<Header UILanguage={UILanguage} />
-			<Snippet ayah={ayah} />
+			<Snippet ayah={ayah} UILanguage={UILanguage} getRandomSnippet={getRandomSnippet} QLanguage={QLanguage} />
 			<Settings
 				settingsVisibility={settingsVisibility}
 				setSettingsVisibility={setSettingsVisibility}
