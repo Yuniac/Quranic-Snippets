@@ -1,11 +1,11 @@
 @import "./style/_variables.module";
 @import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,700&display=swap");
 @font-face {
-	font-family: Scheherazade;
+	font-family: Kitab;
 	src: url("./fonts/Kitab-Regular.ttf");
 }
 @font-face {
-	font-family: Scheherazade;
+	font-family: Kitab;
 	src: url("./fonts/Kitab-Bold.ttf");
 }
 body {
@@ -21,8 +21,8 @@ body {
 	margin: 0 auto;
 
 	color: $primary-font-color;
+
 	// font-family: "Amiri", serif;
-	// font-family: "Kitab", Scheherazade;
 
 	display: flex;
 	flex-direction: column;
@@ -38,7 +38,8 @@ footer {
 }
 main {
 	color: $primary-font-color;
-	font-family: "Amiri", serif;
+	// font-family: "Amiri", serif;
+	font-family: "Kitab";
 }
 
 //
