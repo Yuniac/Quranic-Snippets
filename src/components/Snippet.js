@@ -2,7 +2,9 @@
 import React from "react";
 import "../App.scss";
 
-function Snippet({ ayah, QLanguage }) {
+import CurrentAyahCallToActions from "./hidden_by_default/CurrentAyahCallToActions";
+
+function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet }) {
 	const [currentSurahName, setCurrentSurahName] = React.useState("");
 
 	async function getStoredName() {
@@ -22,17 +24,12 @@ function Snippet({ ayah, QLanguage }) {
 			<p className="current-ayah" style={{ direction: QLanguage.startsWith("ar") ? "rtl" : "ltr" }}>
 				{ayah}
 			</p>
-			<p
-				className="current-ayah-from-surah"
-				style={{
-					direction: QLanguage.startsWith("ar") ? "rtl" : "ltr",
-					textAlign: "center",
-					marginTop: "0.4rem",
-				}}
-			>
-				<span style={{ display: QLanguage.startsWith("ar") ? "none" : "inline" }}>Surah </span>
-				{currentSurahName}
-			</p>
+			<CurrentAyahCallToActions
+				getRandomSnippet={getRandomSnippet}
+				UILanguage={UILanguage}
+				currentSurahName={currentSurahName}
+				QLanguage={QLanguage}
+			/>
 		</div>
 	);
 }
