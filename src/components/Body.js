@@ -1,23 +1,20 @@
 /* global browser */
 // This stops eslint from breaking the code execution because, here and right now, "browser" isn't defined, but when this app is packged and ran as an extension, "browser" is indeed defined;
 import React from "react";
-
+//
 import Header from "./Header";
 import Snippet from "./Snippet";
 import Settings from "./hidden_by_default/Settings";
 import Feedback from "./hidden_by_default/Feedback";
+//
+import { getStoredValue } from "./helpers/helpers";
 
 function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, setFeedbackVisibility, UILanguage, setUILanguage }) {
 	const [QLanguage, setQLanguage] = React.useState("");
 
-	async function getStoredLang() {
-		const { QLang } = await browser.storage.sync.get("QLang");
-		if (QLang) setQLanguage(QLang);
-	}
-
 	// get the already stored language, run once only;
 	React.useEffect(() => {
-		getStoredLang();
+		getStoredValue("QLang", setQLanguage);
 	}, []);
 
 	const getAyahURL = "http://api.alquran.cloud/v1/ayah/";
@@ -29,16 +26,16 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	let currentAyahNumber, currentAyahNumberInSurah, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 	let urlToFetch;
 
-	async function getRandomSnippet(newAyahInSecondLang, forced) {
+	async function getRandomSnippet(sameAyahInSecondLang, forced) {
 		// get stored ayah and its related information
 		const { ayah, ayahTimeStamp, UILang, QLang } = await browser.storage.sync.get(["ayah", "ayahTimeStamp", "UILang", "QLang"]);
+
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
-		// or if 'newAyahInSecondLang' argument is present as true/false, true = overrides everything and fetch a new ayah regardless, will only be called when the language changes or 'get a new snippet now' button;
-		// this will be named forced new snippet;
-		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency || newAyahInSecondLang) {
+		// or if 'sameAyahInSecondLang' argument is present as true/false, true = fetch the same ayah but in the second langauge, will only be called when the language changes. if 'forced' = true then regardless of anything, fetch a new ayah in whichever current language we have, will only be called from 'get a new snippet now' button;
+		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency || sameAyahInSecondLang) {
 			// fetch a new ayah
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
-			if (newAyahInSecondLang) {
+			if (sameAyahInSecondLang) {
 				const { currentAyahNumber } = await browser.storage.sync.get("currentAyahNumber");
 				// if forced, then user has requested to get a new snippt, regardless of everything so fetch anew;
 				if (forced) {
@@ -95,6 +92,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	React.useEffect(() => {
 		getRandomSnippet(false);
 		// TODO
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
 		<main>

@@ -1,21 +1,24 @@
 import React from "react";
 //
 import NewSnippetNowButton from "./NewSnippetNowButton";
-import CurrentAyahDetailsButton from "./CurrentAyahDetailsButton";
 import CurrentSurahName from "./CurrentSurahName";
-import CurrentAyahDetails from "../hidden_by_default/CurrentAyahDetails";
-// renaming a variable temporarily due to a naming conflict;
-function CurrentAyahCallToActions({ UILanguage, QLanguage, getRandomSnippet, currentSurahName: surahName }) {
-	const [currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility] = React.useState(false);
+import CurrentAyahDetailsButton from "./CurrentAyahDetailsButton";
+// renaming a variable temporarily due to a naming conflict in this component;
+function CurrentAyahCallToActions({
+	UILanguage,
+	QLanguage,
+	getRandomSnippet,
+	currentSurahName,
+	currentAyahDetailsVisibility,
+	setCurrentAyahDetailsVisibility,
+}) {
 	return (
 		<div className="current-surah-cta">
 			<NewSnippetNowButton UILanguage={UILanguage} getRandomSnippet={getRandomSnippet} />
-			<CurrentSurahName CurrentSurahName={surahName} QLanguage={QLanguage} />
-			<CurrentAyahDetailsButton setCurrentAyahDetailsVisibility={setCurrentAyahDetailsVisibility} />
-			<CurrentAyahDetails
-				QLanguage={QLanguage}
-				CurrentSurahName={surahName}
+			<CurrentSurahName currentSurahName={currentSurahName} UILanguage={UILanguage} />
+			<CurrentAyahDetailsButton
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
+				setCurrentAyahDetailsVisibility={setCurrentAyahDetailsVisibility}
 			/>
 		</div>
 	);

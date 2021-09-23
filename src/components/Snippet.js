@@ -10,8 +10,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, curentAyahNumb
 	const [currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility] = React.useState(false);
 
 	async function getStoredName() {
-		console.log(QLanguage);
-		if (QLanguage.startsWith("ar")) {
+		if (UILanguage.startsWith("ar")) {
 			const { currentSurahNameAR } = await browser.storage.sync.get();
 			setCurrentSurahName(currentSurahNameAR);
 		} else {
@@ -41,6 +40,8 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, curentAyahNumb
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
 				currentSurahName={currentSurahName}
 				UILanguage={UILanguage}
+				QLanguage={QLanguage}
+				ayah={ayah}
 			/>
 		</div>
 	);

@@ -39,7 +39,6 @@ function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUI
 					UILanguage={UILanguage}
 					getRandomSnippet={getRandomSnippet}
 				/>
-				<Divider />
 				{/* <ul> */}
 				{/* <li>The freq of which new verses display</li>
 					<li>The UI language</li>
