@@ -29,6 +29,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	async function getRandomSnippet(sameAyahInSecondLang, forced) {
 		// get stored ayah and its related information
 		const { ayah, ayahTimeStamp, UILang, QLang } = await browser.storage.sync.get(["ayah", "ayahTimeStamp", "UILang", "QLang"]);
+
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
 		// or if 'sameAyahInSecondLang' argument is present as true/false, true = fetch the same ayah but in the second langauge, will only be called when the language changes. if 'forced' = true then regardless of anything, fetch a new ayah in whichever current language we have, will only be called from 'get a new snippet now' button;
 		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency || sameAyahInSecondLang) {
