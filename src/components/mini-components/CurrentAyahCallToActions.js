@@ -15,7 +15,7 @@ function CurrentAyahCallToActions({
 	return (
 		<div className="current-surah-cta">
 			<NewSnippetNowButton UILanguage={UILanguage} getRandomSnippet={getRandomSnippet} />
-			<CurrentSurahName currentSurahName={currentSurahName} QLanguage={QLanguage} />
+			<CurrentSurahName currentSurahName={currentSurahName} UILanguage={UILanguage} />
 			<CurrentAyahDetailsButton
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
 				setCurrentAyahDetailsVisibility={setCurrentAyahDetailsVisibility}

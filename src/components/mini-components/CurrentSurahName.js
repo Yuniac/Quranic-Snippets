@@ -1,17 +1,17 @@
 import React from "react";
 
-function CurrentSurahName({ QLanguage, currentSurahName }) {
+function CurrentSurahName({ UILanguage, currentSurahName }) {
 	return (
 		<p
 			className="current-ayah-from-surah"
 			style={{
-				direction: QLanguage.startsWith("ar") ? "rtl" : "ltr",
+				direction: UILanguage.startsWith("ar") ? "rtl" : "ltr",
 				textAlign: "center",
 				marginTop: "0.4rem",
 			}}
 		>
-			<span style={{ display: QLanguage.startsWith("ar") ? "none" : "inline-block" }}>Surah {currentSurahName}</span>
-			<span style={{ display: QLanguage.startsWith("ar") ? "inline-block" : "none" }}>{currentSurahName}</span>
+			<span style={{ display: UILanguage.startsWith("ar") ? "none" : "inline-block" }}>Surah {currentSurahName}</span>
+			<span style={{ display: UILanguage.startsWith("ar") ? "inline-block" : "none" }}>{currentSurahName}</span>
 		</p>
 	);
 }
