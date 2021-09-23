@@ -5,13 +5,12 @@ import "../App.scss";
 import CurrentAyahCallToActions from "./mini-components/CurrentAyahCallToActions";
 import CurrentAyahDetails from "./hidden_by_default/CurrentAyahDetails";
 
-function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, curentAyahNumber, curentAyahNumberInSurah }) {
+function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet }) {
 	const [currentSurahName, setCurrentSurahName] = React.useState("");
 	const [currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility] = React.useState(false);
 
 	async function getStoredName() {
-		console.log(QLanguage);
-		if (QLanguage.startsWith("ar")) {
+		if (UILanguage.startsWith("ar")) {
 			const { currentSurahNameAR } = await browser.storage.sync.get();
 			setCurrentSurahName(currentSurahNameAR);
 		} else {
@@ -21,7 +20,6 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, curentAyahNumb
 	}
 	React.useEffect(() => {
 		getStoredName();
-		// TODO
 	});
 
 	return (
@@ -40,9 +38,9 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, curentAyahNumb
 			<CurrentAyahDetails
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
 				currentSurahName={currentSurahName}
-				curentAyahNumber={curentAyahNumber}
-				curentAyahNumberInSurah={curentAyahNumberInSurah}
 				UILanguage={UILanguage}
+				QLanguage={QLanguage}
+				ayah={ayah}
 			/>
 		</div>
 	);
