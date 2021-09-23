@@ -32,7 +32,6 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, curentAyahNumb
 				getRandomSnippet={getRandomSnippet}
 				UILanguage={UILanguage}
 				currentSurahName={currentSurahName}
-				QLanguage={QLanguage}
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
 				setCurrentAyahDetailsVisibility={setCurrentAyahDetailsVisibility}
 			/>

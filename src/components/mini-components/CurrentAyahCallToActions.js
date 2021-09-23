@@ -6,7 +6,6 @@ import CurrentAyahDetailsButton from "./CurrentAyahDetailsButton";
 // renaming a variable temporarily due to a naming conflict in this component;
 function CurrentAyahCallToActions({
 	UILanguage,
-	QLanguage,
 	getRandomSnippet,
 	currentSurahName,
 	currentAyahDetailsVisibility,
