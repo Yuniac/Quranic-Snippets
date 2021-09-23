@@ -11,8 +11,8 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	const [QLanguage, setQLanguage] = React.useState("");
 
 	async function getStoredLang() {
-		const { QLang } = await browser.storage.sync.get();
-		setQLanguage(QLang);
+		const { QLang } = await browser.storage.sync.get("QLang");
+		if (QLang) setQLanguage(QLang);
 	}
 
 	// get the already stored language, run once only;
@@ -53,7 +53,6 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 			// const urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 			const fetchedAyah = await fetch(urlToFetch);
 			let fetchedAyahAsJson = await fetchedAyah.json();
-			console.log(fetchedAyahAsJson);
 
 			fetchedAyahAsJson = fetchedAyahAsJson.data;
 			currentAyahNumber = fetchedAyahAsJson.number;
@@ -95,12 +94,21 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	}
 	React.useEffect(() => {
 		getRandomSnippet(false);
+		// TODO
 	}, []);
-
 	return (
 		<main>
 			<Header UILanguage={UILanguage} />
-			<Snippet ayah={ayah} UILanguage={UILanguage} getRandomSnippet={getRandomSnippet} QLanguage={QLanguage} />
+			<Snippet
+				ayah={ayah}
+				UILanguage={UILanguage}
+				getRandomSnippet={getRandomSnippet}
+				QLanguage={QLanguage}
+				currentSurahNameAR={currentSurahNameAR}
+				currentSurahNameEN={currentSurahNameEN}
+				currentAyahNumber={currentAyahNumber}
+				curentAyahNumberInSurah={curentAyahNumberInSurah}
+			/>
 			<Settings
 				settingsVisibility={settingsVisibility}
 				setSettingsVisibility={setSettingsVisibility}

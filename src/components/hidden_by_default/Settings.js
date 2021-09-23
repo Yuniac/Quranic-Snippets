@@ -1,10 +1,10 @@
 import React from "react";
-import UILanguageSettings from "../mini-compoenents/UILanguageSettings";
+import UILanguageSettings from "../mini-components/UILanguageSettings";
 import { zImportant, zRegular } from "../../style/_variables.module.scss";
 
 import ToggleButton from "../shared/ToggleButton";
 import Divider from "../shared/Divider";
-import QuranLanguageSettings from "../mini-compoenents/QuranLanguageSetting";
+import QuranLanguageSettings from "../mini-components/QuranLanguageSetting";
 
 function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUILanguage, QLanguage, setQLanguage, getRandomSnippet }) {
 	return (

@@ -15,7 +15,6 @@ function App() {
 		const { UILang } = await browser.storage.sync.get();
 		setUILanguage(UILang);
 	}
-
 	React.useEffect(() => {
 		getStoredLang();
 	}, [UILanguage]);
