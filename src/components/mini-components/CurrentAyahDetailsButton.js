@@ -9,7 +9,6 @@ function CurrentAyahDetailsButton({ currentAyahDetailsVisibility, setCurrentAyah
 	);
 
 	function handleClick() {
-		// toggle the state
 		setCurrentAyahDetailsVisibility((x) => !x);
 	}
 	return (

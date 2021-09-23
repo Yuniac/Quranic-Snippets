@@ -1,13 +1,20 @@
 import React from "react";
+//
+import { getStoredValue } from "../helpers/helpers";
+function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage, QLanguage, ayah }) {
+	console.log(QLanguage);
+	const [currentSurahNameAR, setCurrentSurahNameAR] = React.useState("");
+	const [currentSurahNameEN, setCurrentSurahNameEN] = React.useState("");
+	const [curentAyahNumber, setCurentAyahNumber] = React.useState(0);
+	const [curentAyahNumberInSurah, setCurentAyahNumberInSurah] = React.useState(0);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	React.useEffect(() => {
+		getStoredValue("currentSurahNameAR", setCurrentSurahNameAR);
+		getStoredValue("currentSurahNameEN", setCurrentSurahNameEN);
+		getStoredValue("curentAyahNumber", setCurentAyahNumber);
+		getStoredValue("curentAyahNumberInSurah", setCurentAyahNumberInSurah);
+	});
 
-function CurrentAyahDetails({
-	currentAyahDetailsVisibility,
-	currentSurahNameAR,
-	currentSurahNameEN,
-	curentAyahNumber,
-	curentAyahNumberInSurah,
-	UILanguage,
-}) {
 	return (
 		<div className="current-ayah-details-hidden">
 			<div className="wrapper" style={{ height: currentAyahDetailsVisibility === true ? "auto" : "0" }}>
