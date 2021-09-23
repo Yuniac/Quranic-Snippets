@@ -6,7 +6,7 @@ function QuranLanguageSettings({ QLanguage, setQLanguage, UILanguage, getRandomS
 		const lang = radio.target.value;
 		setQLanguage(lang);
 		// the argument true means fetch a new ayah in the second langauge regardless of what's stored in the storage;
-		browser.storage.sync.set({ QLang: QLanguage }).then(() => getRandomSnippet(true, true));
+		browser.storage.sync.set({ QLang: QLanguage }).then(() => getRandomSnippet(true, false));
 		// TODO
 	}
 
