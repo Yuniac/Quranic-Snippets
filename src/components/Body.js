@@ -26,7 +26,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	//
 	const newSnippetFrequency = 3600000;
 
-	let currentAyahNumber, curentAyahNumberInSurah, currentAyahText, currentSurahNameEN, currentSurahNameAR;
+	let currentAyahNumber, currentAyahNumberInSurah, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 	let urlToFetch;
 
 	async function getRandomSnippet(newAyahInSecondLang, forced) {
@@ -56,7 +56,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 
 			fetchedAyahAsJson = fetchedAyahAsJson.data;
 			currentAyahNumber = fetchedAyahAsJson.number;
-			curentAyahNumberInSurah = fetchedAyahAsJson.numberInSurah;
+			currentAyahNumberInSurah = fetchedAyahAsJson.numberInSurah;
 			currentAyahText = fetchedAyahAsJson.text;
 			currentSurahNameEN = fetchedAyahAsJson.surah.englishName;
 			currentSurahNameAR = fetchedAyahAsJson.surah.name;
@@ -68,7 +68,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 				ayah: processedAyah,
 				ayahTimeStamp: new Date().getTime(),
 				currentAyahNumber: currentAyahNumber,
-				curentAyahNumberInSurah: curentAyahNumberInSurah,
+				currentAyahNumberInSurah: currentAyahNumberInSurah,
 				currentSurahNameEN: currentSurahNameEN,
 				currentSurahNameAR: currentSurahNameAR,
 				UILang: UILang,
@@ -99,16 +99,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	return (
 		<main>
 			<Header UILanguage={UILanguage} />
-			<Snippet
-				ayah={ayah}
-				UILanguage={UILanguage}
-				getRandomSnippet={getRandomSnippet}
-				QLanguage={QLanguage}
-				currentSurahNameAR={currentSurahNameAR}
-				currentSurahNameEN={currentSurahNameEN}
-				currentAyahNumber={currentAyahNumber}
-				curentAyahNumberInSurah={curentAyahNumberInSurah}
-			/>
+			<Snippet ayah={ayah} UILanguage={UILanguage} getRandomSnippet={getRandomSnippet} QLanguage={QLanguage} />
 			<Settings
 				settingsVisibility={settingsVisibility}
 				setSettingsVisibility={setSettingsVisibility}

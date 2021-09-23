@@ -5,7 +5,7 @@ function CurrentAyahDetails({ QLanguage, CurrentSurahName, currentAyahDetailsVis
 	const [currentAyahNumberInSurah, setCurrentAyahNumberInSurah] = React.useState(0);
 	const [currentAyahLink, setCurrentAyahLink] = React.useState("");
 
-	return <button>xx</button>;
+	return <div>xx</div>;
 }
 
 export default CurrentAyahDetails;
