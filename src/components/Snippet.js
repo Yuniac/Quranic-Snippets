@@ -23,6 +23,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, curentAyahNumb
 		// TODO
 	});
 
+	console.log(currentSurahName);
 	return (
 		<div className="snippet-wrapper" style={{ padding: "0 0.4rem" }}>
 			<p className="current-ayah" style={{ direction: QLanguage.startsWith("ar") ? "rtl" : "ltr" }}>

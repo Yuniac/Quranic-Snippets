@@ -2,7 +2,6 @@ import React from "react";
 //
 import { getStoredValue } from "../helpers/helpers";
 function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage, QLanguage, ayah }) {
-	console.log(QLanguage);
 	const [currentSurahNameAR, setCurrentSurahNameAR] = React.useState("");
 	const [currentSurahNameEN, setCurrentSurahNameEN] = React.useState("");
 	const [curentAyahNumber, setCurentAyahNumber] = React.useState(0);

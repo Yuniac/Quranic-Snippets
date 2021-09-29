@@ -1,6 +1,6 @@
 import React from "react";
 
-function CurrentSurahName({ UILanguage, CurrentSurahName }) {
+function CurrentSurahName({ UILanguage, currentSurahName }) {
 	return (
 		<p
 			className="current-ayah-from-surah"
@@ -11,7 +11,7 @@ function CurrentSurahName({ UILanguage, CurrentSurahName }) {
 			}}
 		>
 			<span style={{ display: UILanguage.startsWith("ar") ? "none" : "inline" }}>Surah </span>
-			{CurrentSurahName}
+			{currentSurahName}
 		</p>
 	);
 }
