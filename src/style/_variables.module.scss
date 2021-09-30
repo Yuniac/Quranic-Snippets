@@ -21,6 +21,8 @@ $fw-normal: 400;
 //
 $Z-regular: 1;
 $Z-important: 11;
+//
+$transition-delay: 0.5s;
 // variables used in react js files will be exported down below;
 :export {
 	zRegular: $Z-regular;
