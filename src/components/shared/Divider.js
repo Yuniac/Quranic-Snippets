@@ -1,7 +1,7 @@
 import React from "react";
 
-function Divider() {
-	return <div className="divider"></div>;
+function Divider({ backgroundColor }) {
+	return <div className="divider" style={{ backgroundColor: backgroundColor }}></div>;
 }
 
 export default Divider;
