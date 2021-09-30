@@ -190,25 +190,23 @@ main {
 		div {
 			width: 100%;
 			display: flex;
-			justify-content: space-between;
-			align-items: center;
 
 			span {
 				display: inline-block;
 			}
 
-			input {
+			select {
 				margin: 0 0.2rem;
 			}
-			button {
-				background-color: $primary-bg;
-				color: $white;
+			// button {
+			// 	background-color: $primary-bg;
+			// 	color: $white;
 
-				border-radius: 5px;
+			// 	border-radius: 5px;
 
-				padding: 0.4rem;
-				margin: 0 0.2rem;
-			}
+			// 	padding: 0.4rem;
+			// 	margin: 0 0.2rem;
+			// }
 		}
 	}
 }
