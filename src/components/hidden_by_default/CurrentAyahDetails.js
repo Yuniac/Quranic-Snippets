@@ -1,6 +1,10 @@
 import React from "react";
 //
 import { getStoredValue } from "../helpers/helpers";
+import ReadEntireAyah from "../mini-components/ReadEntireAyah";
+import Divider from "../shared/Divider";
+//
+import { lightCyan } from "../../style/_variables.module.scss";
 function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 	const [currentSurahNameAR, setCurrentSurahNameAR] = React.useState("الفاتحة");
 	const [currentSurahNameEN, setCurrentSurahNameEN] = React.useState("Al Fatihha");
@@ -31,21 +35,22 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 							{currentSurahNameAR}
 						</span>
 						<span style={{ display: UILanguage === "ar" ? "none" : "inline-block", direction: "ltr" }}>
-							<span className="header-span">The Surah name in Arabic:</span>
-							<span>{currentSurahNameEN}</span>
+							<span className="header-span">Surah name in Arabic:</span>
+							<span>{currentSurahNameAR}</span>
 						</span>
 					</span>
 					<span>
 						<span style={{ display: UILanguage === "ar" ? "inline-block" : "none", direction: "rtl" }}>
 							<span className="header-span">إسم السورة باللغة الإنجليزية:</span>
-							{currentSurahNameAR}
+							{currentSurahNameEN}
 						</span>
 						<span style={{ display: UILanguage === "ar" ? "none" : "inline-block", direction: "ltr" }}>
-							<span className="header-span">The Surah name in English: </span>
+							<span className="header-span">Surah name in English: </span>
 							{currentSurahNameEN}
 						</span>
 					</span>
 				</div>
+				<Divider backgroundColor={lightCyan} />
 				<div className="row" style={{ flexDirection: UILanguage === "ar" ? "row-reverse" : "row" }}>
 					<span>
 						<span style={{ display: UILanguage === "ar" ? "inline-block" : "none", direction: "rtl" }}>
@@ -53,7 +58,7 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 							{currentAyahNumber}
 						</span>
 						<span style={{ display: UILanguage === "ar" ? "none" : "inline-block", direction: "ltr" }}>
-							<span className="header-span"> Ayah number:</span>
+							<span className="header-span">Ayah number:</span>
 							{currentAyahNumber}
 						</span>
 					</span>
@@ -63,21 +68,13 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 							{currentSurahNumber}
 						</span>
 						<span style={{ display: UILanguage === "ar" ? "none" : "inline-block", direction: "ltr" }}>
-							<span className="header-span"> The Surah number:</span>
+							<span className="header-span"> Surah number:</span>
 							{currentSurahNumber}25
 						</span>
 					</span>
 				</div>
-				<div className="row" style={{ flexDirection: UILanguage === "ar" ? "row-reverse" : "row" }}>
-					<span>
-						<span style={{ display: UILanguage === "ar" ? "inline-block" : "none", direction: "rtl" }}>
-							<a href>أقرأ الأية كاملة (رابط خارجي)</a>
-						</span>
-						<span style={{ display: UILanguage === "ar" ? "none" : "inline-block", direction: "ltr" }}>
-							<a href>Read the entire Ayah (external link)</a>
-						</span>
-					</span>
-				</div>
+				<Divider backgroundColor={lightCyan} />
+				<ReadEntireAyah UILanguage={UILanguage} currentSurahNumber={currentSurahNumber} />
 			</div>
 		</div>
 	);
