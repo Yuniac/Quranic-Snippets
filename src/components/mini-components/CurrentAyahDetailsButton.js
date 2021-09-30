@@ -14,7 +14,7 @@ function CurrentAyahDetailsButton({ currentAyahDetailsVisibility, setCurrentAyah
 	return (
 		<button
 			onClick={handleClick}
-			className={(currentAyahDetailsVisibility ? "upward" : null, "cta-button current-ayah-details-toggle-button")}
+			className={`cta-button current-ayah-details-toggle-button ${currentAyahDetailsVisibility ? "upward" : "downward"}`}
 		>
 			{expandIcon}
 		</button>
