@@ -76,7 +76,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 			// store the new ayah with a timeStamp and any other info I might add later on;
 			browser.storage.sync.set(newStoredAyah);
 		} else {
-			// otherwise, just get the old already stored ayah and use it to update the state;
+			// otherwise, just use the old already stored ayah and use it to update the state;
 			setAyah(ayah);
 		}
 	}
@@ -90,8 +90,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 		return ayah;
 	}
 	React.useEffect(() => {
-		getRandomSnippet(false);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		getRandomSnippet(false, false);
 	}, []);
 	return (
 		<main>
