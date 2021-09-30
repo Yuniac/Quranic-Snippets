@@ -60,7 +60,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 			currentSurahNameAR = fetchedAyahAsJson.surah.name;
 
 			// processing the ayah to remove "bismillah". might change this later;
-			const processedAyah = processAyah(fetchedAyahAsJson);
+			const processedAyah = processAyah(currentAyahText);
 			// create an object containing the ayah and all the information about it;
 			const newStoredAyah = {
 				ayah: processedAyah,
@@ -82,8 +82,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	}
 
 	// if the ayah begins with 'bismillah', cut it out, as our focus is to only show the verse
-	function processAyah(json) {
-		let ayah = json.data.text;
+	function processAyah(ayah) {
 		if (ayah.match(/^(بِسْم)/)) {
 			ayah = ayah.slice(38);
 			return ayah;
