@@ -23,7 +23,11 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	const [ayah, setAyah] = React.useState("");
 	//
 	// const newSnippetFrequency = 3600000;
-	const [newSnippetFrequency, setNewSnippetFrequency] = React.useState(0);
+	const [newSnippetFrequency, setNewSnippetFrequency] = React.useState(3600000);
+
+	React.useEffect(() => {
+		getStoredValue("freq", setNewSnippetFrequency);
+	}, []);
 
 	let currentAyahNumber, currentSurahNumber, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 	let urlToFetch;
@@ -52,7 +56,6 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 			// const urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 			const fetchedAyah = await fetch(urlToFetch);
 			let fetchedAyahAsJson = await fetchedAyah.json();
-			console.log(fetchedAyahAsJson);
 
 			fetchedAyahAsJson = fetchedAyahAsJson.data;
 			currentAyahNumber = fetchedAyahAsJson.numberInSurah;
@@ -95,6 +98,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	React.useEffect(() => {
 		getRandomSnippet(false, false);
 	}, []);
+
 	return (
 		<main>
 			<Header UILanguage={UILanguage} />

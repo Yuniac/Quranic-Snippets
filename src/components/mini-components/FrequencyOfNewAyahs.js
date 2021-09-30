@@ -1,44 +1,38 @@
+/* global browser */
 import React from "react";
-//
-import { getStoredValue } from "../helpers/helpers";
 function FrequencyOfNewAyahs({ UILanguage, newSnippetFrequency, setNewSnippetFrequency }) {
-	const [userFriendlyFreq, setUserFriendlyFreq] = React.useState(0);
-	async function makeFreqUserFriendly() {
-		await getStoredValue("freq", setNewSnippetFrequency);
-		const convertedValue = newSnippetFrequency / 1000 / 60 / 60;
-		setUserFriendlyFreq(convertedValue);
+	function handleChange(event) {
+		const value = event.target.value;
+		browser.storage.sync.set({ freq: value });
+		setNewSnippetFrequency(value);
 	}
 
-	React.useEffect(() => {
-		makeFreqUserFriendly();
-	}, [newSnippetFrequency]);
-
+	console.log(newSnippetFrequency, browser.storage.sync.get());
 	return (
 		<div className="freq-wrapper">
 			<div
 				style={{
-					display: UILanguage === "ar" ? "flex" : "none",
-					direction: UILanguage === "ar" ? "rtl" : "",
-					flexDirection: UILanguage === "ar" ? "row" : "",
-				}}
-			>
-				<span> أية جديدة كل:</span>
-				<input type="number" />
-				<button>حفظ</button>
-				<span>(حالياً كل {userFriendlyFreq} ساعة)</span>
-			</div>
-			<div
-				style={{
-					display: UILanguage === "ar" ? "none" : "flex",
-					direction: UILanguage === "ar" ? "" : "ltr",
-					flexDirection: UILanguage === "ar" ? "row-reverse" : "",
+					display: "flex",
+					direction: UILanguage === "ar" ? "rtl" : "ltr",
+					flexDirection: "row",
 					justifyContent: "flex-start",
 				}}
 			>
-				<span>New Ayah Each: </span>
-				<input type="number" />
-				<button>save</button>
-				<span>(Currently each {userFriendlyFreq} hour)</span>
+				<span>{UILanguage === "ar" ? "أية جديدة كل: " : "New Ayah Each: "}</span>
+				<select onChange={handleChange}>
+					<option value={newSnippetFrequency}>
+						{UILanguage === "ar" ? "حالياً: " : "Currently: "}
+						{newSnippetFrequency / 1000 / 60 / 60}
+						&nbsp;
+						{UILanguage === "en" ? "hour" : "ساعة"}
+					</option>
+					<option value="3600000">{UILanguage === "en" ? "1h" : "١ ساعة"}</option>
+					<option value="7200000">{UILanguage === "en" ? "2h" : "٢ ساعة"}</option>
+					<option value="14400000">{UILanguage === "en" ? "4h" : "٤ ساعة"}</option>
+					<option value="21600000">{UILanguage === "en" ? "6h" : "٦ ساعة"}</option>
+					<option value="43200000">{UILanguage === "en" ? "12h" : "١٢ ساعة"}</option>
+					<option value="86400000">{UILanguage === "en" ? "24h" : "٢٤ ساعة"}</option>
+				</select>
 			</div>
 		</div>
 	);
