@@ -1,19 +1,19 @@
 import React from "react";
 //
 import { getStoredValue } from "../helpers/helpers";
-function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage, QLanguage, ayah }) {
+function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 	const [currentSurahNameAR, setCurrentSurahNameAR] = React.useState("الفاتحة");
 	const [currentSurahNameEN, setCurrentSurahNameEN] = React.useState("Al Fatihha");
-	const [curentAyahNumber, setCurentAyahNumber] = React.useState(0);
-	const [curentAyahNumberInSurah, setCurentAyahNumberInSurah] = React.useState(0);
+	const [currentAyahNumber, setCurrentAyahNumber] = React.useState(0);
+	const [currentSurahNumber, setcurrentSurahNumber] = React.useState(0);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	React.useEffect(() => {
 		getStoredValue("currentSurahNameAR", setCurrentSurahNameAR);
 		getStoredValue("currentSurahNameEN", setCurrentSurahNameEN);
-		getStoredValue("curentAyahNumber", setCurentAyahNumber);
-		getStoredValue("curentAyahNumberInSurah", setCurentAyahNumberInSurah);
+		getStoredValue("currentAyahNumber", setCurrentAyahNumber);
+		getStoredValue("currentSurahNumber", setcurrentSurahNumber);
 	});
-
+	// console.log(curentAyahNumber, curentAyahNumberInSurah);
 	return (
 		<div className="current-ayah-details-hidden">
 			<div
@@ -50,21 +50,21 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage, QLanguag
 					<span>
 						<span style={{ display: UILanguage === "ar" ? "inline-block" : "none", direction: "rtl" }}>
 							<span className="header-span"> رقم الأية:</span>
-							{curentAyahNumber}
+							{currentAyahNumber}
 						</span>
 						<span style={{ display: UILanguage === "ar" ? "none" : "inline-block", direction: "ltr" }}>
 							<span className="header-span"> Ayah number:</span>
-							{curentAyahNumber}
+							{currentAyahNumber}
 						</span>
 					</span>
 					<span>
 						<span style={{ display: UILanguage === "ar" ? "inline-block" : "none", direction: "rtl" }}>
 							<span className="header-span"> رقم السورة:</span>
-							{curentAyahNumberInSurah}
+							{currentSurahNumber}
 						</span>
 						<span style={{ display: UILanguage === "ar" ? "none" : "inline-block", direction: "ltr" }}>
 							<span className="header-span"> The Surah number:</span>
-							{curentAyahNumberInSurah}25
+							{currentSurahNumber}25
 						</span>
 					</span>
 				</div>

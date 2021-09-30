@@ -24,7 +24,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	//
 	const newSnippetFrequency = 3600000;
 
-	let currentAyahNumber, currentAyahNumberInSurah, currentAyahText, currentSurahNameEN, currentSurahNameAR;
+	let currentAyahNumber, currentSurahNumber, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 	let urlToFetch;
 
 	async function getRandomSnippet(sameAyahInSecondLang, forced) {
@@ -51,10 +51,11 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 			// const urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 			const fetchedAyah = await fetch(urlToFetch);
 			let fetchedAyahAsJson = await fetchedAyah.json();
+			console.log(fetchedAyahAsJson);
 
 			fetchedAyahAsJson = fetchedAyahAsJson.data;
-			currentAyahNumber = fetchedAyahAsJson.number;
-			currentAyahNumberInSurah = fetchedAyahAsJson.numberInSurah;
+			currentAyahNumber = fetchedAyahAsJson.numberInSurah;
+			currentSurahNumber = fetchedAyahAsJson.surah.number;
 			currentAyahText = fetchedAyahAsJson.text;
 			currentSurahNameEN = fetchedAyahAsJson.surah.englishName;
 			currentSurahNameAR = fetchedAyahAsJson.surah.name;
@@ -66,7 +67,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 				ayah: processedAyah,
 				ayahTimeStamp: new Date().getTime(),
 				currentAyahNumber: currentAyahNumber,
-				currentAyahNumberInSurah: currentAyahNumberInSurah,
+				currentSurahNumber: currentSurahNumber,
 				currentSurahNameEN: currentSurahNameEN,
 				currentSurahNameAR: currentSurahNameAR,
 				UILang: UILang,
