@@ -92,7 +92,6 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	}
 	React.useEffect(() => {
 		getRandomSnippet(false);
-		// TODO
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
@@ -106,6 +105,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 				setUILanguage={setUILanguage}
 				QLanguage={QLanguage}
 				setQLanguage={setQLanguage}
+				getRandomSnippet={getRandomSnippet}
 			/>
 			<Feedback feedbackVisibility={feedbackVisibility} setFeedbackVisibility={setFeedbackVisibility} />
 		</main>

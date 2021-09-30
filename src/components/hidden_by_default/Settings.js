@@ -6,7 +6,7 @@ import ToggleButton from "../shared/ToggleButton";
 import Divider from "../shared/Divider";
 import QuranLanguageSettings from "../mini-components/QuranLanguageSetting";
 
-function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUILanguage, QLanguage, setQLanguage }) {
+function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUILanguage, QLanguage, setQLanguage, getRandomSnippet }) {
 	return (
 		<div
 			className="settings popup-css"
