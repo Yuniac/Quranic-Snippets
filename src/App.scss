@@ -156,6 +156,13 @@ main {
 					margin: 0 0.2rem;
 					font-weight: $fw-normal;
 				}
+				a {
+					color: $light-cyan;
+					padding: 0.2rem 0;
+					&:hover {
+						text-decoration: underline;
+					}
+				}
 			}
 		}
 	}
