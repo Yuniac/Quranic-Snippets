@@ -22,7 +22,8 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 	// this state will manage the ayah that is visible to the user when he opens the extension
 	const [ayah, setAyah] = React.useState("");
 	//
-	const newSnippetFrequency = 3600000;
+	// const newSnippetFrequency = 3600000;
+	const [newSnippetFrequency, setNewSnippetFrequency] = React.useState(0);
 
 	let currentAyahNumber, currentSurahNumber, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 	let urlToFetch;
@@ -71,6 +72,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 				currentSurahNameEN: currentSurahNameEN,
 				currentSurahNameAR: currentSurahNameAR,
 				UILang: UILang,
+				freq: 3600000,
 			};
 			// update the state with the newly fetched ayah
 			setAyah(processedAyah);
@@ -105,6 +107,8 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 				QLanguage={QLanguage}
 				setQLanguage={setQLanguage}
 				getRandomSnippet={getRandomSnippet}
+				newSnippetFrequency={newSnippetFrequency}
+				setNewSnippetFrequency={setNewSnippetFrequency}
 			/>
 			<Feedback feedbackVisibility={feedbackVisibility} setFeedbackVisibility={setFeedbackVisibility} />
 		</main>

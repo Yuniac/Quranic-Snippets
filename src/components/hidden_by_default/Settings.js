@@ -1,12 +1,23 @@
 import React from "react";
-import UILanguageSettings from "../mini-components/UILanguageSettings";
 import { zImportant, zRegular } from "../../style/_variables.module.scss";
 
+import UILanguageSettings from "../mini-components/UILanguageSettings";
 import ToggleButton from "../shared/ToggleButton";
 import Divider from "../shared/Divider";
 import QuranLanguageSettings from "../mini-components/QuranLanguageSetting";
+import FrequencyOfNewAyahs from "../mini-components/FrequencyOfNewAyahs";
 
-function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUILanguage, QLanguage, setQLanguage, getRandomSnippet }) {
+function Settings({
+	settingsVisibility,
+	setSettingsVisibility,
+	UILanguage,
+	setUILanguage,
+	QLanguage,
+	setQLanguage,
+	getRandomSnippet,
+	newSnippetFrequency,
+	setNewSnippetFrequency,
+}) {
 	return (
 		<div
 			className="settings popup-css"
@@ -38,6 +49,12 @@ function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUI
 					setQLanguage={setQLanguage}
 					UILanguage={UILanguage}
 					getRandomSnippet={getRandomSnippet}
+				/>
+				<Divider />
+				<FrequencyOfNewAyahs
+					UILanguage={UILanguage}
+					newSnippetFrequency={newSnippetFrequency}
+					setNewSnippetFrequency={setNewSnippetFrequency}
 				/>
 				{/* <ul> */}
 				{/* <li>The freq of which new verses display</li>

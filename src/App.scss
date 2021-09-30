@@ -186,6 +186,31 @@ main {
 			margin: 1rem;
 		}
 	}
+	.freq-wrapper {
+		div {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			span {
+				display: inline-block;
+			}
+
+			input {
+				margin: 0 0.2rem;
+			}
+			button {
+				background-color: $primary-bg;
+				color: $white;
+
+				border-radius: 5px;
+
+				padding: 0.4rem;
+				margin: 0 0.2rem;
+			}
+		}
+	}
 }
 
 .popup-css {
@@ -308,7 +333,7 @@ footer {
 // generic classes and styling;
 .divider {
 	height: 2px;
-	width: 80%;
-	margin: 0 auto;
+	width: 85%;
+	margin: 0.4rem auto;
 	background-color: $primary-bg;
 }

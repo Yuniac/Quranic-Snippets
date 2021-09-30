@@ -17,7 +17,6 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 		getStoredValue("currentAyahNumber", setCurrentAyahNumber);
 		getStoredValue("currentSurahNumber", setcurrentSurahNumber);
 	});
-	// console.log(curentAyahNumber, curentAyahNumberInSurah);
 	return (
 		<div className="current-ayah-details-hidden">
 			<div
