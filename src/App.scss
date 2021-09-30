@@ -4,6 +4,10 @@
 	font-family: Kitab;
 	src: url("./fonts/Kitab-Regular.ttf");
 }
+* {
+	scrollbar-color: transparent;
+	scrollbar-width: none;
+}
 body {
 	background: black;
 }
@@ -94,11 +98,12 @@ main {
 	}
 	.upward {
 		transform: rotate(180deg);
-		transition: all 0.7s ease-in-out;
+		transition: all $transition-delay ease-in-out;
 	}
-	// .new-snippet-now-button {
-	// 	background-color: $secondary-bg;
-	// }
+	.downward {
+		transform: rotate(360deg);
+		transition: all $transition-delay ease-in-out;
+	}
 	.current-ayah-details-hidden {
 		position: relative;
 
@@ -109,10 +114,13 @@ main {
 		flex-direction: column;
 		justify-content: center;
 		align-items: space-around;
+
 		.wrapper {
+			background-color: $primary-bg;
+
 			overflow-y: auto;
 
-			transition: all 0.7s ease-in-out;
+			transition: all $transition-delay ease-in-out;
 
 			position: absolute;
 			left: 0;
@@ -124,13 +132,29 @@ main {
 
 			.row {
 				display: flex;
-				justify-content: center;
+				justify-content: space-between;
 				align-items: center;
 
-				margin: 0.3rem 0;
-
+				&:first-of-type {
+					margin: 0 0 0.4rem;
+				}
+				margin: 0 0 0.4rem;
+				padding: 0 0.2rem;
+				&:last-of-type {
+					justify-content: center;
+				}
+				& > span {
+					display: block;
+					width: 50%;
+				}
+				.header-span {
+					display: block;
+					text-align: center;
+					font-weight: $fw-heavy;
+				}
 				span {
 					margin: 0 0.2rem;
+					font-weight: $fw-normal;
 				}
 			}
 		}
