@@ -26,6 +26,7 @@ function FrequencyOfNewAyahs({ UILanguage, newSnippetFrequency, setNewSnippetFre
 						&nbsp;
 						{UILanguage === "en" ? "hour" : "ساعة"}
 					</option>
+					<option value="1800000">{UILanguage === "en" ? "1/2h" : "نصف ساعة"}</option>
 					<option value="3600000">{UILanguage === "en" ? "1h" : "١ ساعة"}</option>
 					<option value="7200000">{UILanguage === "en" ? "2h" : "٢ ساعة"}</option>
 					<option value="14400000">{UILanguage === "en" ? "4h" : "٤ ساعة"}</option>
