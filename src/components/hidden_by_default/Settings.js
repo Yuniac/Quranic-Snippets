@@ -58,6 +58,8 @@ function Settings({
 				/>
 				{/* <ul> */}
 				{/* <li>The freq of which new verses display</li>
+					<li>read entire surah**, not entire ayah</li>
+
 					<li>The UI language</li>
 					<li>The verses languge</li>
 					<li>Next snippt in {nextSnippetTimer}</li>

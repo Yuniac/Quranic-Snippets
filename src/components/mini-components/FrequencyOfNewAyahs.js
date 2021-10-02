@@ -6,8 +6,6 @@ function FrequencyOfNewAyahs({ UILanguage, newSnippetFrequency, setNewSnippetFre
 		browser.storage.sync.set({ freq: value });
 		setNewSnippetFrequency(value);
 	}
-
-	console.log(newSnippetFrequency, browser.storage.sync.get());
 	return (
 		<div className="freq-wrapper">
 			<div

@@ -56,8 +56,9 @@ main {
 }
 //
 .snippet-wrapper {
-	font-family: "Kitab" !important;
 	position: relative;
+
+	font-family: "Kitab" !important;
 
 	display: flex;
 	flex-direction: column;
@@ -166,6 +167,10 @@ main {
 			}
 		}
 	}
+	.favorite-ayah {
+		position: absolute;
+		top: 2px;
+	}
 }
 //
 .settings {
@@ -198,15 +203,6 @@ main {
 			select {
 				margin: 0 0.2rem;
 			}
-			// button {
-			// 	background-color: $primary-bg;
-			// 	color: $white;
-
-			// 	border-radius: 5px;
-
-			// 	padding: 0.4rem;
-			// 	margin: 0 0.2rem;
-			// }
 		}
 	}
 }
