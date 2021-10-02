@@ -1,61 +1,67 @@
 import React from "react";
 import ToggleButton from "../shared/ToggleButton";
 import "../../App.scss";
-
+//
 import { zImportant, zRegular } from "../../style/_variables.module.scss";
+//
+import { getStoredValue } from "../helpers/helpers";
+function Bookmarks({ bookmarksVisibility, setBookmarksVisibility, UILanguage, QLanguage }) {
+	const [bookmarks, setBookmarks] = React.useState([]);
 
-function Bookmarks({ bookmarksVisibility, setBookmarksVisibility }) {
-	const form = React.useRef(null);
+	const removeBookMarkIcon = (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			enable-background="new 0 0 24 24"
+			height="24px"
+			viewBox="0 0 24 24"
+			width="24px"
+			fill="#FFFFFF"
+		>
+			<rect fill="none" height="24" width="24" />
+			<path d="M17,11v6.97l-5-2.14l-5,2.14V5h6V3H7C5.9,3,5,3.9,5,5v16l7-3l7,3V11H17z M21,7h-6V5h6V7z" />
+		</svg>
+	);
 
-	function handleSubmit(e) {
-		e.preventDefault();
-		const name = form.current.elements.user_name;
-		const email = form.current.elements.user_email;
-		const message = form.current.elements.user_message;
-
-		const url = form.current.action;
-
-		const data = {};
-		data.name = name.value;
-		data.email = email.value;
-		data.message = message.value;
-
-		const dataAsJson = JSON.stringify(data);
-		// console.log(dataAsJson)
-		fetch(dataAsJson, {
-			method: "POST",
-			url: url,
-			contentType: "application/json",
-			headers: {
-				Accept: "application/json",
-			},
-		})
-			.then(() => {
-				console.log("done");
-			})
-			.catch((e) => {
-				console.log(e);
-			});
+	function handleClick(button) {
+		console.log(button);
 	}
+	React.useEffect(() => {
+		getStoredValue("bookmarks", setBookmarks);
+	}, [bookmarks]);
+
+	// React.useEffect(() => {
+	// 	fetchBookmarkedAyahs();
+	// }, [bookmarks, bookmakredAyahs]);
 	return (
 		<div
-			className="feedback popup-css popup-css-full-height"
+			className="bookmarks popup-css"
 			style={{
 				visibility: bookmarksVisibility ? "visible" : "hidden",
 				display: bookmarksVisibility ? "block" : "none",
 				pointerEvents: bookmarksVisibility ? "auto" : "none",
 				zIndex: bookmarksVisibility ? zImportant : zRegular,
+				direction: UILanguage === "ar" ? "rtl" : "ltr",
 			}}
 		>
-			<ToggleButton setFunction={setBookmarksVisibility} />
-			<div className="feedback-forms">
-				<h3>هل لديك شكوى ما حول الإضافة هذه؟ أو أقتراح لإضافة ميزة أو تحسين طريقة عمل ميزة ما؟ رجاءاً تواصل معنا أدناه:</h3>
-				<form action="https://getform.io/f/171f81a8-0cb4-40a7-94a2-61fa94365a26" method="POST" onSubmit={handleSubmit} ref={form}>
-					<input type="text" placeholder="إسمك (غير إلزامي)" name="user_name" />
-					<input type="email" placeholder="الإيميل الخاص فيك (غير إلزامي)" name="user_email" />
-					<textarea placeholder="رسالتك..." name="user_message"></textarea>
-					<button type="submit">أرسل</button>
-				</form>
+			<ToggleButton setFunction={setBookmarksVisibility} UILanguage={UILanguage} />
+			<h2>{UILanguage === "ar" ? "الأيات المحفوظة" : "Bookmarked Ayahs (verses)"}</h2>
+			<div className="bookmarked-ayahs">
+				{bookmarks.map((bookmark) => (
+					<div
+						className="bookmarked-ayah-container"
+						style={{
+							flexDirection: QLanguage === "ar.asad" ? "row" : "row-reverse",
+							direction: QLanguage === "ar.asad" ? "rtl" : "ltr",
+						}}
+					>
+						<div key={bookmark[0]} id={bookmark[0]}>
+							{bookmark[1]}
+						</div>
+						<button className="cta-button" onClick={handleClick}>
+							{removeBookMarkIcon}
+						</button>
+					</div>
+				))}
 			</div>
 		</div>
 	);

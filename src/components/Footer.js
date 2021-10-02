@@ -45,7 +45,7 @@ function Footer({ setSettingsVisibility, setBookmarksVisibility, language }) {
 					</span>
 					{settingsIcon}
 				</li>
-				<li onClick={openFeedback} className="feedback-link" style={{ flexDirection: language === "ar" ? "row-reverse" : "row" }}>
+				<li onClick={openFeedback} className="bookmarks-link" style={{ flexDirection: language === "ar" ? "row-reverse" : "row" }}>
 					<span
 						style={{
 							display: language === "ar" ? "inline-block" : "none",

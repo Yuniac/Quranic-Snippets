@@ -6,7 +6,7 @@ import React from "react";
 import Header from "./Header";
 import Snippet from "./Snippet";
 import Settings from "./hidden_by_default/Settings";
-import Favorites from "./hidden_by_default/Bookmarks";
+import Bookmarks from "./hidden_by_default/Bookmarks";
 //
 import { getStoredValue } from "./helpers/helpers";
 
@@ -49,13 +49,13 @@ function Body({ settingsVisibility, setSettingsVisibility, bookmarksVisibility, 
 			// fetch a new ayah
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
 			if (sameAyahInSecondLang) {
-				const { currentAyahNumber } = await browser.storage.sync.get("currentAyahNumber");
+				const { currentAyahNumberGlobally } = await browser.storage.sync.get("currentAyahNumberGlobally");
 				// if forced, then user has requested to get a new snippt, regardless of everything so fetch anew;
 				if (forced) {
 					urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 				} else {
 					// else, get the same verse that is stored but in th second language
-					urlToFetch = getAyahURL + currentAyahNumber + "/" + QLang;
+					urlToFetch = getAyahURL + currentAyahNumberGlobally + "/" + QLang;
 				}
 			} else {
 				urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
@@ -125,7 +125,13 @@ function Body({ settingsVisibility, setSettingsVisibility, bookmarksVisibility, 
 				newSnippetFrequency={newSnippetFrequency}
 				setNewSnippetFrequency={setNewSnippetFrequency}
 			/>
-			<Favorites bookmarksVisibility={bookmarksVisibility} setBookmarksVisibility={setBookmarksVisibility} />
+			<Bookmarks
+				bookmarksVisibility={bookmarksVisibility}
+				setBookmarksVisibility={setBookmarksVisibility}
+				QLanguage={QLanguage}
+				UILanguage={UILanguage}
+				ayah={ayah}
+			/>
 		</main>
 	);
 }

@@ -5,7 +5,7 @@ import { getStoredValue } from "../helpers/helpers";
 
 function FavoriteCurrentAyah({ UILanguage, ayah }) {
 	const [currentAyahNumberGlobally, setCurrentAyahNumberGlobally] = React.useState(0);
-	// const [currentSurahNameEN, setCurrentSurahNameEN] = React.useState(0);
+	// const [currentAyah, setCurrentAyah] = React.useState("");
 	const [bookmarkedAyahs, setBookmarkedAyahs] = React.useState([]);
 
 	const [isIconFilled, setIsIconFilled] = React.useState(false);
@@ -20,9 +20,16 @@ function FavoriteCurrentAyah({ UILanguage, ayah }) {
 	React.useEffect(() => {});
 
 	const bookmarkIconNotFilled = (
-		<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
-			<path d="M0 0h24v24H0V0z" fill="none" />
-			<path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z" />
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			enable-background="new 0 0 24 24"
+			height="24px"
+			viewBox="0 0 24 24"
+			width="24px"
+			fill="#FFFFFF"
+		>
+			<rect fill="none" height="24" width="24" />
+			<path d="M17,11v6.97l-5-2.14l-5,2.14V5h6V3H7C5.9,3,5,3.9,5,5v16l7-3l7,3V11H17z M21,7h-2v2h-2V7h-2V5h2V3h2v2h2V7z" />
 		</svg>
 	);
 	const bookmarkIconFilled = (
@@ -34,7 +41,7 @@ function FavoriteCurrentAyah({ UILanguage, ayah }) {
 
 	function checkIfBookmarked() {
 		// figure out whether the current ayah the user is trying to favorite its favored already or not;
-		const isAlreadyFavored = bookmarkedAyahs.find((ayahNumber) => ayahNumber === currentAyahNumberGlobally);
+		const isAlreadyFavored = bookmarkedAyahs.find((ayahNumber) => ayahNumber[0] === currentAyahNumberGlobally);
 		return isAlreadyFavored;
 	}
 
@@ -42,7 +49,7 @@ function FavoriteCurrentAyah({ UILanguage, ayah }) {
 		const isAlreadyFavored = checkIfBookmarked();
 		// if it's not then add it to favorites;
 		if (!isAlreadyFavored) {
-			bookmarkedAyahs.push(currentAyahNumberGlobally);
+			bookmarkedAyahs.push([currentAyahNumberGlobally, ayah]);
 			await browser.storage.sync.set({ bookmarks: bookmarkedAyahs, isIconFilled: true });
 			setBookmarkedAyahs([...bookmarkedAyahs]);
 			setIsIconFilled(true);
@@ -50,7 +57,7 @@ function FavoriteCurrentAyah({ UILanguage, ayah }) {
 		} else {
 			const { bookmarks: storedAndBookmarkedAyahs } = await browser.storage.sync.get("bookmarks");
 			const storedAndBookmarkedAyahToBeRemovedIndex = storedAndBookmarkedAyahs.findIndex(
-				(ayah) => ayah === currentAyahNumberGlobally
+				(ayah) => ayah[0] === currentAyahNumberGlobally
 			);
 			storedAndBookmarkedAyahs.splice(storedAndBookmarkedAyahToBeRemovedIndex, 1);
 			await browser.storage.sync.set({ favorites: storedAndBookmarkedAyahs, isIconFilled: false });
