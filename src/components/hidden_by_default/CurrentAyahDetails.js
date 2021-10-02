@@ -53,11 +53,11 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 				<div className="row" style={{ flexDirection: UILanguage === "ar" ? "row-reverse" : "row" }}>
 					<span>
 						<span style={{ display: UILanguage === "ar" ? "inline-block" : "none", direction: "rtl" }}>
-							<span className="header-span"> رقم الأية:</span>
+							<span className="header-span"> رقم الأية في السورة:</span>
 							{currentAyahNumber}
 						</span>
 						<span style={{ display: UILanguage === "ar" ? "none" : "inline-block", direction: "ltr" }}>
-							<span className="header-span">Ayah number:</span>
+							<span className="header-span">Ayah number in Surah:</span>
 							{currentAyahNumber}
 						</span>
 					</span>
