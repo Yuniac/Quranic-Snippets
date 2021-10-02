@@ -5,9 +5,10 @@ import "../../App.scss";
 import { zImportant, zRegular } from "../../style/_variables.module.scss";
 //
 import { getStoredValue } from "../helpers/helpers";
-function Bookmarks({ bookmarksVisibility, setBookmarksVisibility, UILanguage, QLanguage }) {
-	const [bookmarks, setBookmarks] = React.useState([]);
-
+function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksVisibility, UILanguage, QLanguage }) {
+	function handleClick(button) {
+		console.log(button);
+	}
 	const removeBookMarkIcon = (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -22,9 +23,6 @@ function Bookmarks({ bookmarksVisibility, setBookmarksVisibility, UILanguage, QL
 		</svg>
 	);
 
-	function handleClick(button) {
-		console.log(button);
-	}
 	React.useEffect(() => {
 		getStoredValue("bookmarks", setBookmarks);
 	}, [bookmarks]);

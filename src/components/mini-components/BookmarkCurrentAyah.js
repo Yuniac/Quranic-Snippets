@@ -3,21 +3,18 @@ import React from "react";
 //
 import { getStoredValue } from "../helpers/helpers";
 
-function FavoriteCurrentAyah({ UILanguage, ayah }) {
+function FavoriteCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks }) {
 	const [currentAyahNumberGlobally, setCurrentAyahNumberGlobally] = React.useState(0);
 	// const [currentAyah, setCurrentAyah] = React.useState("");
-	const [bookmarkedAyahs, setBookmarkedAyahs] = React.useState([]);
 
 	const [isIconFilled, setIsIconFilled] = React.useState(false);
 
 	React.useEffect(() => {
 		getStoredValue("currentAyahNumberGlobally", setCurrentAyahNumberGlobally);
-		getStoredValue("bookmarks", setBookmarkedAyahs);
+		getStoredValue("bookmarks", setBookmarks);
 
 		// getStoredValue("currentSurahNameEN", setCurrentSurahNameEN);
 	}, [ayah]);
-
-	React.useEffect(() => {});
 
 	const bookmarkIconNotFilled = (
 		<svg
@@ -41,7 +38,7 @@ function FavoriteCurrentAyah({ UILanguage, ayah }) {
 
 	function checkIfBookmarked() {
 		// figure out whether the current ayah the user is trying to favorite its favored already or not;
-		const isAlreadyFavored = bookmarkedAyahs.find((ayahNumber) => ayahNumber[0] === currentAyahNumberGlobally);
+		const isAlreadyFavored = bookmarks.find((ayahNumber) => ayahNumber[0] === currentAyahNumberGlobally);
 		return isAlreadyFavored;
 	}
 
@@ -49,9 +46,9 @@ function FavoriteCurrentAyah({ UILanguage, ayah }) {
 		const isAlreadyFavored = checkIfBookmarked();
 		// if it's not then add it to favorites;
 		if (!isAlreadyFavored) {
-			bookmarkedAyahs.push([currentAyahNumberGlobally, ayah]);
-			await browser.storage.sync.set({ bookmarks: bookmarkedAyahs, isIconFilled: true });
-			setBookmarkedAyahs([...bookmarkedAyahs]);
+			bookmarks.push([currentAyahNumberGlobally, ayah]);
+			await browser.storage.sync.set({ bookmarks: bookmarks, isIconFilled: true });
+			setBookmarks([...bookmarks]);
 			setIsIconFilled(true);
 			// if `checkIfFavored returned truthy that means the user clicked on an already favored ayah so remove it;
 		} else {
@@ -60,7 +57,7 @@ function FavoriteCurrentAyah({ UILanguage, ayah }) {
 				(ayah) => ayah[0] === currentAyahNumberGlobally
 			);
 			storedAndBookmarkedAyahs.splice(storedAndBookmarkedAyahToBeRemovedIndex, 1);
-			await browser.storage.sync.set({ favorites: storedAndBookmarkedAyahs, isIconFilled: false });
+			await browser.storage.sync.set({ bookmarks: storedAndBookmarkedAyahs, isIconFilled: false });
 			setIsIconFilled(false);
 		}
 	}

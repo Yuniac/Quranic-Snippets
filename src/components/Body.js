@@ -12,6 +12,7 @@ import { getStoredValue } from "./helpers/helpers";
 
 function Body({ settingsVisibility, setSettingsVisibility, bookmarksVisibility, setBookmarksVisibility, UILanguage, setUILanguage }) {
 	const [QLanguage, setQLanguage] = React.useState("");
+	const [bookmarks, setBookmarks] = React.useState([]);
 
 	// get the already stored language, run once only;
 	React.useEffect(() => {
@@ -113,7 +114,14 @@ function Body({ settingsVisibility, setSettingsVisibility, bookmarksVisibility, 
 	return (
 		<main>
 			<Header UILanguage={UILanguage} />
-			<Snippet ayah={ayah} UILanguage={UILanguage} getRandomSnippet={getRandomSnippet} QLanguage={QLanguage} />
+			<Snippet
+				ayah={ayah}
+				UILanguage={UILanguage}
+				getRandomSnippet={getRandomSnippet}
+				QLanguage={QLanguage}
+				bookmarks={bookmarks}
+				setBookmarks={setBookmarks}
+			/>
 			<Settings
 				settingsVisibility={settingsVisibility}
 				setSettingsVisibility={setSettingsVisibility}
@@ -126,6 +134,8 @@ function Body({ settingsVisibility, setSettingsVisibility, bookmarksVisibility, 
 				setNewSnippetFrequency={setNewSnippetFrequency}
 			/>
 			<Bookmarks
+				bookmarks={bookmarks}
+				setBookmarks={setBookmarks}
 				bookmarksVisibility={bookmarksVisibility}
 				setBookmarksVisibility={setBookmarksVisibility}
 				QLanguage={QLanguage}

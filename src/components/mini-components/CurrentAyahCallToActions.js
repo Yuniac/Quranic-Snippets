@@ -12,6 +12,8 @@ function CurrentAyahCallToActions({
 	currentAyahDetailsVisibility,
 	setCurrentAyahDetailsVisibility,
 	ayah,
+	bookmarks,
+	setBookmarks,
 }) {
 	return (
 		<div className="current-surah-cta">
@@ -21,7 +23,7 @@ function CurrentAyahCallToActions({
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
 				setCurrentAyahDetailsVisibility={setCurrentAyahDetailsVisibility}
 			/>
-			<BookmarkCurrentAyah UILanguage={UILanguage} ayah={ayah} />
+			<BookmarkCurrentAyah UILanguage={UILanguage} ayah={ayah} bookmarks={bookmarks} setBookmarks={setBookmarks} />
 		</div>
 	);
 }
