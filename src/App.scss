@@ -93,10 +93,6 @@ main {
 		scrollbar-color: $primary-bg $secondary-bg;
 		scrollbar-width: thin;
 	}
-	.cta-button {
-		border: 0;
-		background-color: transparent;
-	}
 	.upward {
 		transform: rotate(180deg);
 		transition: all $transition-delay ease-in-out;
@@ -248,52 +244,44 @@ main {
 		cursor: pointer;
 	}
 }
-.popup-css-full-height {
-	height: fit-content;
-	padding-bottom: 1rem;
-}
 //
-.feedback {
-	padding-right: 0.3rem;
-	h3 {
-		margin-top: 2.5rem;
-		border-bottom: 1px solid $cyan;
+.bookmarks {
+	h2 {
+		color: $black;
 	}
-	form {
+	padding-right: 0.3rem;
+	.bookmarked-ayahs {
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
-		align-items: flex-start;
-		input,
-		textarea {
-			margin: 1rem 0;
-			padding: 4px 0 2px;
-			resize: none;
+		justify-content: center;
 
-			width: 250px;
+		.bookmarked-ayah-container {
+			position: relative;
 
-			&::placeholder {
-				color: #272727;
-				text-shadow: 0px 1px 1px $black;
-			}
-			&:focus {
-				border: 1px solid $cyan;
-				border-radius: 2px;
-			}
-		}
-		textarea {
-			height: 90px;
-			&::placeholder {
-				font-weight: $fw-heavy;
-			}
-		}
-		button {
-			background-color: $white;
-			color: $light-grey;
-			text-shadow: 0px 1px 1px $black;
+			margin: 0.5rem 0;
+			padding: 0.4rem 0;
+			padding-right: 0.1rem;
 
-			padding: 2px;
-			border-radius: 2px;
+			overflow-y: auto;
+
+			max-height: 5rem;
+			height: fit-content;
+
+			scrollbar-color: $primary-bg $secondary-bg;
+			scrollbar-width: thin;
+
+			border: 1px solid $light-cyan;
+			div {
+				width: 90%;
+				direction: rtl;
+				margin-left: auto;
+			}
+
+			button {
+				position: absolute;
+				top: 6px;
+				left: 5px;
+			}
 		}
 	}
 }
@@ -319,7 +307,7 @@ footer {
 			}
 		}
 		.lang-link,
-		.feedback-link {
+		.bookmarks-link {
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -336,4 +324,9 @@ footer {
 	width: 85%;
 	margin: 0.4rem auto;
 	background-color: $primary-bg;
+}
+
+.cta-button {
+	border: 0;
+	background-color: transparent;
 }
