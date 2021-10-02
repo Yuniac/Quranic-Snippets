@@ -4,7 +4,7 @@ import "../../App.scss";
 
 import { zImportant, zRegular } from "../../style/_variables.module.scss";
 
-function Feedback({ feedbackVisibility, setFeedbackVisibility }) {
+function Bookmarks({ bookmarksVisibility, setBookmarksVisibility }) {
 	const form = React.useRef(null);
 
 	function handleSubmit(e) {
@@ -41,13 +41,13 @@ function Feedback({ feedbackVisibility, setFeedbackVisibility }) {
 		<div
 			className="feedback popup-css popup-css-full-height"
 			style={{
-				visibility: feedbackVisibility ? "visible" : "hidden",
-				display: feedbackVisibility ? "block" : "none",
-				pointerEvents: feedbackVisibility ? "auto" : "none",
-				zIndex: feedbackVisibility ? zImportant : zRegular,
+				visibility: bookmarksVisibility ? "visible" : "hidden",
+				display: bookmarksVisibility ? "block" : "none",
+				pointerEvents: bookmarksVisibility ? "auto" : "none",
+				zIndex: bookmarksVisibility ? zImportant : zRegular,
 			}}
 		>
-			<ToggleButton setFunction={setFeedbackVisibility} />
+			<ToggleButton setFunction={setBookmarksVisibility} />
 			<div className="feedback-forms">
 				<h3>هل لديك شكوى ما حول الإضافة هذه؟ أو أقتراح لإضافة ميزة أو تحسين طريقة عمل ميزة ما؟ رجاءاً تواصل معنا أدناه:</h3>
 				<form action="https://getform.io/f/171f81a8-0cb4-40a7-94a2-61fa94365a26" method="POST" onSubmit={handleSubmit} ref={form}>
@@ -61,4 +61,4 @@ function Feedback({ feedbackVisibility, setFeedbackVisibility }) {
 	);
 }
 
-export default Feedback;
+export default Bookmarks;

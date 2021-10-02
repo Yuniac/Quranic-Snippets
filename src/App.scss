@@ -167,9 +167,15 @@ main {
 			}
 		}
 	}
-	.favorite-ayah {
+	.bookmark-ayah {
 		position: absolute;
 		top: 2px;
+
+		button {
+			&:hover {
+				cursor: pointer;
+			}
+		}
 	}
 }
 //

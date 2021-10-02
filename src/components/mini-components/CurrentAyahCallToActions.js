@@ -3,7 +3,7 @@ import React from "react";
 import NewSnippetNowButton from "./NewSnippetNowButton";
 import CurrentSurahName from "./CurrentSurahName";
 import CurrentAyahDetailsButton from "./CurrentAyahDetailsButton";
-import FavoriteCurrentAyah from "./FavoriteCurrentAyah";
+import BookmarkCurrentAyah from "./BookmarkCurrentAyah";
 // renaming a variable temporarily due to a naming conflict in this component;
 function CurrentAyahCallToActions({
 	UILanguage,
@@ -21,7 +21,7 @@ function CurrentAyahCallToActions({
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
 				setCurrentAyahDetailsVisibility={setCurrentAyahDetailsVisibility}
 			/>
-			<FavoriteCurrentAyah UILanguage={UILanguage} ayah={ayah} />
+			<BookmarkCurrentAyah UILanguage={UILanguage} ayah={ayah} />
 		</div>
 	);
 }

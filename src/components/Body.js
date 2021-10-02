@@ -6,11 +6,11 @@ import React from "react";
 import Header from "./Header";
 import Snippet from "./Snippet";
 import Settings from "./hidden_by_default/Settings";
-import Feedback from "./hidden_by_default/Feedback";
+import Favorites from "./hidden_by_default/Bookmarks";
 //
 import { getStoredValue } from "./helpers/helpers";
 
-function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, setFeedbackVisibility, UILanguage, setUILanguage }) {
+function Body({ settingsVisibility, setSettingsVisibility, bookmarksVisibility, setBookmarksVisibility, UILanguage, setUILanguage }) {
 	const [QLanguage, setQLanguage] = React.useState("");
 
 	// get the already stored language, run once only;
@@ -34,13 +34,13 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 
 	async function getRandomSnippet(sameAyahInSecondLang, forced) {
 		// get stored ayah and its related information
-		const { ayah, ayahTimeStamp, UILang, QLang, freq, favorites } = await browser.storage.sync.get([
+		const { ayah, ayahTimeStamp, UILang, QLang, freq, bookmarks } = await browser.storage.sync.get([
 			"ayah",
 			"ayahTimeStamp",
 			"UILang",
 			"QLang",
 			"freq",
-			"favorites",
+			"bookmarks",
 		]);
 
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
@@ -86,7 +86,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 				UILang: UILang,
 				freq: freq,
 				isIconFilled: false,
-				favorites: favorites,
+				bookmarks: bookmarks,
 			};
 			// update the state with the newly fetched ayah
 			setAyah(processedAyah);
@@ -125,7 +125,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 				newSnippetFrequency={newSnippetFrequency}
 				setNewSnippetFrequency={setNewSnippetFrequency}
 			/>
-			<Feedback feedbackVisibility={feedbackVisibility} setFeedbackVisibility={setFeedbackVisibility} />
+			<Favorites bookmarksVisibility={bookmarksVisibility} setBookmarksVisibility={setBookmarksVisibility} />
 		</main>
 	);
 }
