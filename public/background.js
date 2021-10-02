@@ -4,5 +4,6 @@ const ayahObject = {
 	ayahTimeStamp: new Date().getTime(),
 	UILang: "ar",
 	QLang: "ar.asad",
+	favorites: [],
 };
 browser.storage.sync.set(ayahObject);

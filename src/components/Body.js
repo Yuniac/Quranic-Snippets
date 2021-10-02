@@ -29,12 +29,19 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 		getStoredValue("freq", setNewSnippetFrequency);
 	}, []);
 
-	let currentAyahNumber, currentSurahNumber, currentAyahText, currentSurahNameEN, currentSurahNameAR;
+	let currentAyahNumber, currentAyahNumberGlobally, currentSurahNumber, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 	let urlToFetch;
 
 	async function getRandomSnippet(sameAyahInSecondLang, forced) {
 		// get stored ayah and its related information
-		const { ayah, ayahTimeStamp, UILang, QLang } = await browser.storage.sync.get(["ayah", "ayahTimeStamp", "UILang", "QLang"]);
+		const { ayah, ayahTimeStamp, UILang, QLang, freq, favorites } = await browser.storage.sync.get([
+			"ayah",
+			"ayahTimeStamp",
+			"UILang",
+			"QLang",
+			"freq",
+			"favorites",
+		]);
 
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
 		// or if 'sameAyahInSecondLang' argument is present as true/false, true = fetch the same ayah but in the second langauge, will only be called when the language changes. if 'forced' = true then regardless of anything, fetch a new ayah in whichever current language we have, will only be called from 'get a new snippet now' button;
@@ -59,6 +66,7 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 
 			fetchedAyahAsJson = fetchedAyahAsJson.data;
 			currentAyahNumber = fetchedAyahAsJson.numberInSurah;
+			currentAyahNumberGlobally = fetchedAyahAsJson.number;
 			currentSurahNumber = fetchedAyahAsJson.surah.number;
 			currentAyahText = fetchedAyahAsJson.text;
 			currentSurahNameEN = fetchedAyahAsJson.surah.englishName;
@@ -71,11 +79,14 @@ function Body({ settingsVisibility, setSettingsVisibility, feedbackVisibility, s
 				ayah: processedAyah,
 				ayahTimeStamp: new Date().getTime(),
 				currentAyahNumber: currentAyahNumber,
+				currentAyahNumberGlobally: currentAyahNumberGlobally,
 				currentSurahNumber: currentSurahNumber,
 				currentSurahNameEN: currentSurahNameEN,
 				currentSurahNameAR: currentSurahNameAR,
 				UILang: UILang,
-				freq: 3600000,
+				freq: freq,
+				isIconFilled: false,
+				favorites: favorites,
 			};
 			// update the state with the newly fetched ayah
 			setAyah(processedAyah);
