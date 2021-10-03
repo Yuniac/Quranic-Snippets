@@ -3,7 +3,7 @@ import React from "react";
 //
 import { getStoredValue } from "../helpers/helpers";
 
-function FavoriteCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks }) {
+function FavoriteCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, currentSurahName }) {
 	const [currentAyahNumberGlobally, setCurrentAyahNumberGlobally] = React.useState(0);
 	// const [currentAyah, setCurrentAyah] = React.useState("");
 
@@ -46,7 +46,7 @@ function FavoriteCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks }) {
 		const isAlreadyFavored = checkIfBookmarked();
 		// if it's not then add it to favorites;
 		if (!isAlreadyFavored) {
-			bookmarks.push([currentAyahNumberGlobally, ayah]);
+			bookmarks.push([currentAyahNumberGlobally, ayah, currentSurahName]);
 			await browser.storage.sync.set({ bookmarks: bookmarks, isIconFilled: true });
 			setBookmarks([...bookmarks]);
 			setIsIconFilled(true);

@@ -1,3 +1,4 @@
+/* global browser */
 import React from "react";
 import ToggleButton from "../shared/ToggleButton";
 import "../../App.scss";
@@ -7,7 +8,11 @@ import { zImportant, zRegular } from "../../style/_variables.module.scss";
 import { getStoredValue } from "../helpers/helpers";
 function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksVisibility, UILanguage, QLanguage }) {
 	function handleClick(button) {
-		console.log(button);
+		// it's not a pretty, but it's quite a fast way to change a string into a number;
+		const id = button.currentTarget.id * 1;
+		const bookmarkedAyahToBeRemoved = bookmarks.findIndex((bookmarkedAyah) => bookmarkedAyah[0] === id);
+		bookmarks.splice(bookmarkedAyahToBeRemoved, 1);
+		browser.storage.sync.set({ bookmarks: bookmarks, isIconFilled: false });
 	}
 	const removeBookMarkIcon = (
 		<svg
@@ -25,14 +30,10 @@ function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksV
 
 	React.useEffect(() => {
 		getStoredValue("bookmarks", setBookmarks);
-	}, [bookmarks]);
-
-	// React.useEffect(() => {
-	// 	fetchBookmarkedAyahs();
-	// }, [bookmarks, bookmakredAyahs]);
+	}, [bookmarks, UILanguage, setBookmarks]);
 	return (
 		<div
-			className="bookmarks popup-css"
+			className="bookmarks popup-css popup-css-infinite"
 			style={{
 				visibility: bookmarksVisibility ? "visible" : "hidden",
 				display: bookmarksVisibility ? "block" : "none",
@@ -44,20 +45,21 @@ function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksV
 			<ToggleButton setFunction={setBookmarksVisibility} UILanguage={UILanguage} />
 			<h2>{UILanguage === "ar" ? "الأيات المحفوظة" : "Bookmarked Ayahs (verses)"}</h2>
 			<div className="bookmarked-ayahs">
+				{/* 0 = ayah global id
+					1 = ayah text 
+					2 = surah name which the ayah is from
+				*/}
 				{bookmarks.map((bookmark) => (
-					<div
-						className="bookmarked-ayah-container"
-						style={{
-							flexDirection: QLanguage === "ar.asad" ? "row" : "row-reverse",
-							direction: QLanguage === "ar.asad" ? "rtl" : "ltr",
-						}}
-					>
-						<div key={bookmark[0]} id={bookmark[0]}>
-							{bookmark[1]}
+					<div className="bookmarked-ayah-container">
+						<div className="bookmarked-ayah-cta" style={{ flexDirection: UILanguage === "ar" ? "row" : "row-reverse" }}>
+							<button className="cta-button" onClick={handleClick} id={bookmark[0]}>
+								{removeBookMarkIcon}
+							</button>
+							<p>{bookmark[2]}</p>
 						</div>
-						<button className="cta-button" onClick={handleClick}>
-							{removeBookMarkIcon}
-						</button>
+						<div className="bookmarked-ayah-body" key={bookmark[0]}>
+							<p>{bookmark[1]}</p>
+						</div>
 					</div>
 				))}
 			</div>

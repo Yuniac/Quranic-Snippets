@@ -23,7 +23,13 @@ function CurrentAyahCallToActions({
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
 				setCurrentAyahDetailsVisibility={setCurrentAyahDetailsVisibility}
 			/>
-			<BookmarkCurrentAyah UILanguage={UILanguage} ayah={ayah} bookmarks={bookmarks} setBookmarks={setBookmarks} />
+			<BookmarkCurrentAyah
+				UILanguage={UILanguage}
+				ayah={ayah}
+				bookmarks={bookmarks}
+				setBookmarks={setBookmarks}
+				currentSurahName={currentSurahName}
+			/>
 		</div>
 	);
 }
