@@ -4,3 +4,7 @@ export async function getStoredValue(value, setter) {
 	const extractedValue = storedData[value];
 	setter(extractedValue);
 }
+
+export function openPopup(setter) {
+	setter(true);
+}
