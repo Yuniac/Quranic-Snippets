@@ -13,9 +13,9 @@ function App() {
 	const [bookmarksVisibility, setBookmarksVisibility] = React.useState(false);
 	const [aboutVisibility, setAboutVisibility] = React.useState(false);
 
-	React.useEffect(() => {
-		getStoredValue("UILang", setUILanguage);
-	}, [UILanguage]);
+	// React.useEffect(() => {
+	// 	getStoredValue("UILang", setUILanguage);
+	// }, [UILanguage]);
 	return (
 		<div className="App">
 			<Body
