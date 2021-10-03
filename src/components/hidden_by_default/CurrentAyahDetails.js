@@ -1,7 +1,7 @@
 import React from "react";
 //
 import { getStoredValue } from "../helpers/helpers";
-import ReadEntireAyah from "../mini-components/ReadEntireAyah";
+import ReadEntireSurah from "../mini-components/ReadEntireSurah";
 import Divider from "../shared/Divider";
 //
 import { lightCyan } from "../../style/_variables.module.scss";
@@ -73,7 +73,7 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 					</span>
 				</div>
 				<Divider backgroundColor={lightCyan} />
-				<ReadEntireAyah UILanguage={UILanguage} currentSurahNumber={currentSurahNumber} />
+				<ReadEntireSurah UILanguage={UILanguage} currentSurahNumber={currentSurahNumber} />
 			</div>
 		</div>
 	);
