@@ -1,3 +1,8 @@
+
+<div id="basmallah" align="center"><h1>بسم الله الرحمن الرحيم</h1></div>
+
+
+
 # Quranic-Snippets
 
 A React Firefox extension that provides Quranic verses as snippets
