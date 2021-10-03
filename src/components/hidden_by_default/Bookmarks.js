@@ -56,7 +56,9 @@ function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksV
 							<button className="cta-button" onClick={handleClick} id={bookmark[0]}>
 								{removeBookMarkIcon}
 							</button>
-							<p>{bookmark[2]}</p>
+							<p>
+								{bookmark[2]}&nbsp;({bookmark[0]})
+							</p>
 						</div>
 						<div className="bookmarked-ayah-body" key={bookmark[0]}>
 							<p>{bookmark[1]}</p>

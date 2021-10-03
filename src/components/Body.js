@@ -32,34 +32,29 @@ function Body({
 	const getAyahURL = "http://api.alquran.cloud/v1/ayah/";
 	// this state will manage the ayah that is visible to the user when he opens the extension
 	const [ayah, setAyah] = React.useState("");
-	//
-	// const newSnippetFrequency = 3600000;
-	const [newSnippetFrequency, setNewSnippetFrequency] = React.useState(3600000);
-
-	React.useEffect(() => {
-		getStoredValue("freq", setNewSnippetFrequency);
-	}, []);
+	// const [newSnippetFrequency, setNewSnippetFrequency] = React.useState(55);
+	// console.log(newSnippetFrequency);
 
 	let currentAyahNumber, currentAyahNumberGlobally, currentSurahNumber, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 	let urlToFetch;
 
-	async function getRandomSnippet(sameAyahInSecondLang, forced) {
+	async function getRandomSnippet(sameAyahInSecondLang, forced, storedFreq) {
 		// get stored ayah and its related information
-		const { ayah, ayahTimeStamp, UILang, QLang, freq, bookmarks, isIconFilled } = await browser.storage.sync.get([
+		const { ayah, ayahTimeStamp, UILang, QLang, bookmarks, isIconFilled } = await browser.storage.sync.get([
 			"ayah",
 			"ayahTimeStamp",
 			"UILang",
 			"QLang",
-			"freq",
 			"bookmarks",
 			"isIconFilled",
 		]);
 
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
 		// or if 'sameAyahInSecondLang' argument is present as true/false, true = fetch the same ayah but in the second langauge, will only be called when the language changes. if 'forced' = true then regardless of anything, fetch a new ayah in whichever current language we have, will only be called from 'get a new snippet now' button;
-		if (!ayah.length || new Date().getTime() - ayahTimeStamp >= newSnippetFrequency || sameAyahInSecondLang) {
+		if (!ayah.length || new Date().getTime() - ayahTimeStamp > storedFreq || sameAyahInSecondLang) {
 			// fetch a new ayah
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
+			// determine what's the fetching url;
 			if (sameAyahInSecondLang) {
 				const { currentAyahNumberGlobally } = await browser.storage.sync.get("currentAyahNumberGlobally");
 				// if forced, then user has requested to get a new snippt, regardless of everything so fetch anew;
@@ -96,7 +91,7 @@ function Body({
 				currentSurahNameEN: currentSurahNameEN,
 				currentSurahNameAR: currentSurahNameAR,
 				UILang: UILang,
-				freq: freq,
+				freq: storedFreq,
 				isIconFilled: isIconFilled,
 				bookmarks: bookmarks,
 			};
@@ -122,8 +117,12 @@ function Body({
 		}
 		return ayah;
 	}
+	async function getStoredFreq() {
+		const { freq } = await browser.storage.sync.get("freq");
+		getRandomSnippet(false, false, freq);
+	}
 	React.useEffect(() => {
-		getRandomSnippet(false, false);
+		getStoredFreq();
 	}, []);
 
 	return (
@@ -145,8 +144,6 @@ function Body({
 				QLanguage={QLanguage}
 				setQLanguage={setQLanguage}
 				getRandomSnippet={getRandomSnippet}
-				newSnippetFrequency={newSnippetFrequency}
-				setNewSnippetFrequency={setNewSnippetFrequency}
 			/>
 			<About aboutVisibility={aboutVisibility} setAboutVisibility={setAboutVisibility} UILanguage={UILanguage} />
 			<Bookmarks

@@ -1,3 +1,4 @@
+/* global browser */
 import React from "react";
 
 function NewSnippetNowButton({ getRandomSnippet, UILanguage }) {
@@ -8,8 +9,9 @@ function NewSnippetNowButton({ getRandomSnippet, UILanguage }) {
 		</svg>
 	);
 
-	function handleClick() {
-		getRandomSnippet(true, true);
+	async function handleClick() {
+		const { freq } = await browser.storage.sync.get("freq");
+		getRandomSnippet(true, true, freq);
 	}
 	return (
 		<button

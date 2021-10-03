@@ -1,11 +1,32 @@
 /* global browser */
 import React from "react";
-function FrequencyOfNewAyahs({ UILanguage, newSnippetFrequency, setNewSnippetFrequency }) {
+function FrequencyOfNewAyahs({ UILanguage }) {
+	const [newSnippetFrequency, setNewSnippetFrequency] = React.useState(0);
+	const [userFriendlyFreq, setUserFriendlyFreq] = React.useState("");
+
 	function handleChange(event) {
-		const value = event.target.value;
+		const value = event.currentTarget.value;
 		browser.storage.sync.set({ freq: value });
-		setNewSnippetFrequency(value);
 	}
+	async function syncTheStoredFreq() {
+		const { freq } = await browser.storage.sync.get(["freq"]);
+		setNewSnippetFrequency(freq);
+	}
+	React.useEffect(() => {
+		function makeFreqUserFriendly() {
+			let freq = newSnippetFrequency / 1000 / 60 / 60;
+			if (freq === 0.5) {
+				UILanguage === "ar" ? (freq = "نصف") : (freq = "half");
+				setUserFriendlyFreq(freq);
+				return;
+			}
+			setUserFriendlyFreq(freq);
+		}
+
+		syncTheStoredFreq();
+		makeFreqUserFriendly();
+	}, [newSnippetFrequency, UILanguage]);
+
 	return (
 		<div className="freq-wrapper">
 			<div
@@ -20,7 +41,7 @@ function FrequencyOfNewAyahs({ UILanguage, newSnippetFrequency, setNewSnippetFre
 				<select onChange={handleChange}>
 					<option value={newSnippetFrequency}>
 						{UILanguage === "ar" ? "حالياً: " : "Currently: "}
-						{newSnippetFrequency / 1000 / 60 / 60}
+						{userFriendlyFreq}
 						&nbsp;
 						{UILanguage === "en" ? "hour" : "ساعة"}
 					</option>

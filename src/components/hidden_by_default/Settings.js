@@ -51,11 +51,7 @@ function Settings({
 					getRandomSnippet={getRandomSnippet}
 				/>
 				<Divider />
-				<FrequencyOfNewAyahs
-					UILanguage={UILanguage}
-					newSnippetFrequency={newSnippetFrequency}
-					setNewSnippetFrequency={setNewSnippetFrequency}
-				/>
+				<FrequencyOfNewAyahs UILanguage={UILanguage} />
 				{/* <ul> */}
 				{/* <li>The freq of which new verses display</li>
 					<li>read entire surah**, not entire ayah</li>
