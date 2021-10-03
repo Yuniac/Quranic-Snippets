@@ -11,6 +11,7 @@ function App() {
 	const [UILanguage, setUILanguage] = React.useState("");
 	const [settingsVisibility, setSettingsVisibility] = React.useState(false);
 	const [bookmarksVisibility, setBookmarksVisibility] = React.useState(false);
+	const [aboutVisibility, setAboutVisibility] = React.useState(false);
 
 	React.useEffect(() => {
 		getStoredValue("UILang", setUILanguage);
@@ -24,8 +25,15 @@ function App() {
 				setSettingsVisibility={setSettingsVisibility}
 				bookmarksVisibility={bookmarksVisibility}
 				setBookmarksVisibility={setBookmarksVisibility}
+				aboutVisibility={aboutVisibility}
+				setAboutVisibility={setAboutVisibility}
 			/>
-			<Footer setSettingsVisibility={setSettingsVisibility} setBookmarksVisibility={setBookmarksVisibility} language={UILanguage} />
+			<Footer
+				setSettingsVisibility={setSettingsVisibility}
+				setBookmarksVisibility={setBookmarksVisibility}
+				setAboutVisibility={setAboutVisibility}
+				language={UILanguage}
+			/>
 		</div>
 	);
 }

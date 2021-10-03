@@ -43,13 +43,14 @@ function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksV
 			}}
 		>
 			<ToggleButton setFunction={setBookmarksVisibility} UILanguage={UILanguage} />
-			<h2>{UILanguage === "ar" ? "الأيات المحفوظة" : "Bookmarked Ayahs (verses)"}</h2>
+			<h2>{UILanguage === "ar" ? "الأيات المحفوظة:" : "Bookmarked Ayahs (verses):"}</h2>
 			<div className="bookmarked-ayahs">
 				{/* 0 = ayah global id
 					1 = ayah text 
 					2 = surah name which the ayah is from
 				*/}
 				{bookmarks.map((bookmark) => (
+					// each ayah
 					<div className="bookmarked-ayah-container">
 						<div className="bookmarked-ayah-cta" style={{ flexDirection: UILanguage === "ar" ? "row" : "row-reverse" }}>
 							<button className="cta-button" onClick={handleClick} id={bookmark[0]}>

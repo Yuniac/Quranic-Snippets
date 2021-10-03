@@ -7,10 +7,20 @@ import Header from "./Header";
 import Snippet from "./Snippet";
 import Settings from "./hidden_by_default/Settings";
 import Bookmarks from "./hidden_by_default/Bookmarks";
+import About from "./hidden_by_default/About";
 //
 import { getStoredValue } from "./helpers/helpers";
 
-function Body({ settingsVisibility, setSettingsVisibility, bookmarksVisibility, setBookmarksVisibility, UILanguage, setUILanguage }) {
+function Body({
+	settingsVisibility,
+	setSettingsVisibility,
+	bookmarksVisibility,
+	setBookmarksVisibility,
+	aboutVisibility,
+	setAboutVisibility,
+	UILanguage,
+	setUILanguage,
+}) {
 	const [QLanguage, setQLanguage] = React.useState("");
 	const [bookmarks, setBookmarks] = React.useState([]);
 
@@ -138,6 +148,7 @@ function Body({ settingsVisibility, setSettingsVisibility, bookmarksVisibility, 
 				newSnippetFrequency={newSnippetFrequency}
 				setNewSnippetFrequency={setNewSnippetFrequency}
 			/>
+			<About aboutVisibility={aboutVisibility} setAboutVisibility={setAboutVisibility} UILanguage={UILanguage} />
 			<Bookmarks
 				bookmarks={bookmarks}
 				setBookmarks={setBookmarks}

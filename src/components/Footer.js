@@ -1,7 +1,9 @@
 import React from "react";
 import "../App.scss";
+//
+import { openPopup } from "./helpers/helpers";
 
-function Footer({ setSettingsVisibility, setBookmarksVisibility, language }) {
+function Footer({ setSettingsVisibility, setBookmarksVisibility, setAboutVisibility, language }) {
 	const settingsIcon = (
 		<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
 			<path d="M0 0h24v24H0V0z" fill="none" />
@@ -14,16 +16,21 @@ function Footer({ setSettingsVisibility, setBookmarksVisibility, language }) {
 			<path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 4h2v5l-1-.75L9 9V4zm9 16H6V4h1v9l3-2.25L13 13V4h5v16z" />
 		</svg>
 	);
-	function openSettings() {
-		setSettingsVisibility(true);
-	}
-	function openFeedback() {
-		setBookmarksVisibility(true);
-	}
+
+	const infoIcon = (
+		<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+			<path d="M0 0h24v24H0V0z" fill="none" />
+			<path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+		</svg>
+	);
 	return (
 		<footer>
 			<ul>
-				<li onClick={openSettings} className="lang-link" style={{ flexDirection: language === "ar" ? "row-reverse" : "row" }}>
+				<li
+					onClick={() => openPopup(setSettingsVisibility)}
+					className="lang-link"
+					style={{ flexDirection: language === "ar" ? "row-reverse" : "row" }}
+				>
 					<span
 						style={{
 							display: language === "ar" ? "inline-block" : "none",
@@ -45,7 +52,11 @@ function Footer({ setSettingsVisibility, setBookmarksVisibility, language }) {
 					</span>
 					{settingsIcon}
 				</li>
-				<li onClick={openFeedback} className="bookmarks-link" style={{ flexDirection: language === "ar" ? "row-reverse" : "row" }}>
+				<li
+					onClick={() => openPopup(setBookmarksVisibility)}
+					className="bookmarks-link"
+					style={{ flexDirection: language === "ar" ? "row-reverse" : "row" }}
+				>
 					<span
 						style={{
 							display: language === "ar" ? "inline-block" : "none",
@@ -66,6 +77,32 @@ function Footer({ setSettingsVisibility, setBookmarksVisibility, language }) {
 						Bookmarks
 					</span>
 					{bookmarksIcon}
+				</li>
+				<li
+					onClick={() => openPopup(setAboutVisibility)}
+					className="bookmarks-link"
+					style={{ flexDirection: language === "ar" ? "row-reverse" : "row" }}
+				>
+					<span
+						style={{
+							display: language === "ar" ? "inline-block" : "none",
+							direction: language === "ar" ? "rtl" : "",
+							textShadow: language === "ar" ? "0px 2px 1px black" : "none",
+						}}
+					>
+						حولَ
+					</span>
+					<span
+						style={{
+							display: language === "ar" ? "none" : "inline-block",
+							direction: language === "ar" ? "rtl" : "",
+							textShadow: language === "ar" ? "none" : "none",
+							fontWeight: "700",
+						}}
+					>
+						About
+					</span>
+					{infoIcon}
 				</li>
 			</ul>
 		</footer>

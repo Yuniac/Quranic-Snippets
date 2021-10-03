@@ -251,13 +251,21 @@ main {
 }
 //
 .bookmarks {
-	margin-right: 0;
-	margin-left: 0;
-	padding-left: 0;
-	padding-right: 0;
 	h2 {
 		color: $black;
 	}
+
+	.bookmarks-usage-notes {
+		font-size: $fs-normal;
+		color: $white;
+
+		padding: 0 0.1rem;
+
+		border-bottom: 1px groove $black;
+	}
+	overflow-y: auto;
+	scrollbar-color: $primary-bg $secondary-bg;
+	scrollbar-width: thin;
 	.bookmarked-ayahs {
 		display: flex;
 		flex-direction: column;
@@ -266,9 +274,6 @@ main {
 		.bookmarked-ayah-container {
 			margin: 0.5rem 0;
 			padding: 0.2rem 0;
-
-			scrollbar-color: $primary-bg $secondary-bg;
-			scrollbar-width: thin;
 
 			.bookmarked-ayah-cta {
 				display: flex;
@@ -291,6 +296,8 @@ main {
 				line-height: 2.2rem;
 
 				overflow-y: auto;
+				scrollbar-color: $primary-bg $secondary-bg;
+				scrollbar-width: thin;
 
 				padding: 0.4rem 0;
 
@@ -299,6 +306,19 @@ main {
 				max-height: 4rem;
 			}
 		}
+	}
+}
+//
+.about-body {
+	& > div {
+		margin-bottom: 0.5rem;
+	}
+	p {
+		padding: 0.5rem 0.2rem;
+	}
+	h3 {
+		margin-top: 1rem;
+		text-align: center;
 	}
 }
 //
