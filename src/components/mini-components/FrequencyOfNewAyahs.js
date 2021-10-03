@@ -16,7 +16,7 @@ function FrequencyOfNewAyahs({ UILanguage }) {
 		function makeFreqUserFriendly() {
 			let freq = newSnippetFrequency / 1000 / 60 / 60;
 			if (freq === 0.5) {
-				UILanguage === "ar" ? (freq = "نصف") : (freq = "half");
+				UILanguage === "ar" ? (freq = "نصف") : (freq = "half an");
 				setUserFriendlyFreq(freq);
 				return;
 			}
