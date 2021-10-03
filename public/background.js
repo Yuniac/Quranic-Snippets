@@ -5,5 +5,6 @@ const ayahObject = {
 	UILang: "ar",
 	QLang: "ar.asad",
 	bookmarks: [],
+	isIconFilled: false,
 };
 browser.storage.sync.set(ayahObject);

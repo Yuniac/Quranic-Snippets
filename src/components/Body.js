@@ -35,13 +35,14 @@ function Body({ settingsVisibility, setSettingsVisibility, bookmarksVisibility, 
 
 	async function getRandomSnippet(sameAyahInSecondLang, forced) {
 		// get stored ayah and its related information
-		const { ayah, ayahTimeStamp, UILang, QLang, freq, bookmarks } = await browser.storage.sync.get([
+		const { ayah, ayahTimeStamp, UILang, QLang, freq, bookmarks, isIconFilled } = await browser.storage.sync.get([
 			"ayah",
 			"ayahTimeStamp",
 			"UILang",
 			"QLang",
 			"freq",
 			"bookmarks",
+			"isIconFilled",
 		]);
 
 		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
@@ -86,9 +87,13 @@ function Body({ settingsVisibility, setSettingsVisibility, bookmarksVisibility, 
 				currentSurahNameAR: currentSurahNameAR,
 				UILang: UILang,
 				freq: freq,
-				isIconFilled: false,
+				isIconFilled: isIconFilled,
 				bookmarks: bookmarks,
 			};
+			// if forced is true it means a totally new ayah was being requested, in such case make sure that the icon isn't filled = ayah not bookmakred
+			if (forced) {
+				newStoredAyah.isIconFilled = false;
+			}
 			// update the state with the newly fetched ayah
 			setAyah(processedAyah);
 			// store the new ayah with a timeStamp and any other info I might add later on;
