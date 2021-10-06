@@ -18,7 +18,9 @@ function ReadEntireSurah({ UILanguage, currentSurahNumber }) {
 					<a href={externalLink}>أقرأ السورة كاملة (رابط خارجي)</a>
 				</span>
 				<span style={{ display: UILanguage === "ar" ? "none" : "inline-block", direction: "ltr" }}>
-					<a href={externalLink}>Read the entire Surah (external link)</a>
+					<a href={externalLink} className="highlight-link">
+						Read the entire Surah <span>(external link)</span>
+					</a>
 				</span>
 			</span>
 		</div>

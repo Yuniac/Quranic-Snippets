@@ -10,13 +10,14 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 	const [currentSurahNameEN, setCurrentSurahNameEN] = React.useState("Al Fatihha");
 	const [currentAyahNumber, setCurrentAyahNumber] = React.useState(0);
 	const [currentSurahNumber, setcurrentSurahNumber] = React.useState(0);
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// React.useEffect(() => {
-	// 	getStoredValue("currentSurahNameAR", setCurrentSurahNameAR);
-	// 	getStoredValue("currentSurahNameEN", setCurrentSurahNameEN);
-	// 	getStoredValue("currentAyahNumber", setCurrentAyahNumber);
-	// 	getStoredValue("currentSurahNumber", setcurrentSurahNumber);
-	// });
+	React.useEffect(() => {
+		getStoredValue("currentSurahNameAR", setCurrentSurahNameAR);
+		getStoredValue("currentSurahNameEN", setCurrentSurahNameEN);
+		getStoredValue("currentAyahNumber", setCurrentAyahNumber);
+		getStoredValue("currentSurahNumber", setcurrentSurahNumber);
+	});
 	return (
 		<div className="current-ayah-details-hidden">
 			<div
@@ -49,7 +50,7 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 						</span>
 					</span>
 				</div>
-				<Divider backgroundColor={lightCyan} />
+				<Divider />
 				<div className="row" style={{ flexDirection: UILanguage === "ar" ? "row-reverse" : "row" }}>
 					<span>
 						<span style={{ display: UILanguage === "ar" ? "inline-block" : "none", direction: "rtl" }}>
@@ -72,7 +73,7 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 						</span>
 					</span>
 				</div>
-				<Divider backgroundColor={lightCyan} />
+				<Divider />
 				<ReadEntireSurah UILanguage={UILanguage} currentSurahNumber={currentSurahNumber} />
 			</div>
 		</div>

@@ -25,9 +25,9 @@ function Body({
 	const [bookmarks, setBookmarks] = React.useState([]);
 
 	// get the already stored language, run once only;
-	// React.useEffect(() => {
-	// 	getStoredValue("QLang", setQLanguage);
-	// }, []);
+	React.useEffect(() => {
+		getStoredValue("QLang", setQLanguage);
+	}, []);
 
 	const getAyahURL = "http://api.alquran.cloud/v1/ayah/";
 	// this state will manage the ayah that is visible to the user when he opens the extension
