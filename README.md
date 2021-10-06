@@ -1,3 +1,8 @@
+
+<div id="basmallah" align="center"><h1>بسم الله الرحمن الرحيم</h1></div>
+
+
+
 # Quranic-Snippets
 
 A React Firefox extension that provides Quranic verses as snippets
@@ -18,12 +23,12 @@ Right now, the extension provides a new random verse each hour.
 
 ## What features does Quranic-Snippets has?
 
--   A new random verse each hour, this period can be adjusted by the user. (Feature not ready yet)
--   Get more than one verse only, amount decided by the user. (Feature not ready yet)
--   Two languages interface, both in Arabic and in English. (Feature is ready)
--   The ability to get verses in either Arabic or English. (Feature not ready yet)
--   Bookmarking verses. (Feature not ready yet)
--   Read more about/More information about this verse type of feature. (Feature not ready yet)
+-   A new random verse each hour, this period can be adjusted by the user, raning from half an hour to 24h.
+-   Get more than one verse only, amount decided by the user. (Feature might or might not come into being)
+-   Two languages interface, both in Arabic and in English.
+-   The ability to get verses in either Arabic or English.
+-   Bookmarking verses.
+-   Read more about/More information about this verse type of feature.
 -   Different colors and themes. (Feature might or might not come into being)
 
 ## How to use?
