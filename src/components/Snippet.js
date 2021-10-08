@@ -19,7 +19,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 		}
 	}
 
-	const loadingAnimation = <div className="loading-animation"></div>;
+	const loadingAnimation = <span className="loading-animation"></span>;
 
 	React.useEffect(() => {
 		getStoredName();
