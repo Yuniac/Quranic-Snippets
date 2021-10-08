@@ -135,7 +135,7 @@ function About({ aboutVisibility, setAboutVisibility, UILanguage }) {
 						<Divider />
 						<p>
 							If you have a suggestion or would like to report a bug or request a feature, or would like to get in touch with
-							me then please feel free to email on this email:&nbsp;
+							me then please feel free send me an email:&nbsp;
 							<em>
 								<a className="highlight-link" href="mailto:yusuffathisabbag@gmail.com">
 									yusuffathisabbag@gmail.com
