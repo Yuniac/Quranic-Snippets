@@ -45,13 +45,13 @@ function FrequencyOfNewAyahs({ UILanguage }) {
 						&nbsp;
 						{UILanguage === "en" ? "hour" : "ساعة"}
 					</option>
-					<option value="1800000">{UILanguage === "en" ? "1/2h" : "نصف ساعة"}</option>
-					<option value="3600000">{UILanguage === "en" ? "1h" : "١ ساعة"}</option>
-					<option value="7200000">{UILanguage === "en" ? "2h" : "٢ ساعة"}</option>
-					<option value="14400000">{UILanguage === "en" ? "4h" : "٤ ساعة"}</option>
-					<option value="21600000">{UILanguage === "en" ? "6h" : "٦ ساعة"}</option>
-					<option value="43200000">{UILanguage === "en" ? "12h" : "١٢ ساعة"}</option>
-					<option value="86400000">{UILanguage === "en" ? "24h" : "٢٤ ساعة"}</option>
+					<option value="1800000">{UILanguage === "en" ? "1/2 hour" : "نصف ساعة"}</option>
+					<option value="3600000">{UILanguage === "en" ? "1 hour" : "1 ساعة"}</option>
+					<option value="7200000">{UILanguage === "en" ? "2 hour" : "2 ساعة"}</option>
+					<option value="14400000">{UILanguage === "en" ? "4 hour" : "4 ساعة"}</option>
+					<option value="21600000">{UILanguage === "en" ? "6 hour" : "6 ساعة"}</option>
+					<option value="43200000">{UILanguage === "en" ? "12 hour" : "12 ساعة"}</option>
+					<option value="86400000">{UILanguage === "en" ? "24 hour" : "24 ساعة"}</option>
 				</select>
 			</div>
 		</div>
