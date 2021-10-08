@@ -70,6 +70,19 @@ function About({ aboutVisibility, setAboutVisibility, UILanguage }) {
 							الأستمتاع و الإستفادة من إضافة المتصفح هذه و القيام بالدعاء لي.
 						</p>
 					</div>
+					<div className="about-body-arabic-contact-me">
+						<h3>كيفية التواصل معي:</h3>
+						<Divider />
+						<p>
+							إذا كان لديك أقتراح ما أو تريد التبليغ عن مشكلة في الإضافة أو طلب ميزة جديدة بإمكانك مراسلتي عن طريق الإيميل
+							التالي:&nbsp;
+							<em>
+								<a className="highlight-link" href="mailto:yusuffathisabbag@gmail.com">
+									yusuffathisabbag@gmail.com
+								</a>
+							</em>
+						</p>
+					</div>
 				</div>
 				<div className="about-body-english" style={{ display: UILanguage === "ar" ? "none" : "block", direction: "ltr" }}>
 					<div className="about-body-english-settings">
@@ -115,6 +128,19 @@ function About({ aboutVisibility, setAboutVisibility, UILanguage }) {
 							extension that does this. <br />I wanted to create something useful and meaningful, this extension and this
 							project is and will always be free to use and for the sake of Allah, only thing you can do in return is to enjoy
 							using it and do Dua for me.
+						</p>
+					</div>
+					<div className="about-body-english-contact-me">
+						<h3>How to contact me:</h3>
+						<Divider />
+						<p>
+							If you have a suggestion or would like to report a bug or request a feature, or would like to get in touch with
+							me then please feel free to email on this email:&nbsp;
+							<em>
+								<a className="highlight-link" href="mailto:yusuffathisabbag@gmail.com">
+									yusuffathisabbag@gmail.com
+								</a>
+							</em>
 						</p>
 					</div>
 				</div>
