@@ -187,14 +187,6 @@ main {
 					margin: 0 0.2rem;
 					font-weight: $fw-normal;
 				}
-				.highlight-link {
-					padding: 0.2rem 0;
-
-					&:hover {
-						color: $light-cyan;
-						text-decoration: underline;
-					}
-				}
 			}
 		}
 	}
@@ -428,4 +420,13 @@ footer {
 .cta-button {
 	border: 0;
 	background-color: transparent;
+}
+
+.highlight-link {
+	padding: 0.2rem 0;
+
+	&:hover {
+		color: $light-cyan;
+		text-decoration: underline;
+	}
 }
