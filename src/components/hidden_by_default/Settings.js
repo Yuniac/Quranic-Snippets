@@ -7,17 +7,7 @@ import Divider from "../shared/Divider";
 import QuranLanguageSettings from "../mini-components/QuranLanguageSetting";
 import FrequencyOfNewAyahs from "../mini-components/FrequencyOfNewAyahs";
 
-function Settings({
-	settingsVisibility,
-	setSettingsVisibility,
-	UILanguage,
-	setUILanguage,
-	QLanguage,
-	setQLanguage,
-	getRandomSnippet,
-	newSnippetFrequency,
-	setNewSnippetFrequency,
-}) {
+function Settings({ settingsVisibility, setSettingsVisibility, UILanguage, setUILanguage, QLanguage, setQLanguage, getRandomSnippet }) {
 	return (
 		<div
 			className="settings popup-css"
@@ -40,7 +30,6 @@ function Settings({
 				</span>{" "}
 			</h2>
 			<ToggleButton setFunction={setSettingsVisibility} UILanguage={UILanguage} />
-			{/* <div>Background stays here</div> */}
 			<div className="settings-options">
 				<UILanguageSettings UILanguage={UILanguage} setUILanguage={setUILanguage} />
 				<Divider />
@@ -52,24 +41,6 @@ function Settings({
 				/>
 				<Divider />
 				<FrequencyOfNewAyahs UILanguage={UILanguage} />
-				{/* <ul> */}
-				{/* <li>The freq of which new verses display</li>
-					<li>read entire surah**, not entire ayah</li>
-
-					<li>The UI language</li>
-					<li>The verses languge</li>
-					<li>Next snippt in {nextSnippetTimer}</li>
-					<li>The UI theme</li>\<li>The frequency of getting a new verse</li>
-					<li>Bookmark verses</li>
-					<li>Get additional information about verses</li>
-					<li>And more to come</li> */}
-				{/* <li>لغة الواجهة</li>
-					<li>القرآن باللغة الإنجليزية</li>
-					<li>إمكانية تغيير لون الواجهة</li>
-					<li>حفظ السور لتصفحها لاحقاً</li>
-					<li>الحصول على معلومات إضافية حول بعض السور</li>
-					<li>و المزيد!</li> */}
-				{/* </ul> */}
 			</div>
 		</div>
 	);

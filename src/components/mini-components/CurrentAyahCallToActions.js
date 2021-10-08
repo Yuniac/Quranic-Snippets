@@ -16,7 +16,7 @@ function CurrentAyahCallToActions({
 	setBookmarks,
 }) {
 	return (
-		<div className="current-surah-cta">
+		<div className="current-ayah-cta">
 			<NewSnippetNowButton UILanguage={UILanguage} getRandomSnippet={getRandomSnippet} />
 			<CurrentSurahName currentSurahName={currentSurahName} UILanguage={UILanguage} />
 			<CurrentAyahDetailsButton

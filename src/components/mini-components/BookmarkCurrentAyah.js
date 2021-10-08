@@ -3,17 +3,12 @@ import React from "react";
 //
 import { getStoredValue } from "../helpers/helpers";
 
-function FavoriteCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, currentSurahName }) {
+function BookmarkCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, currentSurahName }) {
 	const [currentAyahNumberGlobally, setCurrentAyahNumberGlobally] = React.useState(0);
-	// const [currentAyah, setCurrentAyah] = React.useState("");
-
 	const [isIconFilled, setIsIconFilled] = React.useState(false);
-
 	React.useEffect(() => {
 		getStoredValue("currentAyahNumberGlobally", setCurrentAyahNumberGlobally);
 		getStoredValue("bookmarks", setBookmarks);
-
-		// getStoredValue("currentSurahNameEN", setCurrentSurahNameEN);
 	}, [ayah]);
 
 	const bookmarkIconNotFilled = (
@@ -67,7 +62,7 @@ function FavoriteCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, curren
 		checkIfBookmarked();
 	});
 	return (
-		<div className="bookmark-ayah" style={{ left: UILanguage === "ar" ? "8px" : "494px" }}>
+		<div className="bookmark-ayah">
 			<button className="cta-button" onClick={handleClick}>
 				{isIconFilled ? bookmarkIconFilled : bookmarkIconNotFilled}
 			</button>
@@ -75,4 +70,4 @@ function FavoriteCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, curren
 	);
 }
 
-export default FavoriteCurrentAyah;
+export default BookmarkCurrentAyah;

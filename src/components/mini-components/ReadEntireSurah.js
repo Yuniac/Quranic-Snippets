@@ -15,7 +15,9 @@ function ReadEntireSurah({ UILanguage, currentSurahNumber }) {
 		<div className="row" style={{ flexDirection: UILanguage === "ar" ? "row-reverse" : "row" }}>
 			<span>
 				<span style={{ display: UILanguage === "ar" ? "inline-block" : "none", direction: "rtl" }}>
-					<a href={externalLink}>أقرأ السورة كاملة (رابط خارجي)</a>
+					<a href={externalLink} className="highlight-link">
+						<span>أقرأ السورة كاملة </span>(رابط خارجي)
+					</a>
 				</span>
 				<span style={{ display: UILanguage === "ar" ? "none" : "inline-block", direction: "ltr" }}>
 					<a href={externalLink} className="highlight-link">

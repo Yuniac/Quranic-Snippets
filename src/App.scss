@@ -43,17 +43,13 @@ main {
 
 //
 .header {
-	h1 {
-		text-align: center;
-		padding: 1rem 0;
+	background-image: url("./img/banners/banner.png");
+	background-position: center;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 9rem;
 
-		font-size: $fs-x-large;
-		font-weight: $fw-heavy;
-		color: $white;
-
-		text-shadow: 0px 2px 1px $black;
-		box-shadow: 0px -10px 50px $light-cyan;
-	}
+	margin: 0 0.3rem;
 }
 //
 .snippet-wrapper {
@@ -65,8 +61,9 @@ main {
 	flex-direction: column;
 	align-items: center;
 
-	.current-surah-cta {
+	.current-ayah-cta {
 		display: flex;
+		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
 
@@ -74,24 +71,26 @@ main {
 		margin: 0.4rem auto 0;
 	}
 	.current-ayah-from-surah {
+		text-align: center;
 		p {
 			color: $white;
 		}
 	}
 	.current-ayah {
+		background-image: url("./img/banners/ayah_banner.png");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 100% 100%;
+
 		position: relative;
 
 		font-size: $fs-large;
-		p {
-			font-family: "Kitab" !important;
-		}
+		font-family: "Kitab" !important;
 
 		line-height: 4.1rem;
 		text-align: center;
 
-		padding: 0.4rem 0 0.8rem;
-
-		border: 1px solid $light-cyan;
+		padding: 2rem 1.3rem;
 
 		min-height: 120px;
 		max-height: 320px;
@@ -100,7 +99,7 @@ main {
 		overflow-y: auto;
 		overflow-x: hidden;
 
-		scrollbar-color: $primary-bg $secondary-bg;
+		scrollbar-color: $light-cyan $secondary-bg;
 		scrollbar-width: thin;
 	}
 	.upward {
@@ -165,9 +164,10 @@ main {
 					font-weight: $fw-normal;
 				}
 				.highlight-link {
-					color: $cyan;
 					padding: 0.2rem 0;
+
 					&:hover {
+						color: $light-cyan;
 						text-decoration: underline;
 					}
 				}
@@ -175,9 +175,7 @@ main {
 		}
 	}
 	.bookmark-ayah {
-		position: absolute;
-		top: 2px;
-
+		height: 24px;
 		button {
 			&:hover {
 				cursor: pointer;
@@ -189,8 +187,11 @@ main {
 .settings {
 	h2 {
 		padding: 0 0.2rem;
-		color: $black;
 		font-weight: 700;
+	}
+	h2,
+	h4 {
+		color: $light-cyan;
 	}
 	.settings-options {
 		& > div {
@@ -273,7 +274,7 @@ main {
 		border-bottom: 1px groove $black;
 	}
 	overflow-y: auto;
-	scrollbar-color: $primary-bg $secondary-bg;
+	scrollbar-color: $light-cyan $secondary-bg;
 	scrollbar-width: thin;
 	.bookmarked-ayahs {
 		display: flex;
@@ -305,7 +306,7 @@ main {
 				line-height: 2.2rem;
 
 				overflow-y: auto;
-				scrollbar-color: $primary-bg $secondary-bg;
+				scrollbar-color: $light-cyan $secondary-bg;
 				scrollbar-width: thin;
 
 				padding: 0.4rem 0;

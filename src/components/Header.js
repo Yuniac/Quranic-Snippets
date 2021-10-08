@@ -3,7 +3,7 @@ import "../App.scss";
 function Header({ UILanguage }) {
 	return (
 		<div className="header">
-			<h1>
+			{/* <h1>
 				<span
 					style={{
 						display: UILanguage === "ar" ? "inline-block" : "none",
@@ -18,7 +18,7 @@ function Header({ UILanguage }) {
 				>
 					Quranic Snippets
 				</span>
-			</h1>
+			</h1> */}
 		</div>
 	);
 }
