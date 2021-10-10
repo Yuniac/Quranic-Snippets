@@ -14,11 +14,11 @@
 	},
 	"browser_specific_settings": {
 		"gecko": {
-			"id": "quranicSnippetsExtension@By.Yuniac"
+			"id": "yusuffathisabbag@gmail.com"
 		}
 	},
 	"background": {
 		"scripts": ["background.js"]
 	},
-	"permissions": ["storage", "nativeMessaging"]
+	"permissions": ["storage"]
 }
