@@ -14,7 +14,7 @@ function App() {
 	const [aboutVisibility, setAboutVisibility] = React.useState(false);
 
 	React.useEffect(() => {
-		getStoredValue("UILang", setUILanguage);
+		getStoredValue(["UILang"], setUILanguage);
 	}, [UILanguage]);
 	return (
 		<div className="App">

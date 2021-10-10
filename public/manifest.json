@@ -1,24 +1,21 @@
 {
 	"name": "Quranic Snippets",
-	"description": "Firefox extension that shows random verses from the noble Quran",
+	"description": "Chrome extension that shows random verses from the noble Quran",
 	"manifest_version": 2,
-	"version": "1",
-	"icons": {
-		"16": "logo16.png",
-		"32": "logo32.png"
+	"version": "1.1",
+	"action": {
+		"default_icon": {
+			"16": "logo16.png",
+			"32": "logo32.png"
+		}
 	},
 	"start_url": ".",
 	"browser_action": {
 		"default_popup": "index.html",
 		"default_title": "Quranic Snippets"
 	},
-	"browser_specific_settings": {
-		"gecko": {
-			"id": "quranicSnippetsExtension@By.Yuniac"
-		}
-	},
 	"background": {
 		"scripts": ["background.js"]
 	},
-	"permissions": ["storage", "nativeMessaging"]
+	"permissions": ["storage"]
 }

@@ -1,8 +1,9 @@
-/* global browser */
+/* global chrome */
 export async function getStoredValue(value, setter) {
-	const storedData = await browser.storage.sync.get(value);
-	const extractedValue = storedData[value];
-	setter(extractedValue);
+	function updateLocalValues(storedData) {
+		setter(storedData[value]);
+	}
+	chrome.storage.sync.get(value, updateLocalValues);
 }
 
 export function openPopup(setter) {

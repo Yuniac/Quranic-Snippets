@@ -1,4 +1,4 @@
-/* global browser */
+/* global chrome */
 import React from "react";
 import "../../App.scss";
 
@@ -9,7 +9,7 @@ function UILanguageSettings({ UILanguage, setUILanguage }) {
 	}
 	React.useEffect(() => {
 		if (UILanguage.trim() !== "") {
-			browser.storage.sync.set({ UILang: UILanguage });
+			chrome.storage.sync.set({ UILang: UILanguage });
 		}
 	}, [UILanguage]);
 	return (

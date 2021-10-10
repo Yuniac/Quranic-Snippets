@@ -1,4 +1,4 @@
-/* global browser */
+/* global chrome */
 import React from "react";
 
 function QuranLanguageSettings({ QLanguage, setQLanguage, UILanguage, getRandomSnippet }) {
@@ -6,14 +6,14 @@ function QuranLanguageSettings({ QLanguage, setQLanguage, UILanguage, getRandomS
 		const lang = radio.target.value;
 		setQLanguage(lang);
 		// the argument true means fetch a new ayah in the second langauge regardless of what's stored in the storage;
-		await browser.storage.sync.set({ QLang: QLanguage });
-		const { freq } = await browser.storage.sync.get("freq");
+		await chrome.storage.sync.set({ QLang: QLanguage });
+		const { freq } = await chrome.storage.sync.get("freq");
 		getRandomSnippet(true, false, freq);
 	}
 
 	React.useEffect(() => {
 		if (QLanguage.length) {
-			browser.storage.sync.set({ QLang: QLanguage });
+			chrome.storage.sync.set({ QLang: QLanguage });
 		}
 	}, [QLanguage]);
 	return (

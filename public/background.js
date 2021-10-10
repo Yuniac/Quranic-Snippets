@@ -1,11 +1,11 @@
-/* global browser */
+/* global chrome */
 const ayahObject = {
 	ayah: "",
 	ayahTimeStamp: new Date().getTime(),
-	UILang: "ar",
+	UILang: "en",
 	QLang: "ar.asad",
 	bookmarks: [],
 	isIconFilled: false,
 	freq: 3600000,
 };
-browser.storage.sync.set(ayahObject);
+chrome.storage.sync.set(ayahObject);

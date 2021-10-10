@@ -1,4 +1,4 @@
-/* global browser */
+/* global chrome */
 import React from "react";
 
 function NewSnippetNowButton({ getRandomSnippet, UILanguage }) {
@@ -10,7 +10,7 @@ function NewSnippetNowButton({ getRandomSnippet, UILanguage }) {
 	);
 
 	async function handleClick() {
-		const { freq } = await browser.storage.sync.get("freq");
+		const { freq } = await chrome.storage.sync.get("freq");
 		getRandomSnippet(true, true, freq);
 	}
 	return (

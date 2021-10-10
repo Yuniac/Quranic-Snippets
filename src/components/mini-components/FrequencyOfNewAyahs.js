@@ -1,4 +1,4 @@
-/* global browser */
+/* global chrome */
 import React from "react";
 function FrequencyOfNewAyahs({ UILanguage }) {
 	const [newSnippetFrequency, setNewSnippetFrequency] = React.useState(0);
@@ -6,10 +6,10 @@ function FrequencyOfNewAyahs({ UILanguage }) {
 
 	function handleChange(event) {
 		const value = event.currentTarget.value;
-		browser.storage.sync.set({ freq: value });
+		chrome.storage.sync.set({ freq: value });
 	}
 	async function syncTheStoredFreq() {
-		const { freq } = await browser.storage.sync.get(["freq"]);
+		const { freq } = await chrome.storage.sync.get("freq");
 		setNewSnippetFrequency(freq);
 	}
 	React.useEffect(() => {

@@ -1,4 +1,4 @@
-/* global browser */
+/* global chrome */
 import React from "react";
 import "../App.scss";
 
@@ -11,10 +11,10 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 
 	async function getStoredName() {
 		if (UILanguage.startsWith("ar")) {
-			const { currentSurahNameAR } = await browser.storage.sync.get();
+			const { currentSurahNameAR } = await chrome.storage.sync.get("currentSurahNameAR");
 			setCurrentSurahName(currentSurahNameAR);
 		} else {
-			const { currentSurahNameEN } = await browser.storage.sync.get();
+			const { currentSurahNameEN } = await chrome.storage.sync.get("currentSurahNameEN");
 			setCurrentSurahName(currentSurahNameEN);
 		}
 	}

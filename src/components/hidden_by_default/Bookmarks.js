@@ -1,4 +1,4 @@
-/* global browser */
+/* global chrome */
 import React from "react";
 import ToggleButton from "../shared/ToggleButton";
 import "../../App.scss";
@@ -12,7 +12,7 @@ function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksV
 		const id = button.currentTarget.id * 1;
 		const bookmarkedAyahToBeRemoved = bookmarks.findIndex((bookmarkedAyah) => bookmarkedAyah[0] === id);
 		bookmarks.splice(bookmarkedAyahToBeRemoved, 1);
-		browser.storage.sync.set({ bookmarks: bookmarks, isIconFilled: false });
+		chrome.storage.sync.set({ bookmarks: bookmarks, isIconFilled: false });
 	}
 	const removeBookMarkIcon = (
 		<svg
@@ -65,7 +65,7 @@ function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksV
 	);
 
 	React.useEffect(() => {
-		getStoredValue("bookmarks", setBookmarks);
+		getStoredValue(["bookmarks"], setBookmarks);
 	}, [bookmarks, UILanguage, setBookmarks]);
 	return (
 		<div
@@ -86,7 +86,6 @@ function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksV
 					2 = surah name which the ayah is from
 				*/}
 				{bookmarkedAyahs.length ? bookmarkedAyahs : noBookmarksPlaceHolder}
-				{/* {!bookmarkedAyahs.length && noBookmarksPlaceHolder} */}
 			</div>
 		</div>
 	);

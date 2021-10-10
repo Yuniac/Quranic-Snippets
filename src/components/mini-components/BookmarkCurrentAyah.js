@@ -1,4 +1,4 @@
-/* global browser */
+/* global chrome */
 import React from "react";
 //
 import { getStoredValue } from "../helpers/helpers";
@@ -7,8 +7,8 @@ function BookmarkCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, curren
 	const [currentAyahNumberGlobally, setCurrentAyahNumberGlobally] = React.useState(0);
 	const [isIconFilled, setIsIconFilled] = React.useState(false);
 	React.useEffect(() => {
-		getStoredValue("currentAyahNumberGlobally", setCurrentAyahNumberGlobally);
-		getStoredValue("bookmarks", setBookmarks);
+		getStoredValue(["currentAyahNumberGlobally"], setCurrentAyahNumberGlobally);
+		getStoredValue(["bookmarks"], setBookmarks);
 	}, [ayah]);
 
 	const bookmarkIconNotFilled = (
@@ -42,23 +42,23 @@ function BookmarkCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, curren
 		// if it's not then add it to favorites;
 		if (!isAlreadyFavored) {
 			bookmarks.push([currentAyahNumberGlobally, ayah, currentSurahName]);
-			await browser.storage.sync.set({ bookmarks: bookmarks, isIconFilled: true });
+			await chrome.storage.sync.set({ bookmarks: bookmarks, isIconFilled: true });
 			setBookmarks([...bookmarks]);
 			setIsIconFilled(true);
 			// if `checkIfFavored returned truthy that means the user clicked on an already favored ayah so remove it;
 		} else {
-			const { bookmarks: storedAndBookmarkedAyahs } = await browser.storage.sync.get("bookmarks");
+			const { bookmarks: storedAndBookmarkedAyahs } = await chrome.storage.sync.get("bookmarks");
 			const storedAndBookmarkedAyahToBeRemovedIndex = storedAndBookmarkedAyahs.findIndex(
 				(ayah) => ayah[0] === currentAyahNumberGlobally
 			);
 			storedAndBookmarkedAyahs.splice(storedAndBookmarkedAyahToBeRemovedIndex, 1);
-			await browser.storage.sync.set({ bookmarks: storedAndBookmarkedAyahs, isIconFilled: false });
+			await chrome.storage.sync.set({ bookmarks: storedAndBookmarkedAyahs, isIconFilled: false });
 			setIsIconFilled(false);
 		}
 	}
 
 	React.useEffect(() => {
-		getStoredValue("isIconFilled", setIsIconFilled);
+		getStoredValue(["isIconFilled"], setIsIconFilled);
 		checkIfBookmarked();
 	});
 	return (

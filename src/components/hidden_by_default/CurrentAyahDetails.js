@@ -4,7 +4,6 @@ import { getStoredValue } from "../helpers/helpers";
 import ReadEntireSurah from "../mini-components/ReadEntireSurah";
 import Divider from "../shared/Divider";
 //
-import { lightCyan } from "../../style/_variables.module.scss";
 function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 	const [currentSurahNameAR, setCurrentSurahNameAR] = React.useState("الفاتحة");
 	const [currentSurahNameEN, setCurrentSurahNameEN] = React.useState("Al Fatihha");
@@ -13,10 +12,10 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	React.useEffect(() => {
-		getStoredValue("currentSurahNameAR", setCurrentSurahNameAR);
-		getStoredValue("currentSurahNameEN", setCurrentSurahNameEN);
-		getStoredValue("currentAyahNumber", setCurrentAyahNumber);
-		getStoredValue("currentSurahNumber", setcurrentSurahNumber);
+		getStoredValue(["currentSurahNameAR"], setCurrentSurahNameAR);
+		getStoredValue(["currentSurahNameEN"], setCurrentSurahNameEN);
+		getStoredValue(["currentAyahNumber"], setCurrentAyahNumber);
+		getStoredValue(["currentSurahNumber"], setcurrentSurahNumber);
 	});
 	return (
 		<div className="current-ayah-details-hidden">
