@@ -2,7 +2,7 @@
 const ayahObject = {
 	ayah: "",
 	ayahTimeStamp: new Date().getTime(),
-	UILang: "ar",
+	UILang: "en",
 	QLang: "ar.asad",
 	bookmarks: [],
 	isIconFilled: false,
