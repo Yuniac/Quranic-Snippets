@@ -20,28 +20,24 @@ Right now, the extension provides a new random verse each hour.
 
 ## What features does Quranic-Snippets has?
 
--   A new random verse each hour, this period can be adjusted by the user, raning from half an hour to 24h.
--   Get more than one verse only, amount decided by the user. (Feature might or might not come into being)
--   Two languages interface, both in Arabic and in English.
+-   A new random verse each hour, this period can be adjusted by the user, ranging from half an hour to 24h.
+-   Two languages interface, either in Arabic and in English.
 -   The ability to get verses in either Arabic or English.
 -   Bookmarking verses.
 -   Read more about/More information about this verse type of feature.
--   Different colors and themes. (Feature might or might not come into being)
 
 ## How to use?
 
-This extension will be available for free on the Firefox extensions store, but since it's not ready yet, see section below.
-
-## How to use (currently):
-
-Right now the extension isn't ready for the store just yet, I'm working on adding features and polishing things around but if you would like to test it locally, then follow those steps:
-
--   First off clone this repo.
--   Run, in your terminal, `yarn build` or `npm build`.
--   Open your Firefox browser, type in the address bar: `about:debugging`, this would open a settings web page, from there click on `This Firefox`.
--   After that, click on `Load Temporarily Add-on...`, you will be prompted to pick a file, navigate to the build folder inside the directory which you cloned and built this repo into, select `index.html` from the `build` folder.
--   You should see the extension in your Toolbar, left-click on it to interact with it.
+You can download the extension for free from the [Firefox Addons Store](https://addons.mozilla.org/en-US/firefox/addon/quranic-snippets/).
 
 ## Why Quranic-Snippets?
 
 I'm a person who's learning web development, so I thought why not make something useful while you are learning and also as I said, I wanted some sort of an extension that does what Quranic-Snippets do/will do. Also, I wanted to create something useful and meaningful, this extension and this project is and will always be free to use and for the sake of Allah, only thing you can do in return of using it is report bugs, request features and do Dua for me.
+
+## Contributors: 
+- Project lead: [Yuniac](https://github.com/Yuniac).
+- Design and artwork: [Harry](https://github.com/Haariz).
+
+## Contributing:
+
+As I said eariler this project is for Allah's sake and it's open source, feel free to clone this repo and do whatever changes you like/think are necessary and submit them in a PR.
