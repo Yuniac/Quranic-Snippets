@@ -31,6 +31,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 				style={{
 					direction: QLanguage.startsWith("ar") ? "rtl" : "ltr",
 					fontSize: QLanguage.startsWith("ar") ? "1.9rem" : "1.3rem",
+					lineHeight: QLanguage.startsWith("ar") ? "4.1rem" : "2rem",
 				}}
 			>
 				{ayah ? ayah : loadingAnimation}
