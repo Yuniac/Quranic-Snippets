@@ -165,9 +165,6 @@ main {
 				align-items: center;
 
 				color: $white;
-				&:first-of-type {
-					margin: 0 0 0.4rem;
-				}
 				margin: 0 0 0.4rem;
 				padding: 0 0.2rem;
 				&:last-of-type {
@@ -176,6 +173,8 @@ main {
 				& > span {
 					display: block;
 					width: 50%;
+
+					border: 1px solid purple;
 				}
 				.header-span {
 					display: block;
@@ -185,6 +184,14 @@ main {
 				span {
 					margin: 0 0.2rem;
 					font-weight: $fw-normal;
+				}
+			}
+			.numbers-row {
+				span {
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					align-items: center;
 				}
 			}
 		}
@@ -277,7 +284,7 @@ main {
 //
 .bookmarks {
 	h2 {
-		color: $black;
+		color: $light-cyan;
 	}
 
 	.bookmarks-usage-notes {
@@ -423,9 +430,15 @@ footer {
 
 .highlight-link {
 	padding: 0.2rem 0;
+	text-decoration: underline;
 
+	color: $cyan;
 	&:hover {
 		color: $light-cyan;
 		text-decoration: underline;
 	}
+}
+
+.highlight-numbers {
+	color: $light-cyan;
 }
