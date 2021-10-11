@@ -66,7 +66,7 @@ function Body({
 					urlToFetch = getAyahURL + currentAyahNumberGlobally + "/" + QLang;
 				}
 			} else {
-				urlToFetch = getAyahURL + "26:1" + "/" + QLang;
+				urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 			}
 
 			const fetchedAyah = await fetch(urlToFetch);
