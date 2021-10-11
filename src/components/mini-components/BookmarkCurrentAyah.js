@@ -5,10 +5,12 @@ import { getStoredValue } from "../helpers/helpers";
 
 function BookmarkCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, currentSurahName }) {
 	const [currentAyahNumberGlobally, setCurrentAyahNumberGlobally] = React.useState(0);
+	const [currentAyahNumber, setCurrentAyahNumber] = React.useState(0);
 	const [isIconFilled, setIsIconFilled] = React.useState(false);
 	React.useEffect(() => {
 		getStoredValue("currentAyahNumberGlobally", setCurrentAyahNumberGlobally);
 		getStoredValue("bookmarks", setBookmarks);
+		getStoredValue("currentAyahNumber", setCurrentAyahNumber);
 	}, [ayah]);
 
 	const bookmarkIconNotFilled = (
@@ -41,7 +43,7 @@ function BookmarkCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, curren
 		const isAlreadyFavored = checkIfBookmarked();
 		// if it's not then add it to favorites;
 		if (!isAlreadyFavored) {
-			bookmarks.push([currentAyahNumberGlobally, ayah, currentSurahName]);
+			bookmarks.push([currentAyahNumberGlobally, ayah, currentSurahName, currentAyahNumber]);
 			await browser.storage.sync.set({ bookmarks: bookmarks, isIconFilled: true });
 			setBookmarks([...bookmarks]);
 			setIsIconFilled(true);

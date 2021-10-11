@@ -31,11 +31,16 @@ function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksV
 	const bookmarkedAyahs = bookmarks.map((bookmark) => (
 		<div className="bookmarked-ayah-container">
 			<div className="bookmarked-ayah-cta" style={{ flexDirection: UILanguage === "ar" ? "row" : "row-reverse" }}>
+				{/* 0 = ayah global id
+					1 = ayah text 
+					2 = surah name which the ayah is from
+					3 = the ayah number within the verse
+				*/}
 				<button className="cta-button" onClick={handleClick} id={bookmark[0]}>
 					{removeBookMarkIcon}
 				</button>
 				<p>
-					{bookmark[2]}&nbsp;({bookmark[0]})
+					{bookmark[2]}&nbsp;({bookmark[3]})
 				</p>
 			</div>
 			<div className="bookmarked-ayah-body" key={bookmark[0]}>
@@ -80,14 +85,7 @@ function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksV
 		>
 			<ToggleButton setFunction={setBookmarksVisibility} UILanguage={UILanguage} />
 			<h2>{UILanguage === "ar" ? "الأيات المحفوظة:" : "Bookmarked Ayahs (verses):"}</h2>
-			<div className="bookmarked-ayahs">
-				{/* 0 = ayah global id
-					1 = ayah text 
-					2 = surah name which the ayah is from
-				*/}
-				{bookmarkedAyahs.length ? bookmarkedAyahs : noBookmarksPlaceHolder}
-				{/* {!bookmarkedAyahs.length && noBookmarksPlaceHolder} */}
-			</div>
+			<div className="bookmarked-ayahs">{bookmarkedAyahs.length ? bookmarkedAyahs : noBookmarksPlaceHolder}</div>
 		</div>
 	);
 }
