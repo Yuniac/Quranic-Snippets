@@ -30,88 +30,70 @@ function Body({
 	}, []);
 
 	const getAyahURL = "http://api.alquran.cloud/v1/ayah/";
-	// this state will manage the ayah that is visible to the user when he opens the extension
 	const [ayah, setAyah] = React.useState("");
-	// const [newSnippetFrequency, setNewSnippetFrequency] = React.useState(55);
-	// console.log(newSnippetFrequency);
 
-	let currentAyahNumber, currentSurahNumber, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 	let urlToFetch;
 
-	async function getRandomSnippet(sameAyahInSecondLang, forced, storedFreq) {
-		console.log(storedFreq);
-		let ayah, ayahTimeStamp, UILang, QLang, bookmarks, isIconFilled, currentAyahNumberGlobally;
-
+	function getRandomSnippet(sameAyahInSecondLang, forced, storedFreq) {
 		// get stored ayah and its related information
-		await chrome.storage.sync.get(["ayah", "ayahTimeStamp", "UILang", "QLang", "bookmarks", "isIconFilled"], workWithStoredValues);
-		async function workWithStoredValues(valuesObject) {
-			ayah = valuesObject.ayah;
-			ayahTimeStamp = valuesObject.ayahTimeStamp;
-			UILang = valuesObject.UILang;
-			QLang = valuesObject.QLang;
-			bookmarks = valuesObject.bookmarks;
-			isIconFilled = valuesObject.isIconFilled;
-			currentAyahNumberGlobally = valuesObject.currentAyahNumberGlobally;
-
-			// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
-			// or if 'sameAyahInSecondLang' argument is present as true/false, true = fetch the same ayah but in the second langauge, will only be called when the language changes. if 'forced' = true then regardless of anything, fetch a new ayah in whichever current language we have, will only be called from 'get a new snippet now' button;
-			if (!ayah.length || new Date().getTime() - ayahTimeStamp > storedFreq || sameAyahInSecondLang) {
-				// fetch a new ayah
-				const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
-				// determine what's the fetching url;
-				if (sameAyahInSecondLang) {
-					// const { currentAyahNumberGlobally } = await chrome.storage.sync.get("currentAyahNumberGlobally");
-					// if forced, then user has requested to get a new snippt, regardless of everything so fetch anew;
-					if (forced) {
-						urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
+		chrome.storage.sync.get(
+			["ayah", "ayahTimeStamp", "UILang", "QLang", "bookmarks", "isIconFilled", "currentAyahNumberGlobally"],
+			async ({ ayah, ayahTimeStamp, UILang, QLang, bookmarks, isIconFilled, currentAyahNumberGlobally }) => {
+				// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defeind rate of getting new ayahs;
+				// or if 'sameAyahInSecondLang' argument is present as true/false, true = fetch the same ayah but in the second langauge, will only be called when the language changes. if 'forced' = true then regardless of anything, fetch a new ayah in whichever current language we have, will only be called from 'get a new snippet now' button;
+				if (!ayah.length || sameAyahInSecondLang || new Date().getTime() - ayahTimeStamp > storedFreq) {
+					// fetch a new ayah
+					const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
+					// determine what's the fetching url;
+					if (sameAyahInSecondLang) {
+						// if forced, then user has requested to get a new snippt, regardless of everything so fetch anew;
+						if (forced) {
+							urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
+						} else {
+							alert(currentAyahNumberGlobally);
+							// else, get the same verse that is stored but in th second language
+							urlToFetch = getAyahURL + currentAyahNumberGlobally + "/" + QLang;
+						}
 					} else {
-						// else, get the same verse that is stored but in th second language
-						urlToFetch = getAyahURL + currentAyahNumberGlobally + "/" + QLang;
+						urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 					}
+					const fetchedAyah = await fetch(urlToFetch);
+					let fetchedAyahAsJson = await fetchedAyah.json();
+
+					fetchedAyahAsJson = fetchedAyahAsJson.data;
+					currentAyahNumberGlobally = fetchedAyahAsJson.number;
+
+					// processing the ayah to remove "bismillah". might change this later;
+					const processedAyah = processAyah(fetchedAyahAsJson.text);
+					// create an object containing the ayah and all the information about it;
+					const newStoredAyah = {
+						ayah: processedAyah,
+						ayahTimeStamp: new Date().getTime(),
+						currentAyahNumber: fetchedAyahAsJson.numberInSurah,
+						currentAyahNumberGlobally: fetchedAyahAsJson.number,
+						currentSurahNumber: fetchedAyahAsJson.surah.number,
+						currentSurahNameEN: fetchedAyahAsJson.surah.englishName,
+						currentSurahNameAR: fetchedAyahAsJson.surah.name,
+						UILang: UILang,
+						freq: storedFreq,
+						isIconFilled: isIconFilled,
+						bookmarks: bookmarks,
+					};
+					// if forced is true it means a totally new ayah was being requested, in such case make sure that the icon isn't filled = ayah not bookmakred
+					if (forced) {
+						newStoredAyah.isIconFilled = false;
+					}
+					// store the new ayah with a timeStamp and any other info I might add later on;
+					chrome.storage.sync.set(newStoredAyah, () => {
+						// update the state with the newly fetched ayah
+						setAyah(processedAyah);
+					});
 				} else {
-					urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
+					// otherwise, just use the old already stored ayah and use it to update the state;
+					setAyah(ayah);
 				}
-
-				const fetchedAyah = await fetch(urlToFetch);
-				let fetchedAyahAsJson = await fetchedAyah.json();
-
-				fetchedAyahAsJson = fetchedAyahAsJson.data;
-				currentAyahNumber = fetchedAyahAsJson.numberInSurah;
-				currentAyahNumberGlobally = fetchedAyahAsJson.number;
-				currentSurahNumber = fetchedAyahAsJson.surah.number;
-				currentAyahText = fetchedAyahAsJson.text;
-				currentSurahNameEN = fetchedAyahAsJson.surah.englishName;
-				currentSurahNameAR = fetchedAyahAsJson.surah.name;
-
-				// processing the ayah to remove "bismillah". might change this later;
-				const processedAyah = processAyah(currentAyahText);
-				// create an object containing the ayah and all the information about it;
-				const newStoredAyah = {
-					ayah: processedAyah,
-					ayahTimeStamp: new Date().getTime(),
-					currentAyahNumber: currentAyahNumber,
-					currentAyahNumberGlobally: currentAyahNumberGlobally,
-					currentSurahNumber: currentSurahNumber,
-					currentSurahNameEN: currentSurahNameEN,
-					currentSurahNameAR: currentSurahNameAR,
-					UILang: UILang,
-					freq: storedFreq,
-					isIconFilled: isIconFilled,
-					bookmarks: bookmarks,
-				};
-				// if forced is true it means a totally new ayah was being requested, in such case make sure that the icon isn't filled = ayah not bookmakred
-				if (forced) {
-					newStoredAyah.isIconFilled = false;
-				}
-				// update the state with the newly fetched ayah
-				setAyah(processedAyah);
-				// store the new ayah with a timeStamp and any other info I might add later on;
-				chrome.storage.sync.set(newStoredAyah);
-			} else {
-				// otherwise, just use the old already stored ayah and use it to update the state;
-				setAyah(ayah);
 			}
-		}
+		);
 	}
 
 	// if the ayah begins with 'bismillah', cut it out, as our focus is to only show the verse
@@ -122,14 +104,11 @@ function Body({
 		}
 		return ayah;
 	}
-	function getStoredFreq() {
-		chrome.storage.sync.get(["freq"], handleReturnedDataFromStorage);
-		function handleReturnedDataFromStorage(data) {
-			getRandomSnippet(false, false, data.freq);
-		}
-	}
+
 	React.useEffect(() => {
-		getStoredFreq();
+		chrome.storage.sync.get(["freq"], ({ freq }) => {
+			getRandomSnippet(false, false, freq);
+		});
 	}, []);
 
 	return (
