@@ -10,6 +10,7 @@ import Bookmarks from "./hidden_by_default/Bookmarks";
 import About from "./hidden_by_default/About";
 //
 import { getStoredValue } from "./helpers/helpers";
+import { cleanUpUneededCharacters } from "./helpers/helpers";
 
 function Body({
 	settingsVisibility,
@@ -95,13 +96,38 @@ function Body({
 		);
 	}
 
-	// if the ayah begins with 'bismillah', cut it out, as our focus is to only show the verse
-	function processAyah(ayah) {
-		if (ayah.match(/^(بِسْم)/)) {
-			ayah = ayah.slice(38);
-			return ayah;
+	function processAyah(ayah, QLang) {
+		// while Quran ayahs are being displayed in arabic;
+		// if the ayah begins with 'bismillah', cut it out, as our focus is to only show the ayah;
+		if (QLang === "ar.asad") {
+			if (/^(بِسْم)/.test(ayah)) {
+				ayah = ayah.slice(38);
+				// return, as everything below is related to ayahs when they are being displayed in english and you only got to this comment because the QLanguage/QLang/The Quran Language right now is arabic;
+				return ayah;
+			}
 		}
-		return ayah;
+		// while Quran ayahs are being displayed in english;
+		// capitalize the first letter of the ayah. now, usually in the Quran ayahs come in some context to what's before them and after them and as such, the first letter of a ayah might not be capitalize because the 'sentence' didn't start with it but rather with a ayah before it. however, the user reads each ayah as a standalone ayah and as such it should be, according to english language standards, capitalized;
+		function processInEnglish(ayah) {
+			// sometimes, the ayah we get start with some symbols or diacritics, so this function will traverse each index and find the first alphabetical letter and returns it;
+			let splitAyahString = ayah.split("");
+			for (let i = 0; i < splitAyahString.length; i++) {
+				// before making the first letter an uppercase, remove it if its a dash or some un-needed in the current context character;
+				splitAyahString = cleanUpUneededCharacters("start", splitAyahString);
+
+				// this regex matches for every alphabetical character;
+				if (/\w/.test(splitAyahString[i])) {
+					splitAyahString[i] = splitAyahString[i].toUpperCase();
+					break;
+				}
+			}
+			// now that we have made sure that the first character is an uppercased letter and isn't a dash or underscore, check the last letter for any un-needed characters and remove them.
+			splitAyahString = cleanUpUneededCharacters("end", splitAyahString);
+
+			return splitAyahString;
+		}
+		const ayahProcessedInEnglish = processInEnglish(ayah);
+		return ayahProcessedInEnglish;
 	}
 
 	React.useEffect(() => {
