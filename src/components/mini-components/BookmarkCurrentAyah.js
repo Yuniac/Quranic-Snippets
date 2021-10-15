@@ -42,18 +42,20 @@ function BookmarkCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, curren
 		// if it's not then add it to favorites;
 		if (!isAlreadyFavored) {
 			bookmarks.push([currentAyahNumberGlobally, ayah, currentSurahName]);
-			await chrome.storage.sync.set({ bookmarks: bookmarks, isIconFilled: true });
-			setBookmarks([...bookmarks]);
-			setIsIconFilled(true);
-			// if `checkIfFavored returned truthy that means the user clicked on an already favored ayah so remove it;
+			chrome.storage.sync.set({ bookmarks: bookmarks, isIconFilled: true }, () => {
+				setBookmarks([...bookmarks]);
+				setIsIconFilled(true);
+			});
 		} else {
+			// if `checkIfBookmarked` returned truthy that means the user clicked on an already favored ayah so remove it;
 			const { bookmarks: storedAndBookmarkedAyahs } = await chrome.storage.sync.get("bookmarks");
 			const storedAndBookmarkedAyahToBeRemovedIndex = storedAndBookmarkedAyahs.findIndex(
 				(ayah) => ayah[0] === currentAyahNumberGlobally
 			);
 			storedAndBookmarkedAyahs.splice(storedAndBookmarkedAyahToBeRemovedIndex, 1);
-			await chrome.storage.sync.set({ bookmarks: storedAndBookmarkedAyahs, isIconFilled: false });
-			setIsIconFilled(false);
+			chrome.storage.sync.set({ bookmarks: storedAndBookmarkedAyahs, isIconFilled: false }, () => {
+				setIsIconFilled(false);
+			});
 		}
 	}
 
