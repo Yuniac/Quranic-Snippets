@@ -43,7 +43,7 @@ function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksV
 				</p>
 			</div>
 			<div className="bookmarked-ayah-body" key={bookmark[0]}>
-				<p dir="ltr">{bookmark[1]}</p>
+				<p dir="auto">{bookmark[1]}</p>
 			</div>
 		</div>
 	));
