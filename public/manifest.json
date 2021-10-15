@@ -1,13 +1,11 @@
 {
 	"name": "Quranic Snippets",
-	"description": "Chrome extension that shows random verses from the noble Quran",
+	"description": "Chrome extension that shows randomly selected verses from the noble Quran",
 	"manifest_version": 2,
-	"version": "1.1",
-	"action": {
-		"default_icon": {
-			"16": "logo16.png",
-			"32": "logo32.png"
-		}
+	"version": "1.5",
+	"icons": {
+		"16": "./logo16.png",
+		"32": "./logo32.png"
 	},
 	"start_url": ".",
 	"browser_action": {
