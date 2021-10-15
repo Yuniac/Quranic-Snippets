@@ -50,7 +50,6 @@ function Body({
 						if (forced) {
 							urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 						} else {
-							alert(currentAyahNumberGlobally);
 							// else, get the same verse that is stored but in th second language
 							urlToFetch = getAyahURL + currentAyahNumberGlobally + "/" + QLang;
 						}

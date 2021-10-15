@@ -19,16 +19,16 @@ function CurrentAyahCallToActions({
 		<div className="current-ayah-cta">
 			<NewSnippetNowButton UILanguage={UILanguage} getRandomSnippet={getRandomSnippet} />
 			<CurrentSurahName currentSurahName={currentSurahName} UILanguage={UILanguage} />
-			<CurrentAyahDetailsButton
-				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
-				setCurrentAyahDetailsVisibility={setCurrentAyahDetailsVisibility}
-			/>
 			<BookmarkCurrentAyah
 				UILanguage={UILanguage}
 				ayah={ayah}
 				bookmarks={bookmarks}
 				setBookmarks={setBookmarks}
 				currentSurahName={currentSurahName}
+			/>
+			<CurrentAyahDetailsButton
+				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
+				setCurrentAyahDetailsVisibility={setCurrentAyahDetailsVisibility}
 			/>
 		</div>
 	);
