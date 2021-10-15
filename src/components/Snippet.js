@@ -26,7 +26,14 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 	});
 	return (
 		<div className="snippet-wrapper" style={{ padding: "0 0.4rem" }}>
-			<p className="current-ayah" style={{ direction: QLanguage.startsWith("ar") ? "rtl" : "ltr" }}>
+			<p
+				className="current-ayah"
+				style={{
+					direction: QLanguage.startsWith("ar") ? "rtl" : "ltr",
+					fontSize: QLanguage.startsWith("ar") ? "1.9rem" : "1.3rem",
+					lineHeight: QLanguage.startsWith("ar") ? "4.1rem" : "2rem",
+				}}
+			>
 				{ayah ? ayah : loadingAnimation}
 			</p>
 			<CurrentAyahCallToActions
