@@ -18,11 +18,3 @@ chrome.storage.sync.get(null, (data) => {
 		});
 	}
 });
-
-// else {
-// 	setInterval(() => {
-// 		chrome.storage.sync.get(["currentAyahNumberGlobally"], ({ currentAyahNumberGlobally }) => {
-// 			console.log(currentAyahNumberGlobally);
-// 		});
-// 	}, 2000);
-// }
