@@ -5,6 +5,7 @@
 	src: url("./fonts/Kitab-Regular.ttf");
 }
 * {
+	scroll-behavior: smooth;
 	::-webkit-scrollbar {
 		width: 5px;
 		background-color: $secondary-bg;
@@ -19,7 +20,7 @@ body {
 .App {
 	width: 522px;
 	min-height: 322px;
-	max-height: fit-content;
+	max-height: 540px;
 
 	background-color: $primary-bg;
 
@@ -77,9 +78,9 @@ main {
 	}
 	.current-ayah-from-surah {
 		text-align: center;
-		p {
-			color: $white;
-		}
+
+		color: $white;
+		font-size: $fs-normal;
 	}
 	.current-ayah {
 		background-image: url("./img/banners/ayah_banner.png");
@@ -87,18 +88,21 @@ main {
 		background-position: center;
 		background-size: 100% 100%;
 
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
 		position: relative;
 
 		font-size: $fs-large;
 		font-family: "Kitab" !important;
 
-		line-height: 4.1rem;
 		text-align: center;
 
 		padding: 2rem 1.3rem;
 
 		min-height: 120px;
-		max-height: 320px;
+		max-height: 280px;
 		width: 100%;
 
 		overflow-y: auto;
@@ -136,6 +140,8 @@ main {
 		transition: all $transition-delay ease-in-out;
 	}
 	.current-ayah-details-hidden {
+		font-size: $fs-small;
+
 		position: relative;
 
 		width: 100%;
@@ -146,6 +152,7 @@ main {
 		justify-content: center;
 		align-items: space-around;
 
+		margin-bottom: 1rem;
 		.wrapper {
 			background-color: $primary-bg;
 
@@ -167,11 +174,10 @@ main {
 				align-items: center;
 
 				color: $white;
-				&:first-of-type {
-					margin: 0 0 0.4rem;
-				}
+
 				margin: 0 0 0.4rem;
 				padding: 0 0.2rem;
+
 				&:last-of-type {
 					justify-content: center;
 				}
@@ -182,19 +188,18 @@ main {
 				.header-span {
 					display: block;
 					text-align: center;
-					font-weight: $fw-heavy;
 				}
 				span {
 					margin: 0 0.2rem;
 					font-weight: $fw-normal;
 				}
-				.highlight-link {
-					padding: 0.2rem 0;
-
-					&:hover {
-						color: $light-cyan;
-						text-decoration: underline;
-					}
+			}
+			.numbers-row {
+				span {
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					align-items: center;
 				}
 			}
 		}
@@ -220,6 +225,7 @@ main {
 	}
 	.settings-options {
 		& > div {
+			font-size: $fs-normal;
 			padding: 0 0.4rem;
 		}
 	}
@@ -363,22 +369,30 @@ main {
 	}
 }
 //
-.about-body {
-	& > div {
-		margin-bottom: 0.5rem;
+.about {
+	font-size: $fs-normal;
+	h2 {
+		margin-left: 0.2rem;
 	}
-	p {
-		padding: 0.5rem 0.2rem;
-	}
-	h3 {
-		margin-top: 1rem;
-		text-align: center;
+	.about-body {
+		margin-left: 0.2rem;
+		& > div {
+			margin-bottom: 0.5rem;
+		}
+		p {
+			font-size: $fs-small;
+			padding: 0.5rem 0.2rem;
+		}
+		h3 {
+			margin-top: 1rem;
+			text-align: center;
+		}
 	}
 }
 //
 footer {
 	margin-top: 0.7rem;
-
+	font-size: $fs-normal;
 	ul {
 		width: 80%;
 		margin: 0 auto;
@@ -418,4 +432,17 @@ footer {
 .cta-button {
 	border: 0;
 	background-color: transparent;
+}
+
+.highlight-link {
+	padding: 0.2rem 0;
+	color: $cyan;
+	&:hover {
+		color: $light-cyan;
+		text-decoration: underline;
+	}
+}
+
+.highlight-numbers {
+	color: $light-cyan;
 }
