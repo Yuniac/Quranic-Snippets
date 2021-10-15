@@ -5,9 +5,9 @@
 	src: url("./fonts/Kitab-Regular.ttf");
 }
 * {
-	scrollbar-color: transparent;
-	scrollbar-width: none;
-}
+	scrollbar-color: $light-cyan $secondary-bg;
+	scrollbar-width: thin;
+	scroll-behavior: smooth;
 body {
 	color: $white;
 }
@@ -97,9 +97,6 @@ main {
 
 		overflow-y: auto;
 		overflow-x: hidden;
-
-		scrollbar-color: $light-cyan $secondary-bg;
-		scrollbar-width: thin;
 
 		.loading-animation {
 			display: block;
@@ -294,8 +291,6 @@ main {
 		border-bottom: 1px groove $black;
 	}
 	overflow-y: auto;
-	scrollbar-color: $light-cyan $secondary-bg;
-	scrollbar-width: thin;
 	.bookmarked-ayahs {
 		display: flex;
 		flex-direction: column;
@@ -326,8 +321,6 @@ main {
 				line-height: 2.2rem;
 
 				overflow-y: auto;
-				scrollbar-color: $light-cyan $secondary-bg;
-				scrollbar-width: thin;
 
 				padding: 0.4rem 0;
 
