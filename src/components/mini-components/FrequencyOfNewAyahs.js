@@ -8,24 +8,22 @@ function FrequencyOfNewAyahs({ UILanguage }) {
 		const value = event.currentTarget.value;
 		chrome.storage.sync.set({ freq: value });
 	}
-	async function syncTheStoredFreq() {
-		const { freq } = await chrome.storage.sync.get("freq");
-		setNewSnippetFrequency(freq);
-	}
-	React.useEffect(() => {
-		function makeFreqUserFriendly() {
-			let freq = newSnippetFrequency / 1000 / 60 / 60;
-			if (freq === 0.5) {
-				UILanguage === "ar" ? (freq = "نصف") : (freq = "half an");
-				setUserFriendlyFreq(freq);
-				return;
-			}
-			setUserFriendlyFreq(freq);
-		}
 
+	React.useEffect(() => {
+		async function syncTheStoredFreq() {
+			chrome.storage.sync.get(["freq"], ({ freq }) => {
+				setNewSnippetFrequency(freq);
+				let freqToBeEditied = newSnippetFrequency / 1000 / 60 / 60;
+				if (freqToBeEditied === 0.5) {
+					UILanguage === "ar" ? (freqToBeEditied = "نصف") : (freqToBeEditied = "half an");
+					setUserFriendlyFreq(freqToBeEditied);
+					return;
+				}
+				setUserFriendlyFreq(freqToBeEditied);
+			});
+		}
 		syncTheStoredFreq();
-		makeFreqUserFriendly();
-	}, [newSnippetFrequency, UILanguage]);
+	}, [UILanguage, newSnippetFrequency]);
 
 	return (
 		<div className="freq-wrapper">

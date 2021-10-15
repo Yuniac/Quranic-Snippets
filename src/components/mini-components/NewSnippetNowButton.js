@@ -9,9 +9,10 @@ function NewSnippetNowButton({ getRandomSnippet, UILanguage }) {
 		</svg>
 	);
 
-	async function handleClick() {
-		const { freq } = await chrome.storage.sync.get("freq");
-		getRandomSnippet(true, true, freq);
+	function handleClick() {
+		chrome.storage.sync.get(["freq"], ({ freq }) => {
+			getRandomSnippet(true, true, freq);
+		});
 	}
 	return (
 		<button className="new-snippet-now-button cta-button" onClick={handleClick}>

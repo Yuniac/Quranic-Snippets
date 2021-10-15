@@ -9,21 +9,22 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 	const [currentSurahName, setCurrentSurahName] = React.useState("");
 	const [currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility] = React.useState(false);
 
-	async function getStoredName() {
-		if (UILanguage.startsWith("ar")) {
-			const { currentSurahNameAR } = await chrome.storage.sync.get("currentSurahNameAR");
-			setCurrentSurahName(currentSurahNameAR);
-		} else {
-			const { currentSurahNameEN } = await chrome.storage.sync.get("currentSurahNameEN");
-			setCurrentSurahName(currentSurahNameEN);
-		}
-	}
-
 	const loadingAnimation = <span className="loading-animation"></span>;
 
 	React.useEffect(() => {
+		async function getStoredName() {
+			if (UILanguage.startsWith("ar")) {
+				chrome.storage.sync.get(["currentSurahNameAR"], ({ currentSurahNameAR }) => {
+					setCurrentSurahName(currentSurahNameAR);
+				});
+			} else {
+				chrome.storage.sync.get(["currentSurahNameEN"], ({ currentSurahNameEN }) => {
+					setCurrentSurahName(currentSurahNameEN);
+				});
+			}
+		}
 		getStoredName();
-	});
+	}, [QLanguage, UILanguage, ayah]);
 	return (
 		<div className="snippet-wrapper" style={{ padding: "0 0.4rem" }}>
 			<p
