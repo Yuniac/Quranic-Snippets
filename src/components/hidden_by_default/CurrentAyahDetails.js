@@ -21,7 +21,7 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage }) {
 	});
 
 	return (
-		<div className="current-ayah-details-hidden">
+		<div className="current-ayah-details-hidden" style={{ paddingBottom: currentAyahDetailsVisibility ? "205px" : 0 }}>
 			<div
 				className="wrapper"
 				style={{
