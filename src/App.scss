@@ -8,13 +8,14 @@
 	scrollbar-color: $light-cyan $secondary-bg;
 	scrollbar-width: thin;
 	scroll-behavior: smooth;
+}
 body {
 	color: $white;
 }
 .App {
 	width: 522px;
 	min-height: 322px;
-	max-height: fit-content;
+	max-height: 540px;
 
 	background-color: $primary-bg;
 
@@ -141,6 +142,7 @@ main {
 		justify-content: center;
 		align-items: space-around;
 
+		margin-bottom: 1rem;
 		.wrapper {
 			background-color: $primary-bg;
 
@@ -282,20 +284,13 @@ main {
 		color: $light-cyan;
 	}
 
-	.bookmarks-usage-notes {
-		font-size: $fs-normal;
-		color: $white;
-
-		padding: 0 0.1rem;
-
-		border-bottom: 1px groove $black;
-	}
 	overflow-y: auto;
 	.bookmarked-ayahs {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
 
+		font-size: $fs-normal;
 		.bookmarked-ayah-container {
 			margin: 0.5rem 0;
 			padding: 0.2rem 0;
@@ -362,16 +357,22 @@ main {
 	}
 }
 //
-.about-body {
-	& > div {
-		margin-bottom: 0.5rem;
+.about {
+	h2 {
+		margin-left: 0.2rem;
 	}
-	p {
-		padding: 0.5rem 0.2rem;
-	}
-	h3 {
-		margin-top: 1rem;
-		text-align: center;
+	.about-body {
+		margin-left: 0.2rem;
+		& > div {
+			margin-bottom: 0.5rem;
+		}
+		p {
+			padding: 0.5rem 0.2rem;
+		}
+		h3 {
+			margin-top: 1rem;
+			text-align: center;
+		}
 	}
 }
 //
