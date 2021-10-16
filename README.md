@@ -2,7 +2,7 @@
 
 # Quranic-Snippets
 
-A React Firefox extension that provides Quranic verses as snippets
+A Browser extension that provides Quranic verses as snippets
 
 <div align="center">
 
@@ -40,4 +40,4 @@ I'm a person who's learning web development, so I thought why not make something
 
 ## Contributing:
 
-As I said eariler this project is for Allah's sake and it's open source, feel free to clone this repo and do whatever changes you like/think are necessary and submit them in a PR.
+As I said earlier this project is for Allah's sake and it's open source, feel free to clone this repo and do whatever changes you like/think are necessary and submit them in a PR.
