@@ -28,7 +28,9 @@ Right now, the extension provides a new random verse each hour.
 
 ## How to use?
 
-You can download the extension for free from the [Firefox Addons Store](https://addons.mozilla.org/en-US/firefox/addon/quranic-snippets/).
+- You can download the extension for free from the [Firefox Addons Store](https://addons.mozilla.org/en-US/firefox/addon/quranic-snippets/).
+
+- You can download the extension for free from the [Chrome web store](https://chrome.google.com/webstore/detail/quranic-snippets/ahahmhhkknhgobkknjlikglfnjgkfbod).
 
 ## Why Quranic-Snippets?
 
