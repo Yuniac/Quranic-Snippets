@@ -18,7 +18,6 @@ function CurrentAyahCallToActions({
 	return (
 		<div className="current-ayah-cta">
 			<NewSnippetNowButton UILanguage={UILanguage} getRandomSnippet={getRandomSnippet} />
-			<CurrentSurahName currentSurahName={currentSurahName} UILanguage={UILanguage} />
 			<BookmarkCurrentAyah
 				UILanguage={UILanguage}
 				ayah={ayah}

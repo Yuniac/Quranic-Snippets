@@ -4,6 +4,7 @@ import "../App.scss";
 
 import CurrentAyahCallToActions from "./mini-components/CurrentAyahCallToActions";
 import CurrentAyahDetails from "./hidden_by_default/CurrentAyahDetails";
+import CurrentSurahNameComp from "./mini-components/CurrentSurahName";
 
 function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, setBookmarks }) {
 	const [currentSurahName, setCurrentSurahName] = React.useState("");
@@ -36,6 +37,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 			>
 				{ayah ? ayah : loadingAnimation}
 			</p>
+			<CurrentSurahNameComp UILanguage={UILanguage} currentSurahName={currentSurahName} />
 			<CurrentAyahCallToActions
 				getRandomSnippet={getRandomSnippet}
 				UILanguage={UILanguage}
