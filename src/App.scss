@@ -78,9 +78,9 @@ main {
 	}
 	.current-ayah-from-surah {
 		text-align: center;
-
+		margin: 0.7rem 0;
+		font-size: $fs-xnormal;
 		color: $white;
-		font-size: $fs-normal;
 	}
 	.current-ayah {
 		background-image: url("./img/banners/ayah_banner.png");
