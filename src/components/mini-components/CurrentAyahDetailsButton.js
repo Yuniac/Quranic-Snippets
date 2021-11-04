@@ -2,30 +2,12 @@ import React from "react";
 
 function CurrentAyahDetailsButton({ currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility }) {
 	const expandIcon = (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			enable-background="new 0 0 24 24"
-			height="24px"
-			viewBox="0 0 24 24"
-			width="24px"
-			fill="#FFFFFF"
-		>
-			<g>
-				<rect fill="none" height="24" width="24" />
-			</g>
-			<g>
-				<g>
-					<polygon points="18,6.41 16.59,5 12,9.58 7.41,5 6,6.41 12,12.41" />
-					<polygon points="18,13 16.59,11.59 12,16.17 7.41,11.59 6,13 12,19" />
-				</g>
-			</g>
+		<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+			<path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+			<path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
 		</svg>
 	);
 
-	// <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
-	// 	<path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
-	// 	<path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z" />
-	// </svg>
 	function handleClick() {
 		setCurrentAyahDetailsVisibility((x) => !x);
 	}
