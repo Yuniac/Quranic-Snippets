@@ -33,9 +33,13 @@ function Body({
 	const getAyahURL = "http://api.alquran.cloud/v1/ayah/";
 	// this state will manage the ayah that is visible to the user when he opens the extension
 	const [ayah, setAyah] = React.useState("");
+	// const [newSnippetFrequency, setNewSnippetFrequency] = React.useState(55);
+	// console.log(newSnippetFrequency);
+
+	let currentAyahNumber, currentAyahNumberGlobally, currentSurahNumber, currentAyahText, currentSurahNameEN, currentSurahNameAR;
+	let urlToFetch;
 
 	async function getRandomSnippet(sameAyahInSecondLang, forced, storedFreq) {
-		let urlToFetch;
 		// get stored ayah and its related information
 		const { ayah, ayahTimeStamp, UILang, QLang, bookmarks, isIconFilled } = await browser.storage.sync.get([
 			"ayah",
@@ -53,11 +57,11 @@ function Body({
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
 			// determine what's the fetching url;
 			if (sameAyahInSecondLang) {
+				const { currentAyahNumberGlobally } = await browser.storage.sync.get("currentAyahNumberGlobally");
 				// if forced, then user has requested to get a new snippet, regardless of everything so fetch a new ayah;
 				if (forced) {
 					urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 				} else {
-					const { currentAyahNumberGlobally } = await browser.storage.sync.get("currentAyahNumberGlobally");
 					// else, get the same ayah that is stored but in the second language
 					urlToFetch = getAyahURL + currentAyahNumberGlobally + "/" + QLang;
 				}
@@ -66,19 +70,27 @@ function Body({
 			}
 
 			const fetchedAyah = await fetch(urlToFetch);
-			const { data: fetchedAyahAsJson } = await fetchedAyah.json();
+			let fetchedAyahAsJson = await fetchedAyah.json();
+
+			fetchedAyahAsJson = fetchedAyahAsJson.data;
+			currentAyahNumber = fetchedAyahAsJson.numberInSurah;
+			currentAyahNumberGlobally = fetchedAyahAsJson.number;
+			currentSurahNumber = fetchedAyahAsJson.surah.number;
+			currentAyahText = fetchedAyahAsJson.text;
+			currentSurahNameEN = fetchedAyahAsJson.surah.englishName;
+			currentSurahNameAR = fetchedAyahAsJson.surah.name;
 
 			// processing the ayah to remove "bismillah". might change this later;
-			const processedAyah = processAyah(fetchedAyahAsJson.text, QLang);
+			const processedAyah = processAyah(currentAyahText, QLang);
 			// create an object containing the ayah and all the information about it;
 			const newStoredAyah = {
 				ayah: processedAyah,
 				ayahTimeStamp: new Date().getTime(),
-				currentAyahNumber: fetchedAyahAsJson.numberInSurah,
-				currentAyahNumberGlobally: fetchedAyahAsJson.number,
-				currentSurahNumber: fetchedAyahAsJson.surah.number,
-				currentSurahNameEN: fetchedAyahAsJson.surah.englishName,
-				currentSurahNameAR: fetchedAyahAsJson.surah.name,
+				currentAyahNumber: currentAyahNumber,
+				currentAyahNumberGlobally: currentAyahNumberGlobally,
+				currentSurahNumber: currentSurahNumber,
+				currentSurahNameEN: currentSurahNameEN,
+				currentSurahNameAR: currentSurahNameAR,
 				UILang: UILang,
 				freq: storedFreq,
 				isIconFilled: isIconFilled,

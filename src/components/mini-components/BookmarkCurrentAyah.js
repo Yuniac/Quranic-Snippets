@@ -3,7 +3,7 @@ import React from "react";
 //
 import { getStoredValue } from "../helpers/helpers";
 
-function BookmarkCurrentAyah({ ayah, bookmarks, setBookmarks, currentSurahName }) {
+function BookmarkCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, currentSurahName }) {
 	const [currentAyahNumberGlobally, setCurrentAyahNumberGlobally] = React.useState(0);
 	const [currentAyahNumber, setCurrentAyahNumber] = React.useState(0);
 	const [isIconFilled, setIsIconFilled] = React.useState(false);
@@ -61,7 +61,8 @@ function BookmarkCurrentAyah({ ayah, bookmarks, setBookmarks, currentSurahName }
 
 	React.useEffect(() => {
 		getStoredValue("isIconFilled", setIsIconFilled);
-	}, [ayah]);
+		checkIfBookmarked();
+	});
 	return (
 		<div className="bookmark-ayah">
 			<button className="cta-button" onClick={handleClick}>
