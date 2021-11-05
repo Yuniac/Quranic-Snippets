@@ -10,21 +10,22 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 	const [currentSurahName, setCurrentSurahName] = React.useState("");
 	const [currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility] = React.useState(false);
 
-	async function getStoredName() {
-		if (UILanguage.startsWith("ar")) {
-			const { currentSurahNameAR } = await browser.storage.sync.get();
-			setCurrentSurahName(currentSurahNameAR);
-		} else {
-			const { currentSurahNameEN } = await browser.storage.sync.get();
-			setCurrentSurahName(currentSurahNameEN);
-		}
-	}
-
 	const loadingAnimation = <span className="loading-animation"></span>;
-
+	// this variable determines whether we align the ayah in the middle or align it at the start, because long ayahs and short ayahs behave differently
+	const alignThreshold = 30;
 	React.useEffect(() => {
+		async function getStoredName() {
+			if (UILanguage.startsWith("ar")) {
+				const { currentSurahNameAR } = await browser.storage.sync.get();
+				setCurrentSurahName(currentSurahNameAR);
+			} else {
+				const { currentSurahNameEN } = await browser.storage.sync.get();
+				setCurrentSurahName(currentSurahNameEN);
+			}
+		}
 		getStoredName();
-	});
+	}, [ayah, UILanguage]);
+	console.log(ayah);
 	return (
 		<div className="snippet-wrapper" style={{ padding: "0 0.4rem" }}>
 			<div
@@ -33,6 +34,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 					direction: QLanguage.startsWith("ar") ? "rtl" : "ltr",
 					fontSize: QLanguage.startsWith("ar") ? "1.9rem" : "1.3rem",
 					lineHeight: QLanguage.startsWith("ar") ? "4.1rem" : "2rem",
+					alignItems: ayah.length > alignThreshold ? "flex-start" : "center",
 				}}
 			>
 				<p>{ayah ? ayah : loadingAnimation}</p>
