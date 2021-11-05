@@ -5,11 +5,13 @@ import ReadEntireSurah from "../mini-components/ReadEntireSurah";
 import Divider from "../shared/Divider";
 //
 function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage, ayah }) {
+	// states we will get from the browser storagea after first re-render;
 	const [currentSurahNameAR, setCurrentSurahNameAR] = React.useState("");
 	const [currentSurahNameEN, setCurrentSurahNameEN] = React.useState("");
 	const [currentAyahNumber, setCurrentAyahNumber] = React.useState(0);
 	const [currentSurahNumber, setcurrentSurahNumber] = React.useState(0);
 	const [currentAyahNumberGlobally, setCurrentAyahNumberGlobally] = React.useState(0);
+	//
 
 	React.useEffect(() => {
 		getStoredValue("currentSurahNameAR", setCurrentSurahNameAR);
@@ -18,16 +20,18 @@ function CurrentAyahDetails({ currentAyahDetailsVisibility, UILanguage, ayah }) 
 		getStoredValue("currentSurahNumber", setcurrentSurahNumber);
 		getStoredValue("currentAyahNumberGlobally", setCurrentAyahNumberGlobally);
 	}, [UILanguage, ayah]);
-	//  style={{ paddingBottom: currentAyahDetailsVisibility ? "205px" : 0 }}
+
 	return (
 		<div
 			className="current-ayah-details-hidden"
-			style={{ height: currentAyahDetailsVisibility ? "230px" : "0", marginBottom: currentAyahDetailsVisibility ? "1rem" : "0" }}
+			style={{
+				height: currentAyahDetailsVisibility ? "250px" : "0",
+				marginBottom: currentAyahDetailsVisibility ? "1rem" : "0",
+			}}
 		>
 			<div
 				className="wrapper"
 				style={{
-					// height: currentAyahDetailsVisibility ? "max-content" : "0",
 					outline: currentAyahDetailsVisibility ? "1px solid lightcyan" : "none",
 					boxShadow: currentAyahDetailsVisibility ? "2px 2px 4px lightcyan, -2px -2px 4px lightcyan" : "none",
 				}}
