@@ -3,15 +3,14 @@ import React from "react";
 //
 import { getStoredValue } from "../helpers/helpers";
 
-function BookmarkCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, currentSurahName }) {
+function BookmarkCurrentAyah({ ayah, bookmarks, setBookmarks, currentSurahName, isIconFilled, setIsIconFilled }) {
 	const [currentAyahNumberGlobally, setCurrentAyahNumberGlobally] = React.useState(0);
 	const [currentAyahNumber, setCurrentAyahNumber] = React.useState(0);
-	const [isIconFilled, setIsIconFilled] = React.useState(false);
 	React.useEffect(() => {
 		getStoredValue("currentAyahNumberGlobally", setCurrentAyahNumberGlobally);
 		getStoredValue("bookmarks", setBookmarks);
 		getStoredValue("currentAyahNumber", setCurrentAyahNumber);
-	}, [ayah]);
+	}, [ayah, setBookmarks]);
 
 	const bookmarkIconNotFilled = (
 		<svg
@@ -33,22 +32,22 @@ function BookmarkCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, curren
 		</svg>
 	);
 
-	function checkIfBookmarked() {
+	function checkIfFavored() {
 		// figure out whether the current ayah the user is trying to favorite its favored already or not;
 		const isAlreadyFavored = bookmarks.find((ayahNumber) => ayahNumber[0] === currentAyahNumberGlobally);
 		return isAlreadyFavored;
 	}
 
 	async function handleClick() {
-		const isAlreadyFavored = checkIfBookmarked();
+		const isAlreadyFavored = checkIfFavored();
 		// if it's not then add it to favorites;
 		if (!isAlreadyFavored) {
 			bookmarks.push([currentAyahNumberGlobally, ayah, currentSurahName, currentAyahNumber]);
 			await browser.storage.sync.set({ bookmarks: bookmarks, isIconFilled: true });
-			setBookmarks([...bookmarks]);
+			setBookmarks(bookmarks);
 			setIsIconFilled(true);
-			// if `checkIfFavored returned truthy that means the user clicked on an already favored ayah so remove it;
 		} else {
+			// if `checkIfFavored returned truthy that means the user clicked on an already favored ayah so remove it;
 			const { bookmarks: storedAndBookmarkedAyahs } = await browser.storage.sync.get("bookmarks");
 			const storedAndBookmarkedAyahToBeRemovedIndex = storedAndBookmarkedAyahs.findIndex(
 				(ayah) => ayah[0] === currentAyahNumberGlobally
@@ -56,13 +55,13 @@ function BookmarkCurrentAyah({ UILanguage, ayah, bookmarks, setBookmarks, curren
 			storedAndBookmarkedAyahs.splice(storedAndBookmarkedAyahToBeRemovedIndex, 1);
 			await browser.storage.sync.set({ bookmarks: storedAndBookmarkedAyahs, isIconFilled: false });
 			setIsIconFilled(false);
+			setBookmarks(storedAndBookmarkedAyahs);
 		}
 	}
 
 	React.useEffect(() => {
 		getStoredValue("isIconFilled", setIsIconFilled);
-		checkIfBookmarked();
-	});
+	}, [ayah, setIsIconFilled]);
 	return (
 		<div className="bookmark-ayah">
 			<button className="cta-button" onClick={handleClick}>

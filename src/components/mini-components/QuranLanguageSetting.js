@@ -4,10 +4,13 @@ import React from "react";
 function QuranLanguageSettings({ QLanguage, setQLanguage, UILanguage, getRandomSnippet }) {
 	async function changeQLanguage(radio) {
 		const lang = radio.target.value;
+		// set the state with the new language the user chose
 		setQLanguage(lang);
-		// the argument true means fetch a new ayah in the second langauge regardless of what's stored in the storage;
+		// after receiving the newly set language by the user (after the re-render), store it in the storage
 		await browser.storage.sync.set({ QLang: QLanguage });
+		// get the stored freq of ayahs;
 		const { freq } = await browser.storage.sync.get("freq");
+		// fetch the same ayah currently viewed in the other language;
 		getRandomSnippet(true, false, freq);
 	}
 

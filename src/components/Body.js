@@ -24,6 +24,7 @@ function Body({
 }) {
 	const [QLanguage, setQLanguage] = React.useState("");
 	const [bookmarks, setBookmarks] = React.useState([]);
+	const [isIconFilled, setIsIconFilled] = React.useState(false);
 
 	// get the already stored language, run once only;
 	React.useEffect(() => {
@@ -50,18 +51,18 @@ function Body({
 			"isIconFilled",
 		]);
 
-		// if nothing is stored, no old ayah, first time user OR an ayah indeed exist but its older than the user's defined rate of getting new ayahs;
+		// if nothing is stored, no old ayah, first time user, OR, an ayah indeed exist but its older than the user's defined rate of getting new ayahs;
 		// or if 'sameAyahInSecondLang' argument is present as true/false, true = fetch the same ayah but in the second language, will only be called when the language changes. if 'forced' = true then regardless of anything, fetch a new ayah in whichever current language we have, will only be called from 'get a new snippet now' button;
-		if (!ayah.length || new Date().getTime() - ayahTimeStamp > storedFreq || sameAyahInSecondLang) {
-			// fetch a new ayah
+		if (!ayah.length || new Date().getTime() - ayahTimeStamp > storedFreq || sameAyahInSecondLang || forced) {
+			// make a random ayah number
 			const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
 			// determine what's the fetching url;
 			if (sameAyahInSecondLang) {
-				const { currentAyahNumberGlobally } = await browser.storage.sync.get("currentAyahNumberGlobally");
 				// if forced, then user has requested to get a new snippet, regardless of everything so fetch a new ayah;
 				if (forced) {
 					urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 				} else {
+					const { currentAyahNumberGlobally } = await browser.storage.sync.get("currentAyahNumberGlobally");
 					// else, get the same ayah that is stored but in the second language
 					urlToFetch = getAyahURL + currentAyahNumberGlobally + "/" + QLang;
 				}
@@ -125,11 +126,12 @@ function Body({
 		function processInEnglish(ayah) {
 			// sometimes, the ayah we get start with some symbols or diacritics, so this function will traverse each index and find the first alphabetical letter and returns it;
 			let splitAyahString = ayah.split("");
+			// loop over each letter of the ayah
 			for (let i = 0; i < splitAyahString.length; i++) {
-				// before making the first letter an uppercase, remove it if its a dash or some un-needed in the current context character;
+				// before making the first letter an uppercase, remove it if its a dash or some un-needed (in the current context) character;
 				splitAyahString = cleanUpUneededCharacters("start", splitAyahString);
 
-				// this regex matches for every alphabetical character;
+				// this regex matches for every alphabetical character, find the first alphabetical character and make it uppercase;
 				if (/\w/.test(splitAyahString[i])) {
 					splitAyahString[i] = splitAyahString[i].toUpperCase();
 					break;
@@ -138,7 +140,7 @@ function Body({
 			// now that we have made sure that the first character is an uppercased letter and isn't a dash or underscore, check the last letter for any un-needed characters and remove them.
 			splitAyahString = cleanUpUneededCharacters("end", splitAyahString);
 
-			return splitAyahString;
+			return splitAyahString.join("");
 		}
 		const ayahProcessedInEnglish = processInEnglish(ayah);
 		return ayahProcessedInEnglish;
@@ -150,7 +152,6 @@ function Body({
 	React.useEffect(() => {
 		getStoredFreq();
 	}, []);
-
 	return (
 		<main>
 			<Header UILanguage={UILanguage} />
@@ -161,6 +162,8 @@ function Body({
 				QLanguage={QLanguage}
 				bookmarks={bookmarks}
 				setBookmarks={setBookmarks}
+				isIconFilled={isIconFilled}
+				setIsIconFilled={setIsIconFilled}
 			/>
 			<Settings
 				settingsVisibility={settingsVisibility}
@@ -180,6 +183,7 @@ function Body({
 				QLanguage={QLanguage}
 				UILanguage={UILanguage}
 				ayah={ayah}
+				setIsIconFilled={setIsIconFilled}
 			/>
 		</main>
 	);

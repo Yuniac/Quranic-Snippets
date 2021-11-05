@@ -6,13 +6,19 @@ import "../../App.scss";
 import { zImportant, zRegular } from "../../style/_variables.module.scss";
 //
 import { getStoredValue } from "../helpers/helpers";
-function Bookmarks({ bookmarks, setBookmarks, bookmarksVisibility, setBookmarksVisibility, UILanguage, QLanguage }) {
-	function handleClick(button) {
+function Bookmarks({ ayah, bookmarks, setBookmarks, bookmarksVisibility, setBookmarksVisibility, UILanguage, setIsIconFilled }) {
+	async function handleClick(button) {
 		// it's not a pretty, but it's quite a fast way to change a string into a number;
 		const id = button.currentTarget.id * 1;
 		const bookmarkedAyahToBeRemoved = bookmarks.findIndex((bookmarkedAyah) => bookmarkedAyah[0] === id);
+		// if the current ayah being viewed equals the one that is being removed from bookmarks in the bookmarks section, then toggle the icon for the ayah that is being viewed also, because otherwise there is no need to to if the ayah being removed from bookmakrs isn't the same one as the one being viewed. (viewed = the main ayah, the one showing in the app currently);
+		if (bookmarks[bookmarkedAyahToBeRemoved][1] === ayah) {
+			await browser.storage.sync.set({ isIconFilled: false });
+			setIsIconFilled(false);
+		}
 		bookmarks.splice(bookmarkedAyahToBeRemoved, 1);
-		browser.storage.sync.set({ bookmarks: bookmarks, isIconFilled: false });
+		await browser.storage.sync.set({ bookmarks: bookmarks });
+		setBookmarks(bookmarks);
 	}
 	const removeBookMarkIcon = (
 		<svg
