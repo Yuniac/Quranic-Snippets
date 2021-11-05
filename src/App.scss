@@ -12,10 +12,17 @@
 body {
 	color: $white;
 }
+main,
+footer {
+	direction: rtl;
+}
+main {
+	color: $primary-font-color;
+}
 .App {
 	width: 522px;
 	min-height: 322px;
-
+	height: 530px;
 	background-color: $primary-bg;
 
 	font-family: "Amiri", serif;
@@ -32,13 +39,6 @@ body {
 
 	overflow-y: auto;
 	overflow-x: hidden;
-}
-main,
-footer {
-	direction: rtl;
-}
-main {
-	color: $primary-font-color;
 }
 
 //
@@ -60,7 +60,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-
+	width: 100%;
 	.current-ayah-cta {
 		display: flex;
 		flex-direction: row;
@@ -68,7 +68,9 @@ main {
 		align-items: center;
 
 		width: 350px;
-		margin: 0.4rem auto 0;
+		margin: 1.5rem auto 0;
+
+		overflow: hidden;
 	}
 	.current-ayah-from-surah {
 		text-align: center;
@@ -77,6 +79,10 @@ main {
 		color: $white;
 	}
 	.current-ayah {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
 		background-image: url("./img/banners/ayah_banner.png");
 		background-repeat: no-repeat;
 		background-position: center;
@@ -91,8 +97,8 @@ main {
 
 		padding: 2rem 1.4rem;
 
-		min-height: 120px;
-		max-height: 320px;
+		min-height: 190px;
+		max-height: 220px;
 		width: 100%;
 
 		overflow-y: auto;
@@ -133,9 +139,7 @@ main {
 	.current-ayah-details-hidden {
 		position: relative;
 
-		width: 100%;
-		height: 100%;
-
+		width: 97%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -154,7 +158,7 @@ main {
 			top: 10px;
 
 			width: 100%;
-
+			height: 100%;
 			text-align: center;
 
 			.row {
@@ -194,6 +198,7 @@ main {
 	}
 	.bookmark-ayah {
 		height: 24px;
+		overflow-y: hidden;
 		button {
 			&:hover {
 				cursor: pointer;
@@ -377,6 +382,7 @@ main {
 //
 footer {
 	margin-top: 0.7rem;
+	padding-bottom: 0.1rem;
 
 	ul {
 		width: 80%;
@@ -417,10 +423,10 @@ footer {
 .cta-button {
 	border: 0;
 	background-color: transparent;
+	overflow-y: hidden;
 }
 
 .highlight-link {
-	padding: 0.2rem 0;
 	text-decoration: underline;
 
 	color: $cyan;
