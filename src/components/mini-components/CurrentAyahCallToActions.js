@@ -1,7 +1,6 @@
 import React from "react";
 //
 import NewSnippetNowButton from "./NewSnippetNowButton";
-import CurrentSurahName from "./CurrentSurahName";
 import CurrentAyahDetailsButton from "./CurrentAyahDetailsButton";
 import BookmarkCurrentAyah from "./BookmarkCurrentAyah";
 // renaming a variable temporarily due to a naming conflict in this component;
@@ -14,17 +13,20 @@ function CurrentAyahCallToActions({
 	ayah,
 	bookmarks,
 	setBookmarks,
+	isIconFilled,
+	setIsIconFilled,
 }) {
 	return (
 		<div className="current-ayah-cta">
 			<NewSnippetNowButton UILanguage={UILanguage} getRandomSnippet={getRandomSnippet} />
-			<CurrentSurahName currentSurahName={currentSurahName} UILanguage={UILanguage} />
 			<BookmarkCurrentAyah
 				UILanguage={UILanguage}
 				ayah={ayah}
 				bookmarks={bookmarks}
 				setBookmarks={setBookmarks}
 				currentSurahName={currentSurahName}
+				isIconFilled={isIconFilled}
+				setIsIconFilled={setIsIconFilled}
 			/>
 			<CurrentAyahDetailsButton
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}

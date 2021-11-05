@@ -4,8 +4,9 @@ import "../App.scss";
 
 import CurrentAyahCallToActions from "./mini-components/CurrentAyahCallToActions";
 import CurrentAyahDetails from "./hidden_by_default/CurrentAyahDetails";
+import CurrentSurahNameComp from "./mini-components/CurrentSurahName";
 
-function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, setBookmarks }) {
+function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, setBookmarks, isIconFilled, setIsIconFilled }) {
 	const [currentSurahName, setCurrentSurahName] = React.useState("");
 	const [currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility] = React.useState(false);
 
@@ -26,7 +27,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 	});
 	return (
 		<div className="snippet-wrapper" style={{ padding: "0 0.4rem" }}>
-			<p
+			<div
 				className="current-ayah"
 				style={{
 					direction: QLanguage.startsWith("ar") ? "rtl" : "ltr",
@@ -34,8 +35,9 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 					lineHeight: QLanguage.startsWith("ar") ? "4.1rem" : "2rem",
 				}}
 			>
-				{ayah ? ayah : loadingAnimation}
-			</p>
+				<p>{ayah ? ayah : loadingAnimation}</p>
+			</div>
+			<CurrentSurahNameComp UILanguage={UILanguage} currentSurahName={currentSurahName} />
 			<CurrentAyahCallToActions
 				getRandomSnippet={getRandomSnippet}
 				UILanguage={UILanguage}
@@ -45,6 +47,8 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 				ayah={ayah}
 				bookmarks={bookmarks}
 				setBookmarks={setBookmarks}
+				isIconFilled={isIconFilled}
+				setIsIconFilled={setIsIconFilled}
 			/>
 			<CurrentAyahDetails
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
