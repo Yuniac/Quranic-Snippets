@@ -34,10 +34,6 @@ function Body({
 	const getAyahURL = "http://api.alquran.cloud/v1/ayah/";
 	// this state will manage the ayah that is visible to the user when he opens the extension
 	const [ayah, setAyah] = React.useState("");
-	// const [newSnippetFrequency, setNewSnippetFrequency] = React.useState(55);
-	// console.log(newSnippetFrequency);
-
-	let currentAyahNumber, currentAyahNumberGlobally, currentSurahNumber, currentAyahText, currentSurahNameEN, currentSurahNameAR;
 	let urlToFetch;
 
 	async function getRandomSnippet(sameAyahInSecondLang, forced, storedFreq) {
@@ -70,28 +66,19 @@ function Body({
 				urlToFetch = getAyahURL + randomAyahNumber + "/" + QLang;
 			}
 
-			const fetchedAyah = await fetch(urlToFetch);
-			let fetchedAyahAsJson = await fetchedAyah.json();
-
-			fetchedAyahAsJson = fetchedAyahAsJson.data;
-			currentAyahNumber = fetchedAyahAsJson.numberInSurah;
-			currentAyahNumberGlobally = fetchedAyahAsJson.number;
-			currentSurahNumber = fetchedAyahAsJson.surah.number;
-			currentAyahText = fetchedAyahAsJson.text;
-			currentSurahNameEN = fetchedAyahAsJson.surah.englishName;
-			currentSurahNameAR = fetchedAyahAsJson.surah.name;
+			const { data: fetchedAyahAsJson } = await (await fetch(urlToFetch)).json();
 
 			// processing the ayah to remove "bismillah". might change this later;
-			const processedAyah = processAyah(currentAyahText, QLang);
+			const processedAyah = processAyah(fetchedAyahAsJson.text, QLang);
 			// create an object containing the ayah and all the information about it;
 			const newStoredAyah = {
 				ayah: processedAyah,
 				ayahTimeStamp: new Date().getTime(),
-				currentAyahNumber: currentAyahNumber,
-				currentAyahNumberGlobally: currentAyahNumberGlobally,
-				currentSurahNumber: currentSurahNumber,
-				currentSurahNameEN: currentSurahNameEN,
-				currentSurahNameAR: currentSurahNameAR,
+				currentAyahNumber: fetchedAyahAsJson.numberInSurah,
+				currentAyahNumberGlobally: fetchedAyahAsJson.number,
+				currentSurahNumber: fetchedAyahAsJson.surah.number,
+				currentSurahNameEN: fetchedAyahAsJson.surah.englishName,
+				currentSurahNameAR: fetchedAyahAsJson.surah.name,
 				UILang: UILang,
 				freq: storedFreq,
 				isIconFilled: isIconFilled,
