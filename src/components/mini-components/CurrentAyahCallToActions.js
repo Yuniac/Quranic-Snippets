@@ -13,6 +13,8 @@ function CurrentAyahCallToActions({
 	ayah,
 	bookmarks,
 	setBookmarks,
+	isIconFilled,
+	setIsIconFilled,
 }) {
 	return (
 		<div className="current-ayah-cta">
@@ -23,6 +25,8 @@ function CurrentAyahCallToActions({
 				bookmarks={bookmarks}
 				setBookmarks={setBookmarks}
 				currentSurahName={currentSurahName}
+				isIconFilled={isIconFilled}
+				setIsIconFilled={setIsIconFilled}
 			/>
 			<CurrentAyahDetailsButton
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}

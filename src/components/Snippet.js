@@ -6,12 +6,12 @@ import CurrentAyahCallToActions from "./mini-components/CurrentAyahCallToActions
 import CurrentAyahDetails from "./hidden_by_default/CurrentAyahDetails";
 import CurrentSurahNameComp from "./mini-components/CurrentSurahName";
 
-function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, setBookmarks }) {
+function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, setBookmarks, isIconFilled, setIsIconFilled }) {
 	const [currentSurahName, setCurrentSurahName] = React.useState("");
 	const [currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility] = React.useState(false);
 
 	const loadingAnimation = <span className="loading-animation"></span>;
-
+	const alignThreshold = 40;
 	React.useEffect(() => {
 		async function getStoredName() {
 			if (UILanguage.startsWith("ar")) {
@@ -25,7 +25,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 			}
 		}
 		getStoredName();
-	}, [QLanguage, UILanguage, ayah]);
+	}, [UILanguage, ayah]);
 	return (
 		<div className="snippet-wrapper" style={{ padding: "0 0.4rem" }}>
 			<p
@@ -34,6 +34,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 					direction: QLanguage.startsWith("ar") ? "rtl" : "ltr",
 					fontSize: QLanguage.startsWith("ar") ? "1.9rem" : "1.3rem",
 					lineHeight: QLanguage.startsWith("ar") ? "4.1rem" : "2rem",
+					alignItems: ayah.length > alignThreshold ? "flex-start" : "center",
 				}}
 			>
 				{ayah ? ayah : loadingAnimation}
@@ -48,6 +49,8 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 				ayah={ayah}
 				bookmarks={bookmarks}
 				setBookmarks={setBookmarks}
+				isIconFilled={isIconFilled}
+				setIsIconFilled={setIsIconFilled}
 			/>
 			<CurrentAyahDetails
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
