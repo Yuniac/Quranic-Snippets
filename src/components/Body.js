@@ -21,6 +21,7 @@ function Body({
 	setAboutVisibility,
 	UILanguage,
 	setUILanguage,
+	setFooterVisibility,
 }) {
 	const [QLanguage, setQLanguage] = React.useState("");
 	const [bookmarks, setBookmarks] = React.useState([]);
@@ -151,6 +152,7 @@ function Body({
 				setBookmarks={setBookmarks}
 				isIconFilled={isIconFilled}
 				setIsIconFilled={setIsIconFilled}
+				setFooterVisibility={setFooterVisibility}
 			/>
 			<Settings
 				settingsVisibility={settingsVisibility}

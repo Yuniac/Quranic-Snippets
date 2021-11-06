@@ -6,7 +6,17 @@ import CurrentAyahCallToActions from "./mini-components/CurrentAyahCallToActions
 import CurrentAyahDetails from "./hidden_by_default/CurrentAyahDetails";
 import CurrentSurahNameComp from "./mini-components/CurrentSurahName";
 
-function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, setBookmarks, isIconFilled, setIsIconFilled }) {
+function Snippet({
+	ayah,
+	QLanguage,
+	UILanguage,
+	getRandomSnippet,
+	bookmarks,
+	setBookmarks,
+	isIconFilled,
+	setIsIconFilled,
+	setFooterVisibility,
+}) {
 	const [currentSurahName, setCurrentSurahName] = React.useState("");
 	const [currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility] = React.useState(false);
 
@@ -50,6 +60,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 				bookmarks={bookmarks}
 				setBookmarks={setBookmarks}
 				isIconFilled={isIconFilled}
+				setFooterVisibility={setFooterVisibility}
 				setIsIconFilled={setIsIconFilled}
 			/>
 			<CurrentAyahDetails

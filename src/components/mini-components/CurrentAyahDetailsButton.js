@@ -1,6 +1,6 @@
 import React from "react";
 
-function CurrentAyahDetailsButton({ currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility }) {
+function CurrentAyahDetailsButton({ currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility, setFooterVisibility }) {
 	const expandIcon = (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +23,9 @@ function CurrentAyahDetailsButton({ currentAyahDetailsVisibility, setCurrentAyah
 	);
 
 	function handleClick() {
+		// reverse the state
 		setCurrentAyahDetailsVisibility((x) => !x);
+		setFooterVisibility((x) => !x);
 	}
 	return (
 		<button

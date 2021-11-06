@@ -3,7 +3,7 @@ import "../App.scss";
 //
 import { openPopup } from "./helpers/helpers";
 
-function Footer({ setSettingsVisibility, setBookmarksVisibility, setAboutVisibility, language }) {
+function Footer({ setSettingsVisibility, setBookmarksVisibility, setAboutVisibility, footerVisibility, language }) {
 	const settingsIcon = (
 		<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
 			<path d="M0 0h24v24H0V0z" fill="none" />
@@ -24,7 +24,7 @@ function Footer({ setSettingsVisibility, setBookmarksVisibility, setAboutVisibil
 		</svg>
 	);
 	return (
-		<footer>
+		<footer style={{ display: footerVisibility ? "block" : "none" }}>
 			<ul>
 				<li
 					onClick={() => openPopup(setSettingsVisibility)}

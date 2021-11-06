@@ -15,6 +15,7 @@ function CurrentAyahCallToActions({
 	setBookmarks,
 	isIconFilled,
 	setIsIconFilled,
+	setFooterVisibility,
 }) {
 	return (
 		<div className="current-ayah-cta">
@@ -31,6 +32,7 @@ function CurrentAyahCallToActions({
 			<CurrentAyahDetailsButton
 				currentAyahDetailsVisibility={currentAyahDetailsVisibility}
 				setCurrentAyahDetailsVisibility={setCurrentAyahDetailsVisibility}
+				setFooterVisibility={setFooterVisibility}
 			/>
 		</div>
 	);
