@@ -1,6 +1,6 @@
 /* global browser */
 // only stores the initial values on the very first time the extension runs;
-if (!browser.storage.sync.get()) {
+if (!browser.storage.sync.get(null)) {
 	const ayahObject = {
 		ayah: "",
 		ayahTimeStamp: new Date().getTime(),
