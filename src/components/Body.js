@@ -78,7 +78,7 @@ function Body({
 						bookmarks: bookmarks,
 					};
 					// if forced is true it means a totally new ayah was being requested, in such case make sure that the icon isn't filled = ayah not bookmakred
-					if (forced) {
+					if (forced || new Date().getTime() - ayahTimeStamp > storedFreq) {
 						newStoredAyah.isIconFilled = false;
 					}
 					// store the new ayah with a timeStamp and any other info I might add later on;
