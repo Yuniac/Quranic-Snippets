@@ -35,13 +35,11 @@ function Snippet({
 		}
 		getStoredName();
 	}, [ayah, UILanguage]);
-	console.log(ayah);
 	return (
 		<div className="snippet-wrapper" style={{ padding: "0 0.4rem" }}>
 			<div
 				className="current-ayah"
 				style={{
-					direction: QLanguage.startsWith("ar") ? "rtl" : "ltr",
 					fontSize: QLanguage.startsWith("ar") ? "1.9rem" : "1.3rem",
 					lineHeight: QLanguage.startsWith("ar") ? "4.1rem" : "2rem",
 					alignItems: ayah.length > alignThreshold ? "flex-start" : "center",

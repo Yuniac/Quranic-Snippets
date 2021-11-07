@@ -28,7 +28,7 @@ function FrequencyOfNewAyahs({ UILanguage }) {
 	}, [newSnippetFrequency, UILanguage]);
 
 	return (
-		<div className="freq-wrapper">
+		<div className="freq-wrapper" style={{ marginTop: "1rem" }}>
 			<div
 				style={{
 					display: "flex",
