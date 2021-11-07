@@ -13,7 +13,7 @@ function UILanguageSettings({ UILanguage, setUILanguage }) {
 		}
 	}, [UILanguage]);
 	return (
-		<div>
+		<div style={{ marginTop: "0.5rem" }}>
 			<div>
 				<h4>
 					<span style={{ display: UILanguage === "ar" ? "block" : "none", direction: UILanguage === "ar" ? "rtl" : "" }}>

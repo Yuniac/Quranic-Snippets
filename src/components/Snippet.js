@@ -28,17 +28,18 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 	}, [UILanguage, ayah]);
 	return (
 		<div className="snippet-wrapper" style={{ padding: "0 0.4rem" }}>
-			<p
-				className="current-ayah"
-				style={{
-					direction: QLanguage.startsWith("ar") ? "rtl" : "ltr",
-					fontSize: QLanguage.startsWith("ar") ? "1.9rem" : "1.3rem",
-					lineHeight: QLanguage.startsWith("ar") ? "4.1rem" : "2rem",
-					alignItems: ayah.length > alignThreshold ? "flex-start" : "center",
-				}}
-			>
-				{ayah ? ayah : loadingAnimation}
-			</p>
+			<div style={{ width: "100%" }} className="current-ayah-wrapper">
+				<p
+					className="current-ayah"
+					style={{
+						fontSize: QLanguage.startsWith("ar") ? "1.9rem" : "1.3rem",
+						lineHeight: QLanguage.startsWith("ar") ? "4.1rem" : "2rem",
+						alignItems: ayah.length > alignThreshold ? "flex-start" : "center",
+					}}
+				>
+					{ayah ? ayah : loadingAnimation}
+				</p>
+			</div>
 			<CurrentSurahNameComp currentSurahName={currentSurahName} UILanguage={UILanguage} />
 			<CurrentAyahCallToActions
 				getRandomSnippet={getRandomSnippet}

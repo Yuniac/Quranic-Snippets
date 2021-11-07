@@ -20,7 +20,6 @@ body {
 .App {
 	width: 522px;
 	min-height: 322px;
-	max-height: 540px;
 
 	background-color: $primary-bg;
 
@@ -82,55 +81,63 @@ main {
 		font-size: $fs-xnormal;
 		color: $white;
 	}
-	.current-ayah {
+	.current-ayah-wrapper {
 		background-image: url("./img/banners/ayah_banner.png");
 		background-repeat: no-repeat;
 		background-position: center;
-		background-size: 100% 100%;
+		background-size: 96% 100%;
+		.current-ayah {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
-		display: flex;
-		justify-content: center;
-		align-items: center;
+			position: relative;
 
-		position: relative;
+			font-size: $fs-large;
+			font-family: "Kitab" !important;
 
-		font-size: $fs-large;
-		font-family: "Kitab" !important;
+			text-align: center;
 
-		text-align: center;
+			padding: 1.8rem;
 
-		padding: 2rem 1.3rem;
-
-		min-height: 120px;
-		max-height: 280px;
-		width: 100%;
-
-		overflow-y: auto;
-		overflow-x: hidden;
-		.loading-animation {
-			display: block;
-
-			border: 1px solid $secondary-bg;
-			border-top: 1px solid $light-cyan;
-			border-radius: 50%;
-			width: 1.6rem;
-			height: 1.6rem;
-			animation: rotation 0.5s linear infinite;
-
-			position: absolute;
-			top: 41%;
-			left: 46%;
-		}
-
-		@keyframes rotation {
-			0% {
-				transform: rotate(0deg);
+			p {
+				padding: 0 0.4rem;
 			}
-			100% {
-				transform: rotate(360deg);
+
+			min-height: 120px;
+			max-height: 280px;
+			width: 100%;
+
+			overflow-y: auto;
+			overflow-x: hidden;
+
+			direction: ltr;
+			.loading-animation {
+				display: block;
+
+				border: 1px solid $secondary-bg;
+				border-top: 1px solid $light-cyan;
+				border-radius: 50%;
+				width: 1.6rem;
+				height: 1.6rem;
+				animation: rotation 0.5s linear infinite;
+
+				position: absolute;
+				top: 41%;
+				left: 46%;
+			}
+
+			@keyframes rotation {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
 			}
 		}
 	}
+
 	.upward {
 		transform: rotate(180deg);
 		transition: all $transition-delay ease-in-out;

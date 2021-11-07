@@ -15,7 +15,7 @@ function QuranLanguageSettings({ QLanguage, setQLanguage, UILanguage, getRandomS
 	}
 
 	return (
-		<div>
+		<div style={{ marginTop: "0.5rem" }}>
 			<div>
 				<h4>
 					<span style={{ display: UILanguage === "ar" ? "block" : "none", direction: UILanguage === "ar" ? "rtl" : "" }}>
