@@ -87,7 +87,7 @@ main {
 		background-image: url("./img/banners/ayah_banner.png");
 		background-repeat: no-repeat;
 		background-position: center;
-		background-size: 100% 100%;
+		background-size: 96% 100%;
 
 		position: relative;
 
@@ -96,7 +96,11 @@ main {
 
 		text-align: center;
 
-		padding: 2rem 1.4rem;
+		padding: 1.8rem;
+
+		p {
+			padding: 0 0.4rem;
+		}
 
 		min-height: 190px;
 		max-height: 220px;
@@ -105,6 +109,7 @@ main {
 		overflow-y: auto;
 		overflow-x: hidden;
 
+		direction: ltr;
 		.loading-animation {
 			display: block;
 
