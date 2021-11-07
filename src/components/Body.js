@@ -86,9 +86,10 @@ function Body({
 				bookmarks: bookmarks,
 			};
 			// if forced is true it means a totally new ayah was being requested, in such case make sure that the icon isn't filled = ayah not bookmakred
-			if (forced) {
+			if (forced || new Date().getTime() - ayahTimeStamp > storedFreq) {
 				newStoredAyah.isIconFilled = false;
 			}
+
 			// update the state with the newly fetched ayah
 			setAyah(processedAyah);
 			// store the new ayah with a timeStamp and any other info I might add later on;
@@ -98,7 +99,6 @@ function Body({
 			setAyah(ayah);
 		}
 	}
-
 	function processAyah(ayah, QLang) {
 		// while Quran ayahs are being displayed in arabic;
 		// if the ayah begins with 'bismillah', cut it out, as our focus is to only show the ayah;
