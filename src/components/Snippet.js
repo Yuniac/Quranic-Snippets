@@ -40,7 +40,7 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 					{ayah ? ayah : loadingAnimation}
 				</p>
 			</div>
-			<CurrentSurahNameComp currentSurahName={currentSurahName} UILanguage={UILanguage} />
+			<CurrentSurahNameComp currentSurahName={currentSurahName} UILanguage={UILanguage} ayah={ayah} />
 			<CurrentAyahCallToActions
 				getRandomSnippet={getRandomSnippet}
 				UILanguage={UILanguage}
