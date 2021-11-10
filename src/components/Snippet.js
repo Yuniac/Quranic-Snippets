@@ -47,7 +47,7 @@ function Snippet({
 			>
 				<p>{ayah ? ayah : loadingAnimation}</p>
 			</div>
-			<CurrentSurahNameComp UILanguage={UILanguage} currentSurahName={currentSurahName} />
+			<CurrentSurahNameComp UILanguage={UILanguage} currentSurahName={currentSurahName} ayah={ayah} />
 			<CurrentAyahCallToActions
 				getRandomSnippet={getRandomSnippet}
 				UILanguage={UILanguage}
