@@ -112,29 +112,6 @@ main {
 			overflow-x: hidden;
 
 			direction: ltr;
-			.loading-animation {
-				display: block;
-
-				border: 1px solid $secondary-bg;
-				border-top: 1px solid $light-cyan;
-				border-radius: 50%;
-				width: 1.6rem;
-				height: 1.6rem;
-				animation: rotation 0.5s linear infinite;
-
-				position: absolute;
-				top: 41%;
-				left: 46%;
-			}
-
-			@keyframes rotation {
-				0% {
-					transform: rotate(0deg);
-				}
-				100% {
-					transform: rotate(360deg);
-				}
-			}
 		}
 	}
 
@@ -452,4 +429,28 @@ footer {
 
 .highlight-numbers {
 	color: $light-cyan;
+}
+
+.loading-animation {
+	display: block;
+
+	border: 1px solid $secondary-bg;
+	border-top: 1px solid $light-cyan;
+	border-radius: 50%;
+	width: 1.6rem;
+	height: 1.6rem;
+	animation: rotation 0.5s linear infinite;
+
+	position: absolute;
+	top: 41%;
+	left: 46%;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
