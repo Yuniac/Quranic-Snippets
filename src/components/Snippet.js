@@ -21,8 +21,6 @@ function Snippet({
 	const [currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility] = React.useState(false);
 
 	const loadingAnimation = <span className="loading-animation"></span>;
-	// this variable determines whether we align the ayah in the middle or align it at the start, because long ayahs and short ayahs behave differently
-	const alignThreshold = 30;
 	React.useEffect(() => {
 		async function getStoredName() {
 			if (UILanguage.startsWith("ar")) {
@@ -42,7 +40,6 @@ function Snippet({
 				style={{
 					fontSize: QLanguage.startsWith("ar") ? "1.9rem" : "1.3rem",
 					lineHeight: QLanguage.startsWith("ar") ? "4.1rem" : "2rem",
-					alignItems: ayah.length > alignThreshold ? "flex-start" : "center",
 				}}
 			>
 				<p>{ayah ? ayah : loadingAnimation}</p>
