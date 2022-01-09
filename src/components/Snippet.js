@@ -11,7 +11,6 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 	const [currentAyahDetailsVisibility, setCurrentAyahDetailsVisibility] = React.useState(false);
 
 	const loadingAnimation = <span className="loading-animation"></span>;
-	const alignThreshold = 40;
 	React.useEffect(() => {
 		async function getStoredName() {
 			if (UILanguage.startsWith("ar")) {
@@ -34,7 +33,6 @@ function Snippet({ ayah, QLanguage, UILanguage, getRandomSnippet, bookmarks, set
 					style={{
 						fontSize: QLanguage.startsWith("ar") ? "1.9rem" : "1.3rem",
 						lineHeight: QLanguage.startsWith("ar") ? "4.1rem" : "2rem",
-						alignItems: ayah.length > alignThreshold ? "flex-start" : "center",
 					}}
 				>
 					{ayah ? ayah : loadingAnimation}
