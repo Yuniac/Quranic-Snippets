@@ -2,7 +2,7 @@
 	"name": "Quranic Snippets",
 	"description": "Firefox extension that displays randomly selected verses from the noble Quran",
 	"manifest_version": 2,
-	"version": "1.8.3",
+	"version": "1.8.4",
 	"icons": {
 		"16": "logo16.png",
 		"32": "logo32.png"
